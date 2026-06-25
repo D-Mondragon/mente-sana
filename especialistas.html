@@ -88,68 +88,68 @@
     <aside class="filters-sidebar">
       <div class="filters-sidebar-title">Filtrar resultados</div>
 
-      <div class="filter-group">
+      <div class="filter-group" id="filterEspecialidad">
         <h4>Especialidad</h4>
         <label class="filter-option">
-          <div class="filter-option-left"><input type="checkbox" checked> Ansiedad</div>
-          <span class="filter-option-count">12</span>
+          <div class="filter-option-left"><input type="checkbox" data-key="ansiedad"> Ansiedad</div>
+          <span class="filter-option-count">3</span>
         </label>
         <label class="filter-option">
-          <div class="filter-option-left"><input type="checkbox"> Depresión</div>
-          <span class="filter-option-count">9</span>
+          <div class="filter-option-left"><input type="checkbox" data-key="depresion"> Depresión</div>
+          <span class="filter-option-count">1</span>
         </label>
         <label class="filter-option">
-          <div class="filter-option-left"><input type="checkbox"> Terapia de pareja</div>
-          <span class="filter-option-count">7</span>
+          <div class="filter-option-left"><input type="checkbox" data-key="pareja"> Terapia de pareja</div>
+          <span class="filter-option-count">1</span>
         </label>
         <label class="filter-option">
-          <div class="filter-option-left"><input type="checkbox"> Psicología infantil</div>
-          <span class="filter-option-count">8</span>
+          <div class="filter-option-left"><input type="checkbox" data-key="infantil"> Psicología infantil</div>
+          <span class="filter-option-count">1</span>
         </label>
         <label class="filter-option">
-          <div class="filter-option-left"><input type="checkbox"> Autoestima</div>
-          <span class="filter-option-count">11</span>
+          <div class="filter-option-left"><input type="checkbox" data-key="autoestima"> Autoestima</div>
+          <span class="filter-option-count">1</span>
         </label>
         <label class="filter-option">
-          <div class="filter-option-left"><input type="checkbox"> Duelo</div>
-          <span class="filter-option-count">5</span>
+          <div class="filter-option-left"><input type="checkbox" data-key="duelo"> Duelo</div>
+          <span class="filter-option-count">1</span>
         </label>
         <label class="filter-option">
-          <div class="filter-option-left"><input type="checkbox"> TOC / Fobias</div>
-          <span class="filter-option-count">4</span>
+          <div class="filter-option-left"><input type="checkbox" data-key="toc"> TOC / Fobias</div>
+          <span class="filter-option-count">1</span>
         </label>
       </div>
 
       <div class="filter-group">
         <h4>Modalidad</h4>
-        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad" checked> Online</div></label>
-        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad"> Presencial</div></label>
-        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad"> Ambas modalidades</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad" data-key="online"> Online</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad" data-key="presencial"> Presencial</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad" data-key="ambas" checked> Ambas modalidades</div></label>
       </div>
 
       <div class="filter-group">
         <h4>Valoración mínima</h4>
-        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating" checked> Cualquier valoración</div></label>
-        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating"> ★★★★☆ (4.0+)</div></label>
-        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating"> ★★★★★ (4.5+)</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating" data-min="0" checked> Cualquier valoración</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating" data-min="4.0"> ★★★★☆ (4.0+)</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating" data-min="4.5"> ★★★★★ (4.5+)</div></label>
       </div>
 
       <div class="filter-group">
         <h4>Precio por sesión</h4>
         <div class="price-range">
-          <input type="range" id="priceRange" min="50" max="200" value="150" oninput="updatePrice(this.value)">
+          <input type="range" id="priceRange" min="50" max="200" value="200" oninput="updatePrice(this.value)">
           <div class="price-range-labels">
             <span>S/. 50</span>
-            <span id="priceVal">Hasta S/. 150</span>
+            <span id="priceVal">Hasta S/. 200</span>
           </div>
         </div>
       </div>
 
       <div class="filter-group">
         <h4>Disponibilidad</h4>
-        <label class="filter-option"><div class="filter-option-left"><input type="checkbox"> Disponible hoy</div></label>
-        <label class="filter-option"><div class="filter-option-left"><input type="checkbox"> Esta semana</div></label>
-        <label class="filter-option"><div class="filter-option-left"><input type="checkbox"> Primera consulta gratis</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="checkbox" id="dispHoy"> Disponible hoy</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="checkbox" id="dispSemana"> Esta semana</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="checkbox" id="dispFree"> Primera consulta gratis</div></label>
       </div>
 
       <button class="btn btn-primary btn-full btn-sm" onclick="applyFilters()">Aplicar filtros</button>
@@ -159,7 +159,7 @@
     <!-- RESULTADOS -->
     <main>
       <div class="results-header">
-        <div class="results-count">Mostrando <strong id="resultsCount">9</strong> especialistas</div>
+        <div class="results-count">Mostrando <strong id="resultsCount">27</strong> especialistas</div>
         <select class="sort-select" onchange="applyFilters()">
           <option>Relevancia</option>
           <option>Precio: menor a mayor</option>
@@ -172,7 +172,10 @@
       <div class="specialists-grid" id="specialistsGrid">
 
         <!-- Card 1 — Destacada -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. maría elena rojas" data-tags="ansiedad,estrés,burnout,clínica"
+          data-especialidades="ansiedad,burnout" data-price="90" data-rating="4.9"
+          data-modalidad="ambas" data-disponible="hoy" data-free="true" data-location="">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar">
@@ -195,7 +198,10 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. carlos herrera" data-tags="pareja,familia,comunicación,terapia"
+          data-especialidades="pareja,familia" data-price="100" data-rating="4.8"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Carlos Herrera"></div>
@@ -216,7 +222,10 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. sofía alarcón" data-tags="infancia,adolescencia,tdah,infantil"
+          data-especialidades="infantil,tdah" data-price="80" data-rating="4.9"
+          data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Sofía Alarcón"></div>
@@ -237,7 +246,10 @@
         </div>
 
         <!-- Card 4 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. andrés lima" data-tags="depresión,fobias,toc,tcc"
+          data-especialidades="depresion,fobias,toc" data-price="85" data-rating="4.7"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Andrés Lima"></div>
@@ -258,7 +270,10 @@
         </div>
 
         <!-- Card 5 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. patricia vega" data-tags="evaluación,neuropsicología,presencial"
+          data-especialidades="neuropsicologia" data-price="110" data-rating="4.8"
+          data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1581065178047-8ee15951ede6?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Patricia Vega"></div>
@@ -279,7 +294,10 @@
         </div>
 
         <!-- Card 6 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. diego castro" data-tags="autoestima,mindfulness,bienestar,positiva"
+          data-especialidades="autoestima,bienestar" data-price="75" data-rating="4.6"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1645066928295-2506defde470?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Diego Castro"></div>
@@ -300,7 +318,10 @@
         </div>
 
         <!-- Card 7 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. lucía moreno" data-tags="maternidad,duelo,ansiedad,perinatal"
+          data-especialidades="duelo,ansiedad" data-price="95" data-rating="4.9"
+          data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Lucía Moreno"></div>
@@ -321,7 +342,10 @@
         </div>
 
         <!-- Card 8 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. fernando ríos" data-tags="trauma,emdr,adicciones,trastorno"
+          data-especialidades="trauma,adicciones" data-price="120" data-rating="4.7"
+          data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&crop=top&q=80" alt="Ps. Fernando Ríos"></div>
@@ -342,7 +366,10 @@
         </div>
 
         <!-- Card 9 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. valeria santos" data-tags="burnout,liderazgo,estrés,organizacional"
+          data-especialidades="burnout,estres" data-price="95" data-rating="4.8"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
           <div class="card-top">
             <div class="card-avatar-wrap">
               <div class="card-avatar"><img src="https://images.unsplash.com/photo-1701096374092-bb70915fdc5c?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Valeria Santos"></div>
@@ -362,14 +389,445 @@
           </div>
         </div>
 
+        <!-- ══ PÁGINA 2 ══ -->
+
+        <!-- Card 10 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. andrea flores" data-tags="aprendizaje,bullying,adaptación,educativa"
+          data-especialidades="infantil,aprendizaje" data-price="70" data-rating="4.7"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Andrea Flores"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Andrea Flores</h3>
+              <p class="card-spec">Psicología Educativa · 7 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(98)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Aprendizaje</span><span class="badge">Bullying</span><span class="badge">Adaptación</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 70</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 11 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. isabel mendoza" data-tags="vejez,duelo,familia,gerontología"
+          data-especialidades="duelo,familia" data-price="80" data-rating="4.8"
+          data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Isabel Mendoza"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Isabel Mendoza</h3>
+              <p class="card-spec">Psicogerontología · 9 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(114)</span></div>
+              <div class="card-online"><span class="online-dot" style="background:#f59e0b;"></span>Disponible mañana</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Vejez</span><span class="badge">Duelo</span><span class="badge">Familia</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 80</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 12 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. rodrigo saavedra" data-tags="rendimiento,ansiedad,motivación,deporte"
+          data-especialidades="ansiedad,bienestar" data-price="85" data-rating="4.6"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Rodrigo Saavedra"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Rodrigo Saavedra</h3>
+              <p class="card-spec">Psicología del Deporte · 6 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.6 <span class="card-reviews">(87)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Rendimiento</span><span class="badge">Ansiedad</span><span class="badge">Motivación</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 13 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. carmen paredes" data-tags="ansiedad,depresión,toc,tcc,adultos"
+          data-especialidades="ansiedad,depresion,toc" data-price="90" data-rating="4.9"
+          data-modalidad="ambas" data-disponible="hoy" data-free="true" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Carmen Paredes"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. Carmen Paredes</h3>
+              <p class="card-spec">TCC · Adultos · 14 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.9 <span class="card-reviews">(267)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Ansiedad</span><span class="badge">Depresión</span><span class="badge">TOC</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 90</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 14 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. gabriel ruiz" data-tags="tdah,infantil,escolar,aprendizaje"
+          data-especialidades="infantil,tdah" data-price="75" data-rating="4.5"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Gabriel Ruiz"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Gabriel Ruiz</h3>
+              <p class="card-spec">TDAH y Aprendizaje · 5 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.5 <span class="card-reviews">(61)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">TDAH</span><span class="badge">Infantil</span><span class="badge">Escolar</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 75</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 15 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. mariana lagos" data-tags="trauma,violencia,peritaje,forense"
+          data-especialidades="trauma,duelo" data-price="130" data-rating="4.7"
+          data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Mariana Lagos"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. Mariana Lagos</h3>
+              <p class="card-spec">Psicología Forense · 11 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(73)</span></div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">📍 Presencial — Nueva Cajamarca</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Trauma</span><span class="badge">Violencia</span><span class="badge">Peritaje</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 130</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 16 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. cristina huanca" data-tags="estrés,bienestar,mindfulness,mbsr"
+          data-especialidades="bienestar,estres" data-price="65" data-rating="4.8"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Cristina Huanca"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Cristina Huanca</h3>
+              <p class="card-spec">Mindfulness MBSR · 8 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(152)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Estrés</span><span class="badge">Mindfulness</span><span class="badge">Bienestar</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 65</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 17 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dr. alejandro mora" data-tags="burnout,valores,aceptación,act"
+          data-especialidades="burnout,bienestar" data-price="100" data-rating="4.7"
+          data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dr. Alejandro Mora"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dr. Alejandro Mora</h3>
+              <p class="card-spec">Terapia ACT · 10 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(128)</span></div>
+              <div class="card-online"><span class="online-dot" style="background:#f59e0b;"></span>Disponible mañana</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Valores</span><span class="badge">Aceptación</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 100</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 18 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. nicole herrera" data-tags="maternidad,postparto,duelo,perinatal"
+          data-especialidades="duelo,ansiedad" data-price="70" data-rating="4.6"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1598550874175-4d0ef436c909?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Nicole Herrera"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Nicole Herrera</h3>
+              <p class="card-spec">Psicología Perinatal · 4 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.6 <span class="card-reviews">(49)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Maternidad</span><span class="badge">Postparto</span><span class="badge">Duelo</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 70</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- ══ PÁGINA 3 ══ -->
+
+        <!-- Card 19 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dr. samuel torres" data-tags="fobias,ansiedad,hábitos,hipnoterapia"
+          data-especialidades="ansiedad,fobias" data-price="140" data-rating="4.8"
+          data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dr. Samuel Torres"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dr. Samuel Torres</h3>
+              <p class="card-spec">Hipnoterapia Clínica · 20 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(201)</span></div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">📍 Presencial — Nueva Cajamarca</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Fobias</span><span class="badge">Ansiedad</span><span class="badge">Hábitos</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 140</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 20 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. verónica pinto" data-tags="pareja,familia,comunicación,sistémica"
+          data-especialidades="pareja,familia" data-price="95" data-rating="4.7"
+          data-modalidad="ambas" data-disponible="semana" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Verónica Pinto"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Verónica Pinto</h3>
+              <p class="card-spec">Pareja y Familia · 7 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(136)</span></div>
+              <div class="card-online"><span class="online-dot" style="background:#f59e0b;"></span>Disponible mañana</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Pareja</span><span class="badge">Familia</span><span class="badge">Comunicación</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 21 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. kevin alvarado" data-tags="adolescentes,vocación,identidad,orientación"
+          data-especialidades="infantil,autoestima" data-price="60" data-rating="4.5"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Kevin Alvarado"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Kevin Alvarado</h3>
+              <p class="card-spec">Orientación Vocacional · 3 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.5 <span class="card-reviews">(38)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Adolescentes</span><span class="badge">Vocación</span><span class="badge">Identidad</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 60</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 22 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dra. beatriz salamanca" data-tags="cáncer,duelo,autoestima,psicooncología"
+          data-especialidades="duelo,autoestima" data-price="90" data-rating="4.9"
+          data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Beatriz Salamanca"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. Beatriz Salamanca</h3>
+              <p class="card-spec">Psicooncología · 12 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.9 <span class="card-reviews">(183)</span></div>
+              <div class="card-online"><span class="online-dot" style="background:#f59e0b;"></span>Disponible mañana</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Duelo</span><span class="badge">Autoestima</span><span class="badge">Apoyo oncológico</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 90</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 23 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. luis espinoza" data-tags="tdah,autismo,evaluación,infantil"
+          data-especialidades="infantil,tdah" data-price="100" data-rating="4.8"
+          data-modalidad="ambas" data-disponible="hoy" data-free="false" data-location="nueva cajamarca">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Luis Espinoza"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Luis Espinoza</h3>
+              <p class="card-spec">Neuropsicología Infantil · 9 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(174)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">TDAH</span><span class="badge">Autismo</span><span class="badge">Evaluación</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 100</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 24 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. fiorella castro" data-tags="familia,pareja,adolescencia,sistémica"
+          data-especialidades="familia,pareja" data-price="80" data-rating="4.7"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Fiorella Castro"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Fiorella Castro</h3>
+              <p class="card-spec">Terapia Sistémica · 6 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(91)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Familia</span><span class="badge">Pareja</span><span class="badge">Adolescencia</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 80</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 25 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="dr. hernán vásquez" data-tags="depresión,bipolar,trastornos,psiquiatría"
+          data-especialidades="depresion,toc" data-price="160" data-rating="4.9"
+          data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dr. Hernán Vásquez"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dr. Hernán Vásquez</h3>
+              <p class="card-spec">Psiquiatría de Adultos · 22 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.9 <span class="card-reviews">(318)</span></div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">📍 Presencial — Nueva Cajamarca</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Depresión</span><span class="badge">Bipolar</span><span class="badge">Trastornos</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 160</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 26 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. camila rodríguez" data-tags="burnout,estrés,liderazgo,corporativo"
+          data-especialidades="burnout,estres" data-price="85" data-rating="4.6"
+          data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e0?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Camila Rodríguez"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Camila Rodríguez</h3>
+              <p class="card-spec">Bienestar Corporativo · 5 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.6 <span class="card-reviews">(82)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Estrés</span><span class="badge">Liderazgo</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 27 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+          data-name="ps. marco antonio díaz" data-tags="inconsciente,conflicto,personalidad,psicoanálisis"
+          data-especialidades="depresion,autoestima" data-price="120" data-rating="4.8"
+          data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Marco Antonio Díaz"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Marco Antonio Díaz</h3>
+              <p class="card-spec">Psicoanálisis · 15 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(147)</span></div>
+              <div class="card-online"><span class="online-dot" style="background:#f59e0b;"></span>Disponible mañana</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Conflicto interno</span><span class="badge">Autoestima</span><span class="badge">Personalidad</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 120</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
       </div><!-- /.specialists-grid -->
 
-      <div class="pagination">
-        <button class="page-btn active">1</button>
-        <button class="page-btn">2</button>
-        <button class="page-btn">3</button>
-        <button class="page-btn">›</button>
-      </div>
+      <div class="pagination" id="paginationBar"></div>
     </main>
   </div>
 </div>
@@ -421,46 +879,192 @@
 </footer>
 
 <script>
+/* ── Nav ── */
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 document.addEventListener('click', e => {
-  if(!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove('open');
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove('open');
 });
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 8);
 }, { passive: true });
 
+/* ── Price range ── */
 function updatePrice(val) {
   document.getElementById('priceVal').textContent = 'Hasta S/. ' + val;
+  applyFilters();
 }
 
+/* ── Pagination state ── */
+const CARDS_PER_PAGE = 9;
+let currentPage = 1;
+
+/* ── Core filter logic ── */
 function applyFilters() {
-  const query = document.getElementById('searchInput').value.toLowerCase().trim();
-  const cards  = document.querySelectorAll('.specialist-card');
-  let visible  = 0;
-  cards.forEach(card => {
-    const text = card.textContent.toLowerCase();
-    const show = !query || text.includes(query);
-    card.style.display = show ? '' : 'none';
-    if (show) visible++;
+  const query    = document.getElementById('searchInput').value.toLowerCase().trim();
+  const location = document.getElementById('locationFilter').value.toLowerCase();
+  const maxPrice = parseInt(document.getElementById('priceRange').value);
+
+  const specChecks = [...document.querySelectorAll('#filterEspecialidad input[type="checkbox"]:checked')]
+    .map(cb => cb.dataset.key);
+
+  const modalRadio = document.querySelector('input[name="modalidad"]:checked');
+  const modalVal   = modalRadio ? modalRadio.dataset.key : 'ambas';
+
+  const ratingRadio = document.querySelector('input[name="rating"]:checked');
+  const minRating   = ratingRadio ? parseFloat(ratingRadio.dataset.min || '0') : 0;
+
+  const filterHoy    = document.getElementById('dispHoy')?.checked;
+  const filterSemana = document.getElementById('dispSemana')?.checked;
+  const filterFree   = document.getElementById('dispFree')?.checked;
+
+  document.querySelectorAll('#specialistsGrid .specialist-card').forEach(card => {
+    const d = card.dataset;
+    let show = true;
+
+    if (query) {
+      const haystack = [d.name, d.tags, d.especialidades].join(' ');
+      if (!haystack.includes(query)) show = false;
+    }
+
+    if (show && location) {
+      if (location === 'online') {
+        if (d.modalidad !== 'online' && d.modalidad !== 'ambas') show = false;
+      } else {
+        if (d.modalidad === 'online') show = false;
+        if ((location === 'nueva cajamarca' || location === 'san martín' || location === 'rioja') &&
+            !d.location.includes('nueva cajamarca')) show = false;
+      }
+    }
+
+    if (show && parseInt(d.price) > maxPrice) show = false;
+    if (show && parseFloat(d.rating) < minRating) show = false;
+
+    if (show && specChecks.length > 0) {
+      const esp = d.especialidades || '';
+      if (!specChecks.some(key => esp.includes(key))) show = false;
+    }
+
+    if (show && modalVal && modalVal !== 'ambas') {
+      if (modalVal === 'online'     && d.modalidad !== 'online'     && d.modalidad !== 'ambas') show = false;
+      if (modalVal === 'presencial' && d.modalidad !== 'presencial' && d.modalidad !== 'ambas') show = false;
+    }
+
+    if (show && filterHoy    && d.disponible !== 'hoy') show = false;
+    if (show && filterSemana && d.disponible !== 'hoy' && d.disponible !== 'semana') show = false;
+    if (show && filterFree   && d.free !== 'true') show = false;
+
+    card.dataset.filtered = show ? 'yes' : 'no';
   });
-  document.getElementById('resultsCount').textContent = visible;
+
+  currentPage = 1;
+  sortAndRender();
 }
 
+/* ── Sort then render ── */
+function sortAndRender() { sortCards(); renderPage(); }
+
+function sortCards() {
+  const sortVal = document.querySelector('.sort-select').value;
+  const grid    = document.getElementById('specialistsGrid');
+  const all     = [...grid.querySelectorAll('.specialist-card')];
+  const passing = all.filter(c => c.dataset.filtered !== 'no');
+  const hidden  = all.filter(c => c.dataset.filtered === 'no');
+
+  if (sortVal.includes('menor a mayor')) {
+    passing.sort((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+  } else if (sortVal.includes('mayor a menor')) {
+    passing.sort((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+  } else if (sortVal.includes('valorad')) {
+    passing.sort((a, b) => parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating));
+  } else if (sortVal.includes('reseñas')) {
+    passing.sort((a, b) => {
+      const n = el => parseInt(el.querySelector('.card-reviews')?.textContent.replace(/\D/g, '') || '0');
+      return n(b) - n(a);
+    });
+  }
+
+  [...passing, ...hidden].forEach(c => grid.appendChild(c));
+}
+
+function renderPage() {
+  const all     = [...document.querySelectorAll('#specialistsGrid .specialist-card')];
+  const passing = all.filter(c => c.dataset.filtered !== 'no');
+  const start   = (currentPage - 1) * CARDS_PER_PAGE;
+  const end     = start + CARDS_PER_PAGE;
+
+  all.forEach(c => c.style.display = 'none');
+  passing.slice(start, end).forEach(c => c.style.display = '');
+
+  document.getElementById('resultsCount').textContent = passing.length;
+  updatePagination(Math.ceil(passing.length / CARDS_PER_PAGE));
+}
+
+function updatePagination(totalPages) {
+  const bar = document.getElementById('paginationBar');
+  if (!bar) return;
+  bar.innerHTML = '';
+
+  const mk = (label, page, active, disabled) => {
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (active ? ' active' : '');
+    btn.textContent = label;
+    btn.disabled = disabled;
+    if (!disabled) btn.addEventListener('click', () => goToPage(page));
+    bar.appendChild(btn);
+  };
+
+  mk('‹', currentPage - 1, false, currentPage === 1);
+
+  const delta = 1;
+  for (let p = 1; p <= totalPages; p++) {
+    if (p === 1 || p === totalPages || Math.abs(p - currentPage) <= delta) {
+      mk(p, p, p === currentPage, false);
+    } else if (Math.abs(p - currentPage) === delta + 1) {
+      const dots = document.createElement('span');
+      dots.className = 'page-dots';
+      dots.textContent = '…';
+      bar.appendChild(dots);
+    }
+  }
+
+  mk('›', currentPage + 1, false, currentPage === totalPages || totalPages === 0);
+}
+
+function goToPage(page) {
+  currentPage = page;
+  renderPage();
+  document.getElementById('specialistsGrid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── Clear ── */
 function clearFilters() {
-  document.getElementById('searchInput').value = '';
+  document.getElementById('searchInput').value    = '';
   document.getElementById('locationFilter').value = '';
-  document.querySelectorAll('.specialist-card').forEach(c => c.style.display = '');
-  document.getElementById('resultsCount').textContent = 9;
+  document.getElementById('priceRange').value     = 200;
+  document.getElementById('priceVal').textContent = 'Hasta S/. 200';
+  document.querySelectorAll('#filterEspecialidad input[type="checkbox"]').forEach(cb => cb.checked = false);
+  document.querySelectorAll('input[name="modalidad"]').forEach((r, i, arr) => r.checked = (i === arr.length - 1));
+  document.querySelectorAll('input[name="rating"]').forEach((r, i) => r.checked = (i === 0));
+  if (document.getElementById('dispHoy'))    document.getElementById('dispHoy').checked    = false;
+  if (document.getElementById('dispSemana')) document.getElementById('dispSemana').checked = false;
+  if (document.getElementById('dispFree'))   document.getElementById('dispFree').checked   = false;
+  document.querySelectorAll('#specialistsGrid .specialist-card').forEach(c => { c.dataset.filtered = 'yes'; });
+  currentPage = 1;
+  sortAndRender();
 }
 
-document.querySelectorAll('.page-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-  });
+/* ── Wire up all controls ── */
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('locationFilter').addEventListener('change', applyFilters);
+document.querySelector('.sort-select').addEventListener('change', applyFilters);
+document.querySelectorAll('.filter-group input').forEach(input => {
+  input.addEventListener('change', applyFilters);
 });
+
+/* ── Init ── */
+applyFilters();
 </script>
 <script src="js/main.js"></script>
 </body>

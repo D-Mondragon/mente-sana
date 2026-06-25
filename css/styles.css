@@ -993,6 +993,8 @@ p  { color: var(--text-secondary); line-height: 1.78; }
 .page-btn { width: 40px; height: 40px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--bg); font-size: .85rem; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all var(--transition); }
 .page-btn:hover { border-color: var(--primary); color: var(--primary); }
 .page-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.page-btn:disabled { opacity: .4; cursor: not-allowed; pointer-events: none; }
+.page-dots { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: .9rem; color: var(--text-muted); }
 
 /* ===== SCROLL REVEAL ===== */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
