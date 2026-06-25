@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dra. María Elena Rojas — Mente Sana</title>
+  <meta name="description" content="Perfil de Dra. María Elena Rojas, Psicóloga Clínica especializada en ansiedad, estrés y burnout. Reserva tu sesión online o presencial.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ══════════ NAVEGACIÓN ══════════ -->
+<nav class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="nav-logo-img">
+    </a>
+    <div class="nav-links">
+      <a href="index.html"         class="nav-link">Inicio</a>
+      <a href="especialistas.html" class="nav-link active">Especialistas</a>
+      <a href="index.html#proceso" class="nav-link">Cómo funciona</a>
+      <a href="index.html#blog"    class="nav-link">Blog</a>
+      <a href="index.html#contacto" class="nav-link">Contacto</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+      <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"         class="nav-link">Inicio</a>
+  <a href="especialistas.html" class="nav-link">Especialistas</a>
+  <a href="index.html#contacto" class="nav-link">Contacto</a>
+  <div class="nav-actions">
+    <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+  </div>
+</div>
+
+
+<!-- ══════════ CABECERA DEL PERFIL ══════════ -->
+<div class="profile-header-bg">
+  <div class="container">
+    <div class="breadcrumb" style="margin-bottom:22px;">
+      <a href="index.html">Inicio</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="especialistas.html">Especialistas</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Dra. María Elena Rojas</span>
+    </div>
+
+    <div class="profile-top">
+      <div class="profile-avatar-wrap">
+        <div class="card-avatar-wrap">
+          <div class="profile-avatar">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&h=300&crop=face&q=80" alt="Dra. María Elena Rojas">
+          </div>
+          <span class="verified-badge" style="width:26px;height:26px;font-size:.7rem;" title="Especialista verificada por CPsP">✓</span>
+        </div>
+        <div class="avail-badge">
+          <span class="online-dot"></span>Disponible hoy
+        </div>
+      </div>
+
+      <div class="profile-info">
+        <h1 class="profile-name">Dra. María Elena Rojas</h1>
+        <p class="profile-spec">Psicóloga Clínica · Colegiada CPsP Nº 12345</p>
+        <div class="profile-meta">
+          <span class="profile-meta-item"><span>⭐</span><strong>4.9</strong>&nbsp;(240 reseñas)</span>
+          <span class="profile-meta-item"><span>🎓</span>8 años de experiencia</span>
+          <span class="profile-meta-item"><span>📍</span>Online · Nueva Cajamarca, San Martín</span>
+          <span class="profile-meta-item"><span>💬</span>Responde en &lt;2 h</span>
+        </div>
+        <div class="profile-tags">
+          <span class="badge">Ansiedad</span>
+          <span class="badge">Estrés laboral</span>
+          <span class="badge">Burnout</span>
+          <span class="badge">TCC</span>
+          <span class="badge">Mindfulness</span>
+          <span class="badge">Duelo</span>
+        </div>
+        <div class="profile-actions">
+          <button class="profile-action-btn" id="favBtn" onclick="toggleFavorite()" aria-label="Guardar especialista">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span id="favBtnLabel">Guardar</span>
+          </button>
+          <button class="profile-action-btn" onclick="shareProfile()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Compartir
+          </button>
+          <button class="profile-action-btn" onclick="openMsgModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Mensaje directo
+          </button>
+        </div>
+        <div class="profile-stats">
+          <div>
+            <span class="profile-stat-num">500+</span>
+            <span class="profile-stat-desc">Pacientes</span>
+          </div>
+          <div>
+            <span class="profile-stat-num">98%</span>
+            <span class="profile-stat-desc">Satisfacción</span>
+          </div>
+          <div>
+            <span class="profile-stat-num">8</span>
+            <span class="profile-stat-desc">Años exp.</span>
+          </div>
+          <div>
+            <span class="profile-stat-num">240</span>
+            <span class="profile-stat-desc">Reseñas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ CONTENIDO PRINCIPAL ══════════ -->
+<div class="container">
+  <div class="profile-layout">
+
+    <!-- COLUMNA PRINCIPAL CON TABS -->
+    <main class="profile-main">
+
+      <div class="tabs">
+        <div class="tab-list" role="tablist">
+          <button class="tab-btn active" data-tab="sobre"       role="tab" aria-selected="true">Sobre mí</button>
+          <button class="tab-btn"        data-tab="experiencia" role="tab">Experiencia</button>
+          <button class="tab-btn"        data-tab="resenas"     role="tab">Reseñas <span style="font-size:.76rem;color:var(--text-muted);">(240)</span></button>
+        </div>
+      </div>
+
+      <!-- TAB: Sobre mí -->
+      <div class="tab-panel active" id="tab-sobre">
+        <h3 style="margin-bottom:14px;">Acerca de la especialista</h3>
+        <p style="margin-bottom:16px;">
+          Soy psicóloga clínica egresada de la Pontificia Universidad Católica del Perú (PUCP) con maestría
+          en Psicología Cognitivo-Conductual por la Universidad Complutense de Madrid. Cuento con ocho años
+          de experiencia acompañando a personas adultas en el manejo de la ansiedad, el estrés laboral,
+          el burnout y los procesos de duelo.
+        </p>
+        <p style="margin-bottom:16px;">
+          Mi enfoque es humanista e integrador, combinando técnicas de Terapia Cognitivo-Conductual (TCC),
+          Mindfulness Based Cognitive Therapy (MBCT) y Terapia de Aceptación y Compromiso (ACT).
+          Creo firmemente en la importancia de construir un espacio seguro, cálido y sin juicios,
+          donde cada persona pueda explorar sus emociones con honestidad.
+        </p>
+        <p>
+          Trabajo en modalidad online (con la misma profundidad que la presencial) y en consultorio en Nueva Cajamarca, San Martín.
+          Ofrezco una consulta inicial gratuita de 20 minutos para que conozcamos si somos un buen equipo.
+        </p>
+
+        <hr class="divider">
+
+        <h3 style="margin-bottom:14px;">Mis especialidades</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:.87rem;color:var(--text-secondary);">
+            <span style="color:var(--success);font-weight:800;font-size:1rem;">✓</span> Trastornos de ansiedad
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.87rem;color:var(--text-secondary);">
+            <span style="color:var(--success);font-weight:800;font-size:1rem;">✓</span> Estrés y burnout laboral
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.87rem;color:var(--text-secondary);">
+            <span style="color:var(--success);font-weight:800;font-size:1rem;">✓</span> Duelo y pérdidas
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.87rem;color:var(--text-secondary);">
+            <span style="color:var(--success);font-weight:800;font-size:1rem;">✓</span> Autoestima e identidad
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.87rem;color:var(--text-secondary);">
+            <span style="color:var(--success);font-weight:800;font-size:1rem;">✓</span> Dificultades laborales
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.87rem;color:var(--text-secondary);">
+            <span style="color:var(--success);font-weight:800;font-size:1rem;">✓</span> Crisis vitales y cambios
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:12px;">Enfoques terapéuticos</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge--outline">Terapia Cognitivo-Conductual (TCC)</span>
+          <span class="badge badge--outline">Mindfulness-Based (MBCT)</span>
+          <span class="badge badge--outline">Terapia ACT</span>
+          <span class="badge badge--outline">Psicología Humanista</span>
+          <span class="badge badge--outline">Terapia de Aceptación</span>
+        </div>
+      </div>
+
+      <!-- TAB: Experiencia -->
+      <div class="tab-panel" id="tab-experiencia">
+        <h3 style="margin-bottom:20px;">Formación académica</h3>
+        <div class="credential-list" style="margin-bottom:32px;">
+          <div class="credential-item">
+            <div class="credential-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <div>
+              <h4>Maestría en Psicología Cognitivo-Conductual</h4>
+              <p>Universidad Complutense de Madrid · 2019 – 2021</p>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <div>
+              <h4>Licenciatura en Psicología Clínica</h4>
+              <p>Pontificia Universidad Católica del Perú (PUCP) · 2012 – 2017</p>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+            <div>
+              <h4>Certificación en Mindfulness-Based Cognitive Therapy</h4>
+              <p>Oxford Mindfulness Centre · 2020</p>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+            <div>
+              <h4>Formación en Terapia de Aceptación y Compromiso (ACT)</h4>
+              <p>Association for Contextual Behavioral Science · 2021</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:20px;">Experiencia profesional</h3>
+        <div class="credential-list">
+          <div class="credential-item">
+            <div class="credential-icon">🏥</div>
+            <div>
+              <h4>Psicóloga Clínica — Clínica Los Ángeles</h4>
+              <p>2021 – Presente · Lima, Perú</p>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-icon">🏢</div>
+            <div>
+              <h4>Psicóloga Organizacional — Grupo Romero</h4>
+              <p>2018 – 2020 · Lima, Perú</p>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-icon">🌐</div>
+            <div>
+              <h4>Terapeuta Online — Plataforma MindHelp</h4>
+              <p>2020 – 2022 · Remoto</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: Reseñas -->
+      <div class="tab-panel" id="tab-resenas">
+        <!-- Resumen visual -->
+        <div style="display:flex;gap:28px;align-items:flex-start;padding:20px;background:var(--bg-soft);border-radius:var(--radius);margin-bottom:28px;flex-wrap:wrap;border:1px solid var(--border-light);">
+          <div style="text-align:center;min-width:80px;">
+            <div style="font-size:3.2rem;font-weight:700;font-family:var(--font-heading);color:var(--text);line-height:1;">4.9</div>
+            <div style="color:#F5A623;font-size:1.1rem;margin:4px 0;letter-spacing:.1em;">★★★★★</div>
+            <div style="font-size:.76rem;color:var(--text-muted);">240 reseñas</div>
+          </div>
+          <div style="flex:1;min-width:160px;display:flex;flex-direction:column;gap:7px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:.74rem;color:var(--text-muted);width:18px;text-align:right;">5★</span>
+              <div style="flex:1;height:9px;background:var(--border-light);border-radius:5px;overflow:hidden;">
+                <div style="width:85%;height:100%;background:linear-gradient(90deg,#F5A623,#FFCD6B);border-radius:5px;"></div>
+              </div>
+              <span style="font-size:.74rem;color:var(--text-muted);width:24px;">204</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:.74rem;color:var(--text-muted);width:18px;text-align:right;">4★</span>
+              <div style="flex:1;height:9px;background:var(--border-light);border-radius:5px;overflow:hidden;">
+                <div style="width:12%;height:100%;background:linear-gradient(90deg,#F5A623,#FFCD6B);border-radius:5px;"></div>
+              </div>
+              <span style="font-size:.74rem;color:var(--text-muted);width:24px;">29</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:.74rem;color:var(--text-muted);width:18px;text-align:right;">3★</span>
+              <div style="flex:1;height:9px;background:var(--border-light);border-radius:5px;overflow:hidden;">
+                <div style="width:3%;height:100%;background:linear-gradient(90deg,#F5A623,#FFCD6B);border-radius:5px;"></div>
+              </div>
+              <span style="font-size:.74rem;color:var(--text-muted);width:24px;">7</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de reseñas -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar"><img src="https://ui-avatars.com/api/?name=Andrea+Q&background=B8D9EE&color=2D5270&size=100&bold=true" alt="Andrea Q."></div>
+            <div>
+              <div class="review-name">Andrea Q. <span style="color:#F5A623;font-size:.82rem;margin-left:4px;">★★★★★</span></div>
+              <div class="review-date">Junio 2025 · Sesión online <span class="verified-patient" style="margin-left:6px;">✓ Verificada</span></div>
+            </div>
+          </div>
+          <p class="review-text">"La Dra. Rojas es excepcional. Desde la primera sesión me sentí escuchada y comprendida sin juicios. Sus técnicas son muy prácticas — aplico lo que aprendemos cada día. El cambio que he notado en tres meses es enorme."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar"><img src="https://ui-avatars.com/api/?name=Miguel+Ch&background=C4DFF0&color=2D5270&size=100&bold=true" alt="Miguel Ch."></div>
+            <div>
+              <div class="review-name">Miguel Ch. <span style="color:#F5A623;font-size:.82rem;margin-left:4px;">★★★★★</span></div>
+              <div class="review-date">Mayo 2025 · Sesión presencial <span class="verified-patient" style="margin-left:6px;">✓ Verificado</span></div>
+            </div>
+          </div>
+          <p class="review-text">"Llegué con mucho escepticismo sobre la terapia y en pocas semanas empecé a ver resultados tangibles. La doctora tiene una capacidad increíble para hacer que te sientas seguro y en confianza desde el primer momento."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar"><img src="https://ui-avatars.com/api/?name=Lucia+M&background=D4E8F5&color=2D5270&size=100&bold=true" alt="Lucía M."></div>
+            <div>
+              <div class="review-name">Lucía M. <span style="color:#F5A623;font-size:.82rem;margin-left:4px;">★★★★★</span></div>
+              <div class="review-date">Mayo 2025 · Sesión online <span class="verified-patient" style="margin-left:6px;">✓ Verificada</span></div>
+            </div>
+          </div>
+          <p class="review-text">"Cuatro meses trabajando con la Dra. Rojas y ha sido transformador. Me ayudó a salir de un burnout severo con herramientas concretas, no solo teoría. Es muy puntual, preparada y genuinamente empática."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar"><img src="https://ui-avatars.com/api/?name=Roberto+P&background=E8F2FA&color=3A6485&size=100&bold=true" alt="Roberto P."></div>
+            <div>
+              <div class="review-name">Roberto P. <span style="color:#F5A623;font-size:.82rem;margin-left:4px;">★★★★☆</span></div>
+              <div class="review-date">Abril 2025 · Sesión online <span class="verified-patient" style="margin-left:6px;">✓ Verificado</span></div>
+            </div>
+          </div>
+          <p class="review-text">"Muy buena profesional. La sesión online funcionó perfectamente y la conexión fue inmediata. Cuatro estrellas porque a veces el tiempo se siente justo, pero en general la experiencia ha sido muy positiva."</p>
+        </div>
+
+        <div style="text-align:center;margin-top:20px;">
+          <button class="btn btn-secondary btn-sm">Ver todas las reseñas</button>
+        </div>
+
+        <!-- Write a review (visible when logged in + has booking) -->
+        <div id="reviewSection" style="display:none;margin-top:28px;">
+          <hr class="divider">
+          <div class="review-write-section">
+            <h4>Comparte tu experiencia</h4>
+            <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px;">Solo disponible para pacientes con sesión reservada.</p>
+            <div class="star-picker" id="starPicker" role="group" aria-label="Calificación en estrellas">
+              <span class="star-opt" data-v="1" onclick="setRating(1)" title="1 estrella">★</span>
+              <span class="star-opt" data-v="2" onclick="setRating(2)" title="2 estrellas">★</span>
+              <span class="star-opt" data-v="3" onclick="setRating(3)" title="3 estrellas">★</span>
+              <span class="star-opt" data-v="4" onclick="setRating(4)" title="4 estrellas">★</span>
+              <span class="star-opt" data-v="5" onclick="setRating(5)" title="5 estrellas">★</span>
+            </div>
+            <span class="auth-error" id="starErr" style="margin-bottom:10px;display:block;"></span>
+            <textarea id="reviewText" class="form-textarea" rows="4" placeholder="Comparte tu experiencia con la Dra. Rojas..." style="margin-bottom:6px;"></textarea>
+            <span class="auth-error" id="reviewTextErr" style="margin-bottom:12px;display:block;"></span>
+            <button class="btn btn-primary" onclick="submitReview()">Publicar reseña</button>
+          </div>
+        </div>
+
+        <div id="reviewSent" style="display:none;text-align:center;padding:22px;background:rgba(39,174,96,.06);border-radius:var(--radius);border:1.5px solid rgba(39,174,96,.22);margin-top:24px;">
+          <div style="font-size:1.6rem;margin-bottom:10px;color:var(--success);">✓</div>
+          <div style="font-weight:700;margin-bottom:6px;font-size:1rem;">¡Gracias por tu reseña!</div>
+          <p style="font-size:.82rem;color:var(--text-secondary);">Tu opinión ayuda a otros pacientes a encontrar al especialista ideal.</p>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR DE RESERVA -->
+    <aside>
+      <div class="booking-card">
+        <div class="booking-head">
+          <span class="booking-price">S/. 90</span>
+          <div class="booking-per">por sesión · 50 minutos</div>
+          <div class="booking-promo">✓ Primera consulta gratuita (20 min)</div>
+        </div>
+
+        <div class="booking-body">
+          <span class="booking-label">Selecciona una fecha</span>
+          <div class="cal-wrapper">
+            <div class="cal-head">
+              <button class="cal-nav" id="calPrev" aria-label="Mes anterior">‹</button>
+              <span class="cal-month" id="calMonth">Junio 2025</span>
+              <button class="cal-nav" id="calNext" aria-label="Mes siguiente">›</button>
+            </div>
+            <div class="cal-days-header">
+              <span>L</span><span>M</span><span>X</span>
+              <span>J</span><span>V</span><span>S</span><span>D</span>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+
+          <span class="booking-label">Horarios disponibles</span>
+          <div class="slot-grid" id="slotGrid"></div>
+
+          <div class="booking-summary" id="bookingSummary" style="display:none;">
+            <div><span>Especialista:</span><strong>Dra. M. E. Rojas</strong></div>
+            <div><span>Fecha:</span><strong id="sumDate">—</strong></div>
+            <div><span>Hora:</span><strong id="sumTime">—</strong></div>
+            <div><span>Modalidad:</span><strong>Online</strong></div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <span class="booking-label">Modalidad</span>
+            <select class="form-select" style="width:100%;margin-top:6px;">
+              <option>💻 Online (videollamada)</option>
+              <option>🏥 Presencial — Nueva Cajamarca</option>
+            </select>
+          </div>
+
+          <button class="btn btn-full btn-sm btn-free" onclick="bookFreeConsult()" style="margin-bottom:10px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            Primera consulta gratis · 20 min
+          </button>
+          <button class="btn btn-primary btn-full" id="bookBtn" onclick="confirmBooking()">
+            Reservar sesión
+          </button>
+          <button class="btn btn-full btn-sm" style="margin-top:8px;border:1.5px solid var(--border);color:var(--text-secondary);" onclick="openMsgModal()">
+            Enviar mensaje
+          </button>
+
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border-light);font-size:.73rem;color:var(--text-muted);text-align:center;line-height:1.6;">
+            🔒 Pago 100% seguro<br>
+            Cancelación gratuita hasta 24 h antes
+          </div>
+        </div>
+      </div>
+
+      <!-- Info adicional -->
+      <div style="background:var(--bg-soft);border-radius:var(--radius);padding:16px 18px;margin-top:14px;border:1px solid var(--border-light);">
+        <div style="font-weight:700;margin-bottom:12px;font-size:.84rem;color:var(--text);">Información general</div>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Online · Nueva Cajamarca, San Martín</div>
+          <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Lunes a Viernes · 8:00 – 20:00</div>
+          <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Responde en menos de 2 horas</div>
+          <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Idioma: Español</div>
+          <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Tarjeta y transferencia aceptadas</div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+
+<!-- ══════════ ESPECIALISTAS SIMILARES ══════════ -->
+<div style="background:var(--bg-soft);padding:56px 0;margin-top:16px;border-top:1px solid var(--border-light);">
+  <div class="container">
+    <h3 style="margin-bottom:24px;">También te puede interesar</h3>
+    <div class="grid-3">
+      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="card-top">
+          <div class="card-avatar-wrap">
+            <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Andrés Lima"></div>
+            <span class="verified-badge">✓</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-name">Ps. Andrés Lima</h3>
+            <p class="card-spec">Terapeuta TCC · 6 años exp.</p>
+            <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(158)</span></div>
+          </div>
+        </div>
+        <div class="card-body"><div class="card-tags"><span class="badge">Depresión</span><span class="badge">Fobias</span></div></div>
+        <div class="card-footer">
+          <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+        </div>
+      </div>
+
+      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="card-top">
+          <div class="card-avatar-wrap">
+            <div class="card-avatar"><img src="https://images.unsplash.com/photo-1701096374092-bb70915fdc5c?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Valeria Santos"></div>
+            <span class="verified-badge">✓</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-name">Dra. Valeria Santos</h3>
+            <p class="card-spec">Psic. Organizacional · 7 años exp.</p>
+            <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(190)</span></div>
+          </div>
+        </div>
+        <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Liderazgo</span></div></div>
+        <div class="card-footer">
+          <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+        </div>
+      </div>
+
+      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="card-top">
+          <div class="card-avatar-wrap">
+            <div class="card-avatar"><img src="https://images.unsplash.com/photo-1645066928295-2506defde470?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Diego Castro"></div>
+            <span class="verified-badge">✓</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-name">Ps. Diego Castro</h3>
+            <p class="card-spec">Psicología Positiva · 5 años exp.</p>
+            <div class="card-rating"><span class="stars">★★★★☆</span> 4.6 <span class="card-reviews">(205)</span></div>
+          </div>
+        </div>
+        <div class="card-body"><div class="card-tags"><span class="badge">Autoestima</span><span class="badge">Mindfulness</span></div></div>
+        <div class="card-footer">
+          <span class="card-price">Desde <strong>S/. 75</strong>/sesión</span>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ BOOKING CONFIRMATION MODAL ══════════ -->
+<div class="bk-overlay" id="bkOverlay">
+  <div class="bk-modal" role="dialog" aria-modal="true" aria-label="Confirmar reserva">
+    <button class="bk-close" id="bkClose" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Step 1: confirm -->
+    <div id="bkStep1">
+      <div class="bk-icon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="bk-title">Confirmar reserva</div>
+      <p class="bk-sub">Revisa los detalles de tu sesión antes de confirmar.</p>
+
+      <div class="bk-details">
+        <div class="bk-row"><span>Especialista</span><span>Dra. M. E. Rojas</span></div>
+        <div class="bk-row"><span>Fecha</span><span id="bkDate">—</span></div>
+        <div class="bk-row"><span>Hora</span><span id="bkTime">—</span></div>
+        <div class="bk-row"><span>Modalidad</span><span id="bkModality">Online (videollamada)</span></div>
+        <div class="bk-row"><span>Duración</span><span>50 minutos</span></div>
+        <div class="bk-row"><span>Precio</span><span id="bkPriceVal" style="color:var(--primary-dark);font-weight:700;">S/. 90</span></div>
+      </div>
+
+      <div class="bk-actions">
+        <button class="btn btn-secondary" onclick="closeBkModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="finishBooking()">Confirmar y reservar</button>
+      </div>
+    </div>
+
+    <!-- Step 2: success -->
+    <div id="bkStep2" style="display:none;">
+      <div class="bk-icon" style="background:rgba(39,174,96,.14);">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="bk-title">¡Sesión reservada!</div>
+      <p class="bk-sub">Tu reserva ha sido registrada. Recibirás un recordatorio antes de la sesión.</p>
+
+      <div class="bk-details">
+        <div class="bk-row"><span>Especialista</span><span>Dra. M. E. Rojas</span></div>
+        <div class="bk-row"><span>Fecha</span><span id="bkDate2">—</span></div>
+        <div class="bk-row"><span>Hora</span><span id="bkTime2">—</span></div>
+        <div class="bk-row"><span>Modalidad</span><span id="bkModality2">Online</span></div>
+        <div class="bk-row"><span>Estado</span><span style="color:var(--success);font-weight:700;">✓ Confirmada</span></div>
+      </div>
+
+      <button class="btn btn-primary btn-full" onclick="closeBkModal()">Entendido</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ MESSAGE MODAL ══════════ -->
+<div class="msg-overlay" id="msgOverlay">
+  <div class="msg-modal" role="dialog" aria-modal="true" aria-label="Enviar mensaje">
+    <button class="msg-close" id="msgClose" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div id="msgFormWrap">
+      <div class="msg-title">Mensaje a Dra. Rojas</div>
+      <p class="msg-sub">Cuéntale brevemente el motivo de tu consulta. Responde en menos de 2 horas.</p>
+
+      <form id="msgForm" onsubmit="sendMessage(event)" novalidate>
+        <div style="margin-bottom:14px;">
+          <label class="form-label" for="msgNombre">Tu nombre</label>
+          <input type="text" id="msgNombre" class="form-input" placeholder="Juan Pérez">
+          <span class="auth-error" id="msgNombreErr"></span>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label class="form-label" for="msgEmail">Correo electrónico</label>
+          <input type="email" id="msgEmail" class="form-input" placeholder="tucorreo@gmail.com">
+          <span class="auth-error" id="msgEmailErr"></span>
+        </div>
+        <div style="margin-bottom:18px;">
+          <label class="form-label" for="msgTexto">Mensaje</label>
+          <textarea id="msgTexto" class="form-textarea" rows="4" placeholder="Hola doctora, quisiera consultar sobre..."></textarea>
+          <span class="auth-error" id="msgTextoErr"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Enviar mensaje</button>
+      </form>
+    </div>
+
+    <div class="msg-sent" id="msgSent">
+      <div class="msg-sent-icon">✓</div>
+      <div style="font-weight:700;font-size:1.05rem;margin-bottom:6px;">Mensaje enviado</div>
+      <p style="font-size:.84rem;color:var(--text-secondary);margin-bottom:20px;">La Dra. Rojas te responderá en menos de 2 horas.</p>
+      <button class="btn btn-secondary" onclick="closeMsgModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="footer-logo-img">
+        </div>
+        <p>Conectamos personas con psicólogos certificados para construir procesos de bienestar mental reales y duraderos.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <div class="footer-links">
+          <a href="especialistas.html" class="footer-link">Buscar especialistas</a>
+          <a href="index.html#modalidades" class="footer-link">Sesiones online</a>
+          <a href="index.html#modalidades" class="footer-link">Sesiones presenciales</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Sobre nosotros</a>
+          <a href="index.html#blog" class="footer-link">Blog</a>
+          <a href="index.html#contacto" class="footer-link">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Política de privacidad</a>
+          <a href="#" class="footer-link">Términos de uso</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mente Sana S.A.C. · Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════ JAVASCRIPT ══════════ -->
+<script>
+/* Nav */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove('open');
+});
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 8);
+}, { passive: true });
+
+/* Tabs */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    this.classList.add('active'); this.setAttribute('aria-selected','true');
+    document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+  });
+});
+
+/* Calendar */
+const months  = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const available = [2,5,7,9,10,12,14,16,17,19,21,23,24,26];
+let currentDate = new Date(2025, 5, 1);
+let selectedDay = null;
+
+function renderCalendar() {
+  const grid  = document.getElementById('calGrid');
+  const month = document.getElementById('calMonth');
+  grid.innerHTML = '';
+  month.textContent = months[currentDate.getMonth()] + ' ' + currentDate.getFullYear();
+  const firstDay    = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+  const offset      = firstDay === 0 ? 6 : firstDay - 1;
+  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
+
+  for (let i = 0; i < offset; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-cell empty';
+    grid.appendChild(el);
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el   = document.createElement('div');
+    const isAv = available.includes(d);
+    el.className = 'cal-cell' + (isAv ? ' available' : ' disabled') + (d === selectedDay ? ' selected' : '');
+    el.textContent = d;
+    if (isAv) {
+      el.addEventListener('click', () => {
+        selectedDay = d;
+        document.getElementById('sumDate').textContent = d + ' de ' + months[currentDate.getMonth()];
+        document.getElementById('bookingSummary').style.display = 'flex';
+        document.getElementById('bookingSummary').style.flexDirection = 'column';
+        renderCalendar(); renderSlots();
+      });
+    }
+    grid.appendChild(el);
+  }
+}
+
+/* Slots */
+const slots = ['09:00','10:00','11:00','12:00','16:00','17:00','18:00'];
+let selectedSlot = null;
+
+function renderSlots() {
+  const grid = document.getElementById('slotGrid');
+  grid.innerHTML = '';
+  slots.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'slot-item' + (t === selectedSlot ? ' selected' : '');
+    el.textContent = t;
+    el.addEventListener('click', () => {
+      selectedSlot = t;
+      document.getElementById('sumTime').textContent = t;
+      document.getElementById('bookingSummary').style.display = 'flex';
+      document.getElementById('bookingSummary').style.flexDirection = 'column';
+      renderSlots();
+    });
+    grid.appendChild(el);
+  });
+}
+
+document.getElementById('calPrev').addEventListener('click', () => {
+  currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth()-1, 1);
+  renderCalendar();
+});
+document.getElementById('calNext').addEventListener('click', () => {
+  currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 1);
+  renderCalendar();
+});
+
+renderCalendar();
+renderSlots();
+
+/* Booking confirm — opens modal, auth-gated */
+function confirmBooking() {
+  if (!selectedDay || !selectedSlot) {
+    showToast('Selecciona una fecha y un horario primero.', 'error');
+    return;
+  }
+
+  if (!isLoggedIn()) {
+    openAuthModal('register');
+    showToast('Crea tu cuenta para reservar una sesión.', 'info', 4000);
+    return;
+  }
+
+  /* Reset free-consult state */
+  _isFreeConsult = false;
+  const priceEl = document.getElementById('bkPriceVal');
+  if (priceEl) { priceEl.textContent = 'S/. 90'; priceEl.style.color = ''; }
+
+  const modalityEl = document.querySelector('.booking-body .form-select');
+  const modality   = modalityEl ? modalityEl.value.replace(/^[^\s]+\s/, '') : 'Online (videollamada)';
+  const dateStr    = selectedDay + ' de ' + months[currentDate.getMonth()];
+
+  document.getElementById('bkDate').textContent     = dateStr;
+  document.getElementById('bkTime').textContent     = selectedSlot;
+  document.getElementById('bkModality').textContent = modality;
+
+  const overlay = document.getElementById('bkOverlay');
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBkModal() {
+  const overlay = document.getElementById('bkOverlay');
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    document.getElementById('bkStep1').style.display = '';
+    document.getElementById('bkStep2').style.display = 'none';
+  }, 300);
+}
+
+function finishBooking() {
+  const date     = document.getElementById('bkDate').textContent;
+  const time     = document.getElementById('bkTime').textContent;
+  const modality = document.getElementById('bkModality').textContent;
+  const session  = getSession();
+
+  /* Save booking to localStorage */
+  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  bookings.push({
+    id:         Date.now(),
+    userId:     session ? session.id : null,
+    specialist: 'Dra. María Elena Rojas',
+    date,
+    time,
+    modality,
+    price:      _isFreeConsult ? 'S/. 0 — Gratis' : 'S/. 90',
+    status:     'confirmada',
+    createdAt:  new Date().toISOString(),
+  });
+  localStorage.setItem('ms_bookings', JSON.stringify(bookings));
+
+  /* Show success step */
+  document.getElementById('bkDate2').textContent     = date;
+  document.getElementById('bkTime2').textContent     = time;
+  document.getElementById('bkModality2').textContent = modality;
+  document.getElementById('bkStep1').style.display = 'none';
+  document.getElementById('bkStep2').style.display = '';
+
+  /* Update book button */
+  const btn = document.getElementById('bookBtn');
+  btn.textContent = '✓ Sesión reservada';
+  btn.disabled = true;
+  btn.style.background = 'var(--success)';
+}
+
+/* Message modal */
+function openMsgModal() {
+  const session = getSession();
+  if (session) {
+    const nameEl  = document.getElementById('msgNombre');
+    const emailEl = document.getElementById('msgEmail');
+    if (nameEl)  nameEl.value  = session.name;
+    if (emailEl) emailEl.value = session.email;
+  }
+  document.getElementById('msgOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMsgModal() {
+  document.getElementById('msgOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    document.getElementById('msgFormWrap').style.display = '';
+    document.getElementById('msgSent').classList.remove('visible');
+    document.getElementById('msgForm').reset();
+    ['msgNombreErr','msgEmailErr','msgTextoErr'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = '';
+    });
+  }, 300);
+}
+
+function sendMessage(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('msgNombre').value.trim();
+  const email  = document.getElementById('msgEmail').value.trim();
+  const texto  = document.getElementById('msgTexto').value.trim();
+  let ok = true;
+
+  ['msgNombreErr','msgEmailErr','msgTextoErr'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '';
+  });
+
+  if (nombre.length < 2) { document.getElementById('msgNombreErr').textContent = 'Ingresa tu nombre.'; ok = false; }
+  if (!/\S+@\S+\.\S+/.test(email)) { document.getElementById('msgEmailErr').textContent = 'Correo inválido.'; ok = false; }
+  if (texto.length < 10) { document.getElementById('msgTextoErr').textContent = 'Escribe al menos 10 caracteres.'; ok = false; }
+  if (!ok) return;
+
+  /* Save message */
+  const msgs = JSON.parse(localStorage.getItem('ms_messages') || '[]');
+  msgs.push({ id: Date.now(), specialist: 'Dra. María Elena Rojas', nombre, email, texto, sentAt: new Date().toISOString() });
+  localStorage.setItem('ms_messages', JSON.stringify(msgs));
+
+  document.getElementById('msgFormWrap').style.display = 'none';
+  document.getElementById('msgSent').classList.add('visible');
+}
+
+/* ─── Favourite ─── */
+const SPECIALIST_ID = 'rojas-maria-elena';
+
+function toggleFavorite() {
+  if (!isLoggedIn()) {
+    openAuthModal('login');
+    showToast('Inicia sesión para guardar especialistas.', 'info');
+    return;
+  }
+  const favs = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
+  const idx  = favs.indexOf(SPECIALIST_ID);
+  const btn  = document.getElementById('favBtn');
+  const lbl  = document.getElementById('favBtnLabel');
+  if (idx === -1) {
+    favs.push(SPECIALIST_ID);
+    btn.classList.add('fav-active');
+    lbl.textContent = 'Guardado';
+    showToast('Especialista guardada en tus favoritos.');
+  } else {
+    favs.splice(idx, 1);
+    btn.classList.remove('fav-active');
+    lbl.textContent = 'Guardar';
+    showToast('Eliminada de tus favoritos.', 'info');
+  }
+  localStorage.setItem('ms_favorites', JSON.stringify(favs));
+}
+
+function initFavoriteState() {
+  const favs = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
+  if (favs.includes(SPECIALIST_ID)) {
+    document.getElementById('favBtn').classList.add('fav-active');
+    document.getElementById('favBtnLabel').textContent = 'Guardado';
+  }
+}
+
+/* ─── Share ─── */
+function shareProfile() {
+  const shareData = {
+    title: 'Dra. María Elena Rojas — Mente Sana',
+    text:  'Psicóloga Clínica especializada en ansiedad, estrés y burnout. Primera consulta gratuita.',
+    url:   window.location.href,
+  };
+  if (navigator.share) {
+    navigator.share(shareData).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => showToast('Enlace copiado al portapapeles.'))
+      .catch(() => showToast('Copia este enlace: ' + window.location.href, 'info', 6000));
+  }
+}
+
+/* ─── Free consult ─── */
+let _isFreeConsult = false;
+
+function bookFreeConsult() {
+  if (!isLoggedIn()) {
+    openAuthModal('register');
+    showToast('Crea tu cuenta para reservar tu consulta gratuita.', 'info', 4000);
+    return;
+  }
+  _isFreeConsult = true;
+  selectedDay  = available[0];
+  selectedSlot = slots[0];
+  renderCalendar();
+  renderSlots();
+
+  const dateStr = available[0] + ' de ' + months[currentDate.getMonth()];
+  document.getElementById('sumDate').textContent = dateStr;
+  document.getElementById('sumTime').textContent = slots[0];
+  document.getElementById('bookingSummary').style.display       = 'flex';
+  document.getElementById('bookingSummary').style.flexDirection = 'column';
+
+  document.getElementById('bkDate').textContent     = dateStr;
+  document.getElementById('bkTime').textContent     = slots[0];
+  document.getElementById('bkModality').textContent = 'Online (videollamada)';
+
+  const priceEl = document.getElementById('bkPriceVal');
+  if (priceEl) { priceEl.textContent = 'S/. 0 — Gratis'; priceEl.style.color = 'var(--success)'; }
+
+  document.getElementById('bkOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+/* Reset price display when modal closes normally */
+const _origCloseBkModal = closeBkModal;
+closeBkModal = function() {
+  _origCloseBkModal();
+  _isFreeConsult = false;
+  const priceEl = document.getElementById('bkPriceVal');
+  if (priceEl) { priceEl.textContent = 'S/. 90'; priceEl.style.color = ''; }
+};
+
+/* ─── Star rating ─── */
+let _rating = 0;
+
+function setRating(v) {
+  _rating = v;
+  document.querySelectorAll('.star-opt').forEach((s, i) => s.classList.toggle('active', i < v));
+  document.getElementById('starErr').textContent = '';
+}
+
+/* ─── Review section init (called by main.js after auth is ready) ─── */
+function initReviewSection() {
+  if (!isLoggedIn()) return;
+  const session  = getSession();
+  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  const sentIn   = JSON.parse(localStorage.getItem('ms_reviews')  || '[]');
+  const hasBooked   = bookings.some(b => b.userId === session.id);
+  const hasReviewed = sentIn.some(r => r.userId === session.id && r.specialist === 'Dra. María Elena Rojas');
+
+  if (hasBooked && !hasReviewed) {
+    const sec = document.getElementById('reviewSection');
+    if (sec) sec.style.display = '';
+  }
+  if (hasReviewed) {
+    const sent = document.getElementById('reviewSent');
+    if (sent) sent.style.display = '';
+  }
+}
+
+function submitReview() {
+  if (_rating === 0) {
+    document.getElementById('starErr').textContent = 'Elige una calificación.';
+    return;
+  }
+  const text = document.getElementById('reviewText').value.trim();
+  if (text.length < 15) {
+    document.getElementById('reviewTextErr').textContent = 'Escribe al menos 15 caracteres.';
+    return;
+  }
+  const session = getSession();
+  const reviews = JSON.parse(localStorage.getItem('ms_reviews') || '[]');
+  reviews.push({
+    id:         Date.now(),
+    userId:     session.id,
+    userName:   session.name,
+    specialist: 'Dra. María Elena Rojas',
+    rating:     _rating,
+    text,
+    date:       new Date().toLocaleDateString('es-PE', { month: 'long', year: 'numeric' }),
+    createdAt:  new Date().toISOString(),
+  });
+  localStorage.setItem('ms_reviews', JSON.stringify(reviews));
+  document.getElementById('reviewSection').style.display = 'none';
+  document.getElementById('reviewSent').style.display    = '';
+  showToast('¡Reseña publicada! Gracias por tu opinión.');
+}
+
+/* Close modals on backdrop click / Escape */
+document.getElementById('bkOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('bkOverlay')) closeBkModal();
+});
+document.getElementById('bkClose').addEventListener('click', closeBkModal);
+document.getElementById('msgOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('msgOverlay')) closeMsgModal();
+});
+document.getElementById('msgClose').addEventListener('click', closeMsgModal);
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  closeBkModal();
+  closeMsgModal();
+});
+</script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

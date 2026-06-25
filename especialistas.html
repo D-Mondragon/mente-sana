@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especialistas — Mente Sana</title>
+  <meta name="description" content="Directorio de psicólogos certificados. Filtra por especialidad, precio y disponibilidad.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ══════════ NAVEGACIÓN ══════════ -->
+<nav class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="nav-logo-img">
+    </a>
+    <div class="nav-links">
+      <a href="index.html"         class="nav-link">Inicio</a>
+      <a href="especialistas.html" class="nav-link active">Especialistas</a>
+      <a href="index.html#proceso" class="nav-link">Cómo funciona</a>
+      <a href="index.html#blog"    class="nav-link">Blog</a>
+      <a href="index.html#contacto" class="nav-link">Contacto</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+      <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"         class="nav-link">Inicio</a>
+  <a href="especialistas.html" class="nav-link">Especialistas</a>
+  <a href="index.html#contacto" class="nav-link">Contacto</a>
+  <div class="nav-actions">
+    <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+  </div>
+</div>
+
+
+<!-- ══════════ CABECERA ══════════ -->
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Especialistas</span>
+    </div>
+    <h1>Encuentra tu psicólogo</h1>
+    <p class="lead" style="color:var(--text-secondary);max-width:520px;margin-top:8px;">
+      Directorio de psicólogos certificados, verificados y seleccionados
+      por su excelencia clínica. Primera consulta gratuita.
+    </p>
+  </div>
+</div>
+
+
+<!-- ══════════ BARRA DE BÚSQUEDA ══════════ -->
+<div style="background:var(--bg-soft);padding:18px 0;border-bottom:1px solid var(--border-light);">
+  <div class="container">
+    <div class="search-row" style="margin-bottom:0;">
+      <div class="search-field">
+        <svg class="search-field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="search-input" type="text" id="searchInput" placeholder="Busca por nombre, especialidad o enfoque terapéutico…">
+      </div>
+      <select class="search-select" id="locationFilter">
+        <option value="">📍 Todas las ubicaciones</option>
+        <option>Online</option>
+        <option>Nueva Cajamarca</option>
+        <option>San Martín</option>
+        <option>Rioja</option>
+      </select>
+      <button class="search-btn" onclick="applyFilters()">Buscar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ CONTENIDO PRINCIPAL ══════════ -->
+<div class="container">
+  <div class="specialists-layout">
+
+    <!-- SIDEBAR DE FILTROS -->
+    <aside class="filters-sidebar">
+      <div class="filters-sidebar-title">Filtrar resultados</div>
+
+      <div class="filter-group">
+        <h4>Especialidad</h4>
+        <label class="filter-option">
+          <div class="filter-option-left"><input type="checkbox" checked> Ansiedad</div>
+          <span class="filter-option-count">12</span>
+        </label>
+        <label class="filter-option">
+          <div class="filter-option-left"><input type="checkbox"> Depresión</div>
+          <span class="filter-option-count">9</span>
+        </label>
+        <label class="filter-option">
+          <div class="filter-option-left"><input type="checkbox"> Terapia de pareja</div>
+          <span class="filter-option-count">7</span>
+        </label>
+        <label class="filter-option">
+          <div class="filter-option-left"><input type="checkbox"> Psicología infantil</div>
+          <span class="filter-option-count">8</span>
+        </label>
+        <label class="filter-option">
+          <div class="filter-option-left"><input type="checkbox"> Autoestima</div>
+          <span class="filter-option-count">11</span>
+        </label>
+        <label class="filter-option">
+          <div class="filter-option-left"><input type="checkbox"> Duelo</div>
+          <span class="filter-option-count">5</span>
+        </label>
+        <label class="filter-option">
+          <div class="filter-option-left"><input type="checkbox"> TOC / Fobias</div>
+          <span class="filter-option-count">4</span>
+        </label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Modalidad</h4>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad" checked> Online</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad"> Presencial</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="modalidad"> Ambas modalidades</div></label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Valoración mínima</h4>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating" checked> Cualquier valoración</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating"> ★★★★☆ (4.0+)</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="radio" name="rating"> ★★★★★ (4.5+)</div></label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Precio por sesión</h4>
+        <div class="price-range">
+          <input type="range" id="priceRange" min="50" max="200" value="150" oninput="updatePrice(this.value)">
+          <div class="price-range-labels">
+            <span>S/. 50</span>
+            <span id="priceVal">Hasta S/. 150</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h4>Disponibilidad</h4>
+        <label class="filter-option"><div class="filter-option-left"><input type="checkbox"> Disponible hoy</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="checkbox"> Esta semana</div></label>
+        <label class="filter-option"><div class="filter-option-left"><input type="checkbox"> Primera consulta gratis</div></label>
+      </div>
+
+      <button class="btn btn-primary btn-full btn-sm" onclick="applyFilters()">Aplicar filtros</button>
+      <button class="btn btn-ghost btn-full btn-sm" style="margin-top:8px;border:1.5px solid var(--border);" onclick="clearFilters()">Limpiar filtros</button>
+    </aside>
+
+    <!-- RESULTADOS -->
+    <main>
+      <div class="results-header">
+        <div class="results-count">Mostrando <strong id="resultsCount">9</strong> especialistas</div>
+        <select class="sort-select" onchange="applyFilters()">
+          <option>Relevancia</option>
+          <option>Precio: menor a mayor</option>
+          <option>Precio: mayor a menor</option>
+          <option>Mejor valorados</option>
+          <option>Más reseñas</option>
+        </select>
+      </div>
+
+      <div class="specialists-grid" id="specialistsGrid">
+
+        <!-- Card 1 — Destacada -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. María Elena Rojas">
+              </div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. María Elena Rojas</h3>
+              <p class="card-spec">Psicóloga Clínica · 8 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.9 <span class="card-reviews">(240)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Ansiedad</span><span class="badge">Estrés</span><span class="badge">Burnout</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 90</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Carlos Herrera"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Carlos Herrera</h3>
+              <p class="card-spec">Terapeuta de Pareja · 12 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(186)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Pareja</span><span class="badge">Familia</span><span class="badge">Comunicación</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 100</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Sofía Alarcón"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. Sofía Alarcón</h3>
+              <p class="card-spec">Psicología Infantil · 10 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.9 <span class="card-reviews">(312)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible mañana</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Infancia</span><span class="badge">Adolescencia</span><span class="badge">TDAH</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 80</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Andrés Lima"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Andrés Lima</h3>
+              <p class="card-spec">Terapeuta TCC · 6 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(158)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Depresión</span><span class="badge">Fobias</span><span class="badge">TOC</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1581065178047-8ee15951ede6?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Patricia Vega"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. Patricia Vega</h3>
+              <p class="card-spec">Neuropsicología · 15 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(94)</span></div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">📍 Presencial — Nueva Cajamarca</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Evaluación</span><span class="badge">Neuropsicología</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 110</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1645066928295-2506defde470?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Diego Castro"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Diego Castro</h3>
+              <p class="card-spec">Psicología Positiva · 5 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.6 <span class="card-reviews">(205)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Autoestima</span><span class="badge">Mindfulness</span><span class="badge">Bienestar</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 75</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Lucía Moreno"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. Lucía Moreno</h3>
+              <p class="card-spec">Psicología Perinatal · 9 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.9 <span class="card-reviews">(132)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible mañana</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Maternidad</span><span class="badge">Duelo</span><span class="badge">Ansiedad</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&crop=top&q=80" alt="Ps. Fernando Ríos"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Ps. Fernando Ríos</h3>
+              <p class="card-spec">Trauma · EMDR · 11 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★☆</span> 4.7 <span class="card-reviews">(77)</span></div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">📍 Presencial — Nueva Cajamarca</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Trauma</span><span class="badge">EMDR</span><span class="badge">Adicciones</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 120</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+          <div class="card-top">
+            <div class="card-avatar-wrap">
+              <div class="card-avatar"><img src="https://images.unsplash.com/photo-1701096374092-bb70915fdc5c?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Valeria Santos"></div>
+              <span class="verified-badge">✓</span>
+            </div>
+            <div class="card-info">
+              <h3 class="card-name">Dra. Valeria Santos</h3>
+              <p class="card-spec">Psic. Organizacional · 7 años exp.</p>
+              <div class="card-rating"><span class="stars">★★★★★</span> 4.8 <span class="card-reviews">(190)</span></div>
+              <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Liderazgo</span><span class="badge">Estrés</span></div></div>
+          <div class="card-footer">
+            <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          </div>
+        </div>
+
+      </div><!-- /.specialists-grid -->
+
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">›</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer" style="margin-top:56px;">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="footer-logo-img">
+        </div>
+        <p>Conectamos personas con psicólogos certificados para construir procesos de bienestar mental reales y duraderos.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <div class="footer-links">
+          <a href="especialistas.html" class="footer-link">Buscar especialistas</a>
+          <a href="index.html#modalidades" class="footer-link">Sesiones online</a>
+          <a href="index.html#modalidades" class="footer-link">Sesiones presenciales</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Sobre nosotros</a>
+          <a href="#" class="footer-link">Blog</a>
+          <a href="index.html#contacto" class="footer-link">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Política de privacidad</a>
+          <a href="#" class="footer-link">Términos de uso</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mente Sana S.A.C. · Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if(!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove('open');
+});
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 8);
+}, { passive: true });
+
+function updatePrice(val) {
+  document.getElementById('priceVal').textContent = 'Hasta S/. ' + val;
+}
+
+function applyFilters() {
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
+  const cards  = document.querySelectorAll('.specialist-card');
+  let visible  = 0;
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    const show = !query || text.includes(query);
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('resultsCount').textContent = visible;
+}
+
+function clearFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('locationFilter').value = '';
+  document.querySelectorAll('.specialist-card').forEach(c => c.style.display = '');
+  document.getElementById('resultsCount').textContent = 9;
+}
+
+document.querySelectorAll('.page-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

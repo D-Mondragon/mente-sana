@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mente Sana — Psicología Online y Presencial</title>
+  <meta name="description" content="Encuentra al psicólogo ideal para ti. Sesiones online y presenciales con especialistas certificados. Primera consulta gratuita.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ══════════ NAVEGACIÓN ══════════ -->
+<nav class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="nav-logo-img">
+    </a>
+    <div class="nav-links">
+      <a href="index.html"         class="nav-link active">Inicio</a>
+      <a href="especialistas.html" class="nav-link">Especialistas</a>
+      <a href="#proceso"           class="nav-link">Cómo funciona</a>
+      <a href="#blog"              class="nav-link">Blog</a>
+      <a href="#contacto"         class="nav-link">Contacto</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+      <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"         class="nav-link">Inicio</a>
+  <a href="especialistas.html" class="nav-link">Especialistas</a>
+  <a href="#proceso"           class="nav-link">Cómo funciona</a>
+  <a href="#blog"              class="nav-link">Blog</a>
+  <a href="#contacto"         class="nav-link">Contacto</a>
+  <div class="nav-actions">
+    <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+  </div>
+</div>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-bg-pattern"></div>
+  <div class="container hero-inner">
+
+    <!-- Texto -->
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="pulse-dot"></span>
+        Plataforma de salud mental verificada en Perú
+      </div>
+      <h1 class="hero-title">
+        Un espacio seguro<br>para <em>sanar y crecer</em>
+      </h1>
+      <p class="hero-subtitle">
+        Conectamos personas con psicólogos certificados para iniciar un proceso
+        terapéutico real. Sesiones online, presenciales y por chat — adaptadas a tu ritmo de vida.
+      </p>
+      <div class="hero-cta">
+        <a href="especialistas.html" class="btn btn-primary btn-lg">
+          Buscar mi terapeuta
+        </a>
+        <a href="#proceso" class="btn btn-secondary btn-lg">Cómo funciona</a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item">
+          <span class="trust-check">✓</span>
+          Primera consulta gratuita
+        </span>
+        <span class="trust-item">
+          <span class="trust-check">✓</span>
+          Psicólogos verificados CPsP
+        </span>
+        <span class="trust-item">
+          <span class="trust-check">✓</span>
+          Confidencialidad garantizada
+        </span>
+      </div>
+    </div>
+
+    <!-- Visual -->
+    <div class="hero-visual">
+      <div class="hero-photo-frame">
+        <div class="hero-photo-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?auto=format&fit=crop&w=560&h=620&q=85"
+            alt="Sesión de psicoterapia — espacio seguro y profesional"
+            class="hero-photo-main">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave separator -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,20 C240,55 480,0 720,28 C960,55 1200,10 1440,30 L1440,55 L0,55 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ══════════ BANDA DE CONFIANZA ══════════ -->
+<div class="trust-band">
+  <div class="container">
+    <div class="trust-band-inner">
+      <span class="trust-band-label">Especialistas certificados ante:</span>
+      <div class="trust-band-items">
+        <span class="trust-band-item"><span class="tb-dot"></span>Colegio de Psicólogos del Perú</span>
+        <span class="trust-band-item"><span class="tb-dot"></span>SUNEDU verificado</span>
+        <span class="trust-band-item"><span class="tb-dot"></span>MINSA</span>
+        <span class="trust-band-item"><span class="tb-dot"></span>APA miembros</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ STATS ══════════ -->
+<div class="stats-bar">
+  <div class="container stats-inner">
+    <div class="stat-item">
+      <span class="stat-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+      <span class="stat-num" data-target="50" data-suffix="+">0</span>
+      <span class="stat-desc">Especialistas activos</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+      <span class="stat-num" data-target="1200" data-suffix="+">0</span>
+      <span class="stat-desc">Pacientes atendidos</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></span>
+      <span class="stat-num" data-target="98" data-suffix="%">0</span>
+      <span class="stat-desc">Índice de satisfacción</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+      <span class="stat-num" data-target="5" data-suffix=" años">0</span>
+      <span class="stat-desc">De experiencia</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ══════════ ESPECIALISTAS DESTACADOS ══════════ -->
+<section class="section" id="especialistas">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Especialistas</span>
+      <h2>Psicólogos recomendados para ti</h2>
+      <p>Todos nuestros especialistas están colegiados, verificados y seleccionados por su excelencia clínica y calidad humana.</p>
+    </div>
+
+    <div class="grid-3 reveal">
+
+      <!-- Tarjeta 1 — Destacada -->
+      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="card-top">
+          <div class="card-avatar-wrap">
+            <div class="card-avatar">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. María Elena Rojas">
+            </div>
+            <span class="verified-badge" title="Especialista verificada">✓</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-name">Dra. María Elena Rojas</h3>
+            <p class="card-spec">Psicóloga Clínica · 8 años exp.</p>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span> 4.9
+              <span class="card-reviews">(240 reseñas)</span>
+            </div>
+            <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="badge">Ansiedad</span>
+            <span class="badge">Estrés</span>
+            <span class="badge">Burnout</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">Desde <strong>S/. 90</strong>/sesión</span>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="card-top">
+          <div class="card-avatar-wrap">
+            <div class="card-avatar">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Carlos Herrera">
+            </div>
+            <span class="verified-badge" title="Especialista verificado">✓</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-name">Ps. Carlos Herrera</h3>
+            <p class="card-spec">Terapeuta de Pareja · 12 años exp.</p>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span> 4.8
+              <span class="card-reviews">(186 reseñas)</span>
+            </div>
+            <div class="card-online"><span class="online-dot"></span>Disponible hoy</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="badge">Pareja</span>
+            <span class="badge">Familia</span>
+            <span class="badge">Comunicación</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">Desde <strong>S/. 100</strong>/sesión</span>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+        <div class="card-top">
+          <div class="card-avatar-wrap">
+            <div class="card-avatar">
+              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Sofía Alarcón">
+            </div>
+            <span class="verified-badge" title="Especialista verificada">✓</span>
+          </div>
+          <div class="card-info">
+            <h3 class="card-name">Dra. Sofía Alarcón</h3>
+            <p class="card-spec">Psicología Infantil · 10 años exp.</p>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span> 4.9
+              <span class="card-reviews">(312 reseñas)</span>
+            </div>
+            <div class="card-online"><span class="online-dot"></span>Disponible mañana</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="badge">Infancia</span>
+            <span class="badge">Adolescencia</span>
+            <span class="badge">TDAH</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">Desde <strong>S/. 80</strong>/sesión</span>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center" style="margin-top:40px;">
+      <a href="especialistas.html" class="btn btn-secondary">Ver todos los especialistas →</a>
+      <p style="margin-top:12px;font-size:.8rem;color:var(--text-muted);">+50 psicólogos certificados disponibles</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CÓMO FUNCIONA ══════════ -->
+<section class="section section--gray" id="proceso">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Proceso</span>
+      <h2>Comenzar es más fácil de lo que crees</h2>
+      <p>Cuatro pasos simples para iniciar tu proceso terapéutico sin complicaciones ni esperas.</p>
+    </div>
+
+    <div class="steps-wrapper reveal">
+      <div class="steps-connector"></div>
+      <div class="grid-4">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+          <h3>Regístrate</h3>
+          <p>Crea tu cuenta en menos de 2 minutos. Solo necesitas tu correo electrónico.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+          <h3>Elige tu especialista</h3>
+          <p>Filtra por especialidad, modalidad, precio y disponibilidad según tus necesidades.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <h3>Agenda tu sesión</h3>
+          <p>Selecciona fecha y hora en el calendario. Recibirás confirmación al instante.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>Comienza tu proceso</h3>
+          <p>Inicia tu camino hacia el bienestar con el acompañamiento de un profesional.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center" style="margin-top:36px;">
+      <a href="especialistas.html" class="btn btn-primary">Empezar ahora — es gratis</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ MODALIDADES ══════════ -->
+<section class="section" id="modalidades">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Modalidades</span>
+      <h2>Terapia adaptada a tu estilo de vida</h2>
+      <p>Elige la modalidad que mejor se adapte a tus tiempos, preferencias y lugar de residencia.</p>
+    </div>
+
+    <div class="grid-3 reveal">
+
+      <div class="modality-card">
+        <div class="modality-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <h3>Sesión Online</h3>
+        <p>Terapia por videollamada con la misma calidad y profundidad que la sesión presencial, desde cualquier lugar.</p>
+        <div class="modality-features">
+          <div class="modality-feature">Plataforma segura y encriptada</div>
+          <div class="modality-feature">Sin desplazamientos ni esperas</div>
+          <div class="modality-feature">Compatible con móvil, tablet y PC</div>
+          <div class="modality-feature">Resúmenes de sesión disponibles</div>
+        </div>
+        <a href="especialistas.html" class="btn btn-primary btn-sm">Buscar sesión online</a>
+      </div>
+
+      <div class="modality-card">
+        <div class="modality-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Sesión Presencial</h3>
+        <p>Atención en consultorio en un entorno cálido, privado y profesionalmente equipado para tu comodidad.</p>
+        <div class="modality-features">
+          <div class="modality-feature">Consultorio en Nueva Cajamarca, San Martín</div>
+          <div class="modality-feature">Ambiente confidencial y acogedor</div>
+          <div class="modality-feature">Fácil acceso y estacionamiento</div>
+          <div class="modality-feature">Material de apoyo físico incluido</div>
+        </div>
+        <a href="especialistas.html" class="btn btn-secondary btn-sm">Buscar consultorio</a>
+      </div>
+
+      <div class="modality-card">
+        <div class="modality-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Chat Terapéutico</h3>
+        <p>Comunicación asíncrona con tu terapeuta, ideal para seguimiento continuo entre sesiones y apoyo cotidiano.</p>
+        <div class="modality-features">
+          <div class="modality-feature">Disponible 24/7 para enviar mensajes</div>
+          <div class="modality-feature">Respuesta garantizada en menos de 24 h</div>
+          <div class="modality-feature">Historial completo de conversación</div>
+          <div class="modality-feature">Complemento perfecto a las sesiones</div>
+        </div>
+        <a href="especialistas.html" class="btn btn-ghost btn-sm" style="border:1.5px solid var(--border);">Más información</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ TESTIMONIOS ══════════ -->
+<section class="section section--gray" id="testimonios">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Testimonios</span>
+      <h2>Historias reales de transformación</h2>
+      <p>Más de <strong>1,200 pacientes</strong> encontraron el apoyo que necesitaban. Estas son sus experiencias.</p>
+    </div>
+
+    <div class="testi-carousel reveal">
+      <div class="testi-track" id="testiTrack">
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Encontré a mi psicóloga en menos de diez minutos. Desde la primera sesión me sentí completamente escuchada y comprendida. Tres meses después, el cambio en mi vida es notable y real."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Andrea Q." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Andrea Q.</div>
+              <div class="author-meta">Nueva Cajamarca · Sesiones online</div>
+              <div class="verified-patient">✓ Paciente verificada</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"La terapia de pareja nos dio las herramientas que necesitábamos. Nuestro terapeuta fue increíblemente empático. Después de 4 meses podemos comunicarnos sin peleas innecesarias."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Roberto M." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Roberto M.</div>
+              <div class="author-meta">Arequipa · Sesiones presenciales</div>
+              <div class="verified-patient">✓ Paciente verificado</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Dudé mucho antes de dar el paso, pero fue la mejor decisión. La Dra. Alarcón ayudó enormemente a mi hija con su ansiedad escolar. El cambio que hemos visto es increíble."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Carmen T." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Carmen T.</div>
+              <div class="author-meta">Trujillo · Sesiones online</div>
+              <div class="verified-patient">✓ Paciente verificada</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Llevaba dos años lidiando con el burnout sin saber qué era. El Ps. Herrera me ayudó a entender mis límites y reorganizar mi vida. Hoy voy al trabajo sin ese peso en el pecho."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Miguel Á." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Miguel Á.</div>
+              <div class="author-meta">Rioja · Sesiones online</div>
+              <div class="verified-patient">✓ Paciente verificado</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Empecé la terapia pensando que no funcionaría para mí. Me equivoqué. La Ps. Vega tiene una forma de escuchar que te hace sentir segura al instante. Hoy me conozco y me quiero mucho más."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Lucía P." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Lucía P.</div>
+              <div class="author-meta">Iquitos · Sesiones online</div>
+              <div class="verified-patient">✓ Paciente verificada</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★☆</div>
+          <p class="test-text">"La plataforma es fácil de usar y los horarios son súper flexibles. Pude reservar una sesión para el mismo día. Lo que más valoro es la profesionalidad y la discreción absoluta."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Diego R." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Diego R.</div>
+              <div class="author-meta">Lima · Sesiones online</div>
+              <div class="verified-patient">✓ Paciente verificado</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Vine buscando ayuda para mi ansiedad social y encontré mucho más. Aprendí estrategias que cambiarán mi vida para siempre. Recomendar Mente Sana es lo mínimo que puedo hacer."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Valentina S." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Valentina S.</div>
+              <div class="author-meta">Tarapoto · Sesiones online</div>
+              <div class="verified-patient">✓ Paciente verificada</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-text">"Después de un duelo muy duro no sabía cómo seguir. La Dra. Rojas me acompañó con una paciencia y calidez que nunca olvidaré. Encontré el camino para sanar y volver a sonreír."</p>
+          <div class="test-author">
+            <div class="author-avatar">
+              <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=80&h=80&crop=face&q=80" alt="Javier E." loading="lazy">
+            </div>
+            <div>
+              <div class="author-name">Javier E.</div>
+              <div class="author-meta">Cusco · Sesiones presenciales</div>
+              <div class="verified-patient">✓ Paciente verificado</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="testi-nav testi-nav--prev" id="testiPrev" aria-label="Testimonio anterior">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="testi-nav testi-nav--next" id="testiNext" aria-label="Testimonio siguiente">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div class="testi-dots" id="testiDots"></div>
+
+    <div class="text-center" style="margin-top:20px;">
+      <p style="font-size:.82rem;color:var(--text-muted);">Más de <strong style="color:var(--text);">1,200 reseñas verificadas</strong> de pacientes reales en nuestra plataforma.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ BLOG ══════════ -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Blog &amp; Recursos</span>
+      <h2>Saber más sobre tu bienestar mental</h2>
+      <p>Artículos escritos por nuestros especialistas para acompañarte en el día a día.</p>
+    </div>
+
+    <div class="blog-filter-bar reveal" id="blogFilterBar">
+      <button class="blog-filter-btn active" data-cat="todos">Todos</button>
+      <button class="blog-filter-btn" data-cat="ansiedad">Ansiedad</button>
+      <button class="blog-filter-btn" data-cat="bienestar">Bienestar</button>
+      <button class="blog-filter-btn" data-cat="relaciones">Relaciones</button>
+      <button class="blog-filter-btn" data-cat="familia">Familia</button>
+      <button class="blog-filter-btn" data-cat="autoestima">Autoestima</button>
+      <button class="blog-filter-btn" data-cat="trabajo">Trabajo</button>
+    </div>
+
+    <div class="blog-bento reveal" id="blogGrid">
+
+      <!-- DESTACADO -->
+      <div class="blog-card blog-card--featured" data-cat="ansiedad">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1493836512294-502baa1986e2?auto=format&fit=crop&w=800&h=600&q=80" alt="Persona reflexiva — ansiedad" class="blog-thumb-img" loading="lazy">
+          <div class="blog-thumb-cat">
+            <span class="badge">Ansiedad</span>
+            <span class="blog-thumb-time">5 min lectura</span>
+          </div>
+        </div>
+        <div class="blog-body">
+          <h3>5 señales de que podrías beneficiarte de la terapia psicológica</h3>
+          <p>Reconocer el momento oportuno para buscar ayuda profesional es el primer y más valioso paso hacia el bienestar. Aprende a identificar esas señales que tu mente y cuerpo te envían.</p>
+          <a href="#" class="blog-more">Leer artículo</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="blog-card" data-cat="bienestar">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1526916027372-0c0852cef5d3?auto=format&fit=crop&w=700&h=500&q=80" alt="Mujer en la naturaleza — bienestar" class="blog-thumb-img" loading="lazy">
+          <div class="blog-thumb-cat">
+            <span class="badge">Bienestar</span>
+            <span class="blog-thumb-time">4 min lectura</span>
+          </div>
+        </div>
+        <div class="blog-body">
+          <h3>Técnicas de mindfulness para reducir el estrés laboral</h3>
+          <p>Estrategias prácticas y respaldadas por la evidencia que puedes aplicar hoy mismo.</p>
+          <a href="#" class="blog-more">Leer artículo</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="blog-card" data-cat="relaciones">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=700&h=500&q=80" alt="Dos personas tomadas de la mano" class="blog-thumb-img" loading="lazy">
+          <div class="blog-thumb-cat">
+            <span class="badge">Relaciones</span>
+            <span class="blog-thumb-time">6 min lectura</span>
+          </div>
+        </div>
+        <div class="blog-body">
+          <h3>Comunicación asertiva en pareja: guía para principiantes</h3>
+          <p>Aprende a expresar tus necesidades sin conflicto, fortaleciendo el vínculo con tu pareja.</p>
+          <a href="#" class="blog-more">Leer artículo</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="blog-card" data-cat="familia">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?auto=format&fit=crop&w=700&h=500&q=80" alt="Familia feliz — bienestar familiar" class="blog-thumb-img" loading="lazy">
+          <div class="blog-thumb-cat">
+            <span class="badge">Familia</span>
+            <span class="blog-thumb-time">7 min lectura</span>
+          </div>
+        </div>
+        <div class="blog-body">
+          <h3>Cómo hablar con tus hijos sobre las emociones desde pequeños</h3>
+          <p>La inteligencia emocional se construye en casa. Herramientas concretas para cada etapa del desarrollo.</p>
+          <a href="#" class="blog-more">Leer artículo</a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="blog-card" data-cat="autoestima">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=700&h=500&q=80" alt="Persona segura de sí misma" class="blog-thumb-img" loading="lazy">
+          <div class="blog-thumb-cat">
+            <span class="badge">Autoestima</span>
+            <span class="blog-thumb-time">5 min lectura</span>
+          </div>
+        </div>
+        <div class="blog-body">
+          <h3>Autoestima y redes sociales: el impacto real en tu salud mental</h3>
+          <p>Cómo el scroll infinito afecta tu imagen personal y qué puedes hacer para protegerte.</p>
+          <a href="#" class="blog-more">Leer artículo</a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="blog-card" data-cat="trabajo">
+        <div class="blog-thumb">
+          <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=700&h=500&q=80" alt="Persona agotada frente al escritorio" class="blog-thumb-img" loading="lazy">
+          <div class="blog-thumb-cat">
+            <span class="badge">Trabajo</span>
+            <span class="blog-thumb-time">8 min lectura</span>
+          </div>
+        </div>
+        <div class="blog-body">
+          <h3>Burnout: más que cansancio, una señal que no debes ignorar</h3>
+          <p>Identifica los síntomas del agotamiento laboral antes de que se conviertan en un problema mayor.</p>
+          <a href="#" class="blog-more">Leer artículo</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center" style="margin-top:40px;">
+      <button class="btn btn-secondary">Explorar todos los artículos →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CTA BANNER ══════════ -->
+<div class="cta-banner">
+  <div class="cta-banner-content">
+    <div class="container">
+
+      <!-- Stats row -->
+      <div class="cta-stats">
+        <div class="cta-stat">
+          <span class="cta-stat-num">1,200+</span>
+          <span class="cta-stat-label">Pacientes atendidos</span>
+        </div>
+        <div class="cta-stat-sep"></div>
+        <div class="cta-stat">
+          <span class="cta-stat-num">50+</span>
+          <span class="cta-stat-label">Especialistas verificados</span>
+        </div>
+        <div class="cta-stat-sep"></div>
+        <div class="cta-stat">
+          <span class="cta-stat-num">4.9 ★</span>
+          <span class="cta-stat-label">Valoración promedio</span>
+        </div>
+        <div class="cta-stat-sep"></div>
+        <div class="cta-stat">
+          <span class="cta-stat-num">98%</span>
+          <span class="cta-stat-label">Recomendaría la plataforma</span>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="cta-sep-line"></div>
+
+      <!-- Avatar strip -->
+      <div class="cta-avatars">
+        <div class="cta-avatar-stack">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=60&h=60&crop=face&q=80" alt="Paciente" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=60&h=60&crop=face&q=80" alt="Paciente" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&h=60&crop=face&q=80" alt="Paciente" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=60&h=60&crop=face&q=80" alt="Paciente" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=60&h=60&crop=face&q=80" alt="Paciente" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=60&h=60&crop=face&q=80" alt="Paciente" loading="lazy">
+        </div>
+        <span class="cta-avatars-text">Únete a más de <strong>1,200 personas</strong> que ya dieron el primer paso</span>
+      </div>
+
+      <h2>Tu bienestar mental no puede esperar</h2>
+      <p>Primera consulta completamente gratuita. Sin compromisos, sin presiones — solo el apoyo que mereces.</p>
+      <div class="cta-banner-actions">
+        <a href="especialistas.html" class="btn btn-white btn-lg">Encontrar mi terapeuta</a>
+        <a href="#contacto"         class="btn btn-outline-white btn-lg">Tengo una pregunta</a>
+      </div>
+      <p class="cta-banner-note">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Tus datos están protegidos y tu proceso es completamente confidencial.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ CONTACTO ══════════ -->
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="contact-wrapper">
+
+      <!-- Info -->
+      <div class="contact-info reveal">
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">
+          <span style="display:block;width:20px;height:1.5px;background:var(--primary);border-radius:2px;"></span>
+          Contacto
+          <span style="display:block;width:20px;height:1.5px;background:var(--primary);border-radius:2px;"></span>
+        </span>
+        <h2>¿Tienes dudas? Estamos aquí para ayudarte</h2>
+        <p>Nuestro equipo responde en menos de 24 horas. Cuéntanos qué necesitas y te orientamos hacia el especialista ideal.</p>
+
+        <div class="contact-feat">
+          <div class="contact-feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="contact-feat-text">
+            <h4>Correo electrónico</h4>
+            <p>hola@mentesana.pe · Respondemos en &lt;24 h</p>
+          </div>
+        </div>
+        <div class="contact-feat">
+          <div class="contact-feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div class="contact-feat-text">
+            <h4>WhatsApp</h4>
+            <p>+51 987 654 321 · Lun–Vie 8:00–20:00</p>
+          </div>
+        </div>
+        <div class="contact-feat">
+          <div class="contact-feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="contact-feat-text">
+            <h4>Confidencialidad total</h4>
+            <p>Toda tu información está protegida bajo estrictos protocolos de privacidad.</p>
+          </div>
+        </div>
+        <div class="contact-feat">
+          <div class="contact-feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="contact-feat-text">
+            <h4>¿Emergencia psicológica?</h4>
+            <p>Línea de crisis MINSA: <strong>113</strong> (gratuita, 24 h)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="contact-form reveal">
+        <h3>Envíanos un mensaje</h3>
+        <form id="contactForm" onsubmit="handleContact(event)" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="nombre">Nombre completo</label>
+              <input class="form-input" id="nombre" type="text" placeholder="Tu nombre completo" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="email">Correo electrónico</label>
+              <input class="form-input" id="email" type="email" placeholder="tu@correo.com" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="motivo">Motivo de consulta</label>
+              <select class="form-select" id="motivo">
+                <option value="">Seleccionar motivo…</option>
+                <option>Ansiedad o pánico</option>
+                <option>Depresión o tristeza persistente</option>
+                <option>Terapia de pareja</option>
+                <option>Psicología infantil</option>
+                <option>Autoestima y desarrollo personal</option>
+                <option>Duelo o pérdida</option>
+                <option>Estrés o burnout</option>
+                <option>Otro motivo</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="modalidad">Modalidad preferida</label>
+              <select class="form-select" id="modalidad">
+                <option value="">Seleccionar…</option>
+                <option>Online (videollamada)</option>
+                <option>Presencial</option>
+                <option>Sin preferencia</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label class="form-label" for="mensaje">Mensaje (opcional)</label>
+              <textarea class="form-textarea" id="mensaje" placeholder="Cuéntanos brevemente qué te trae por aquí. Toda la información es confidencial."></textarea>
+            </div>
+            <div class="form-field full">
+              <div class="form-check">
+                <input type="checkbox" id="privacy" required>
+                <label for="privacy">
+                  He leído y acepto la <a href="#">política de privacidad</a>.
+                  Entiendo que mis datos serán tratados con total confidencialidad.
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:20px;min-width:200px;">
+            Enviar consulta
+          </button>
+          <div class="form-success" id="formSuccess">
+            ✓ Mensaje recibido. Te responderemos en menos de 24 horas.
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="footer-logo-img">
+        </div>
+        <p>Conectamos personas con psicólogos certificados para construir procesos de bienestar mental reales, duraderos y accesibles.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+          <a href="#" class="social-btn" aria-label="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-6.34 6.33 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.01a8.16 8.16 0 0 0 4.77 1.52V7.08a4.85 4.85 0 0 1-1-.39z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <div class="footer-links">
+          <a href="especialistas.html" class="footer-link">Buscar especialistas</a>
+          <a href="#modalidades" class="footer-link">Sesiones online</a>
+          <a href="#modalidades" class="footer-link">Sesiones presenciales</a>
+          <a href="#modalidades" class="footer-link">Chat terapéutico</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Sobre nosotros</a>
+          <a href="#" class="footer-link">Únete como psicólogo</a>
+          <a href="#blog" class="footer-link">Blog</a>
+          <a href="#contacto" class="footer-link">Contacto</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Política de privacidad</a>
+          <a href="#" class="footer-link">Términos de uso</a>
+          <a href="#" class="footer-link">Política de cookies</a>
+        </div>
+        <div style="margin-top:16px;font-size:.76rem;color:rgba(255,255,255,.3);line-height:1.6;">
+          Línea de crisis MINSA:<br>
+          <strong style="color:rgba(255,255,255,.55);">113</strong> (gratuita · 24 h)
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mente Sana S.A.C. · Todos los derechos reservados.</p>
+      <p>Hecho con cuidado para el bienestar mental de Perú 🇵🇪</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════ MODAL TERAPEUTA ══════════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Perfil del especialista">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+    <div class="modal-head">
+      <div class="card-avatar-wrap">
+        <div class="modal-avatar">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. María Elena Rojas">
+        </div>
+        <span class="verified-badge">✓</span>
+      </div>
+      <div>
+        <h3 class="modal-title">Dra. María Elena Rojas</h3>
+        <p class="modal-spec">Psicóloga Clínica · CPsP Nº 12345 · 8 años exp.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <span class="badge">Ansiedad</span>
+          <span class="badge">Estrés</span>
+          <span class="badge">TCC</span>
+          <span class="badge">Burnout</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <span class="modal-section-label">Sobre la especialista</span>
+        <p>Psicóloga clínica con 8 años de experiencia en el tratamiento de trastornos de ansiedad, estrés y burnout. Egresada de la PUCP con maestría en Psicología Cognitivo-Conductual. Trabaja desde un enfoque basado en evidencia, centrado en la persona.</p>
+      </div>
+      <div class="modal-section">
+        <span class="modal-section-label">Próximas disponibilidades</span>
+        <div class="modal-slots" id="modalSlots">
+          <div class="time-slot">Lun 10:00</div>
+          <div class="time-slot selected">Lun 12:00</div>
+          <div class="time-slot">Mar 09:00</div>
+          <div class="time-slot">Mar 16:00</div>
+          <div class="time-slot">Mié 11:00</div>
+          <div class="time-slot">Jue 10:00</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <div>
+        <div class="modal-price-label">Precio por sesión (50 min)</div>
+        <div class="modal-price-amount">S/. 90</div>
+      </div>
+      <div class="modal-foot-actions">
+        <button class="btn btn-ghost btn-sm" style="border:1.5px solid var(--border);">Enviar mensaje</button>
+        <a href="perfil.html" class="btn btn-primary btn-sm">Reservar sesión</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ JAVASCRIPT ══════════ -->
+<script>
+/* — Hamburger menu — */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target))
+    mobileMenu.classList.remove('open');
+});
+
+/* — Nav shadow on scroll — */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 8);
+}, { passive: true });
+
+/* — Trust band entrance animation — */
+const trustItems = document.querySelector('.trust-band-items');
+if (trustItems) {
+  const trustObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.trust-band-item').forEach(item => item.classList.add('in-view'));
+        trustObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  trustObs.observe(trustItems);
+}
+
+/* — Scroll reveal — */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* — Animated counters — */
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.done) {
+      e.target.dataset.done = '1';
+      animateCounter(e.target);
+    }
+  });
+}, { threshold: 0.6 });
+
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start    = performance.now();
+  const update   = now => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease     = 1 - Math.pow(1 - progress, 3);
+    const val      = Math.round(ease * target);
+    el.textContent = val.toLocaleString('es-PE') + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+document.querySelectorAll('[data-target]').forEach(el => countObs.observe(el));
+
+/* — Modal — */
+const overlay   = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+function openModal()  { overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal() { overlay.classList.remove('active'); document.body.style.overflow = ''; }
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+modalClose.addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* Modal time slots */
+document.querySelectorAll('#modalSlots .time-slot').forEach(slot => {
+  slot.addEventListener('click', function() {
+    document.querySelectorAll('#modalSlots .time-slot').forEach(s => s.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+/* — Contact form — */
+function handleContact(e) {
+  e.preventDefault();
+  const form = e.target;
+
+  /* clear previous errors */
+  form.querySelectorAll('.form-field-error').forEach(el => el.remove());
+  form.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+  form.querySelector('.form-check')?.classList.remove('check-error');
+
+  const nombre   = document.getElementById('nombre');
+  const email    = document.getElementById('email');
+  const privacy  = document.getElementById('privacy');
+  let valid = true;
+
+  function addErr(input, msg) {
+    input.classList.add('input-error');
+    const span = document.createElement('span');
+    span.className = 'form-field-error';
+    span.textContent = msg;
+    input.after(span);
+    valid = false;
+  }
+
+  if (!nombre.value.trim() || nombre.value.trim().length < 2) {
+    addErr(nombre, 'Ingresa tu nombre completo.');
+  }
+  if (!email.value.trim() || !/\S+@\S+\.\S+/.test(email.value.trim())) {
+    addErr(email, 'Ingresa un correo electrónico válido.');
+  }
+  if (!privacy.checked) {
+    privacy.closest('.form-check').classList.add('check-error');
+    valid = false;
+  }
+  if (!valid) return;
+
+  /* Save to localStorage */
+  const contacts = JSON.parse(localStorage.getItem('ms_contacts') || '[]');
+  contacts.push({
+    id:         Date.now(),
+    nombre:     nombre.value.trim(),
+    email:      email.value.trim(),
+    motivo:     document.getElementById('motivo').value,
+    modalidad:  document.getElementById('modalidad').value,
+    mensaje:    document.getElementById('mensaje').value.trim(),
+    sentAt:     new Date().toISOString(),
+  });
+  localStorage.setItem('ms_contacts', JSON.stringify(contacts));
+
+  /* UI feedback */
+  const btn     = form.querySelector('button[type="submit"]');
+  const success = document.getElementById('formSuccess');
+  btn.textContent = 'Enviando…';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.style.display = 'none';
+    success.classList.add('visible');
+    form.reset();
+    setTimeout(() => {
+      btn.style.display = '';
+      btn.textContent = 'Enviar consulta';
+      btn.disabled = false;
+      success.classList.remove('visible');
+    }, 5000);
+  }, 900);
+}
+
+/* ── TESTIMONIALS CAROUSEL ── */
+(function () {
+  const track = document.getElementById('testiTrack');
+  const dotsWrap = document.getElementById('testiDots');
+  const prev = document.getElementById('testiPrev');
+  const next = document.getElementById('testiNext');
+  if (!track) return;
+
+  const cards = track.querySelectorAll('.testimonial-card');
+  const total = cards.length;
+
+  /* build dots */
+  cards.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Ir al testimonio ' + (i + 1));
+    d.addEventListener('click', () => scrollTo(i));
+    dotsWrap.appendChild(d);
+  });
+
+  function cardW() { return cards[0].offsetWidth + 20; }
+  function curIdx() { return Math.round(track.scrollLeft / cardW()); }
+
+  function scrollTo(idx) {
+    idx = Math.max(0, Math.min(idx, total - 1));
+    track.scrollTo({ left: idx * cardW(), behavior: 'smooth' });
+  }
+
+  function updateDots() {
+    const idx = curIdx();
+    dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  track.addEventListener('scroll', updateDots, { passive: true });
+  prev.addEventListener('click', () => scrollTo(curIdx() <= 0 ? total - 1 : curIdx() - 1));
+  next.addEventListener('click', () => scrollTo(curIdx() >= total - 1 ? 0 : curIdx() + 1));
+
+  /* auto-advance */
+  let timer = setInterval(() => scrollTo(curIdx() >= total - 1 ? 0 : curIdx() + 1), 5000);
+  function pause()  { clearInterval(timer); }
+  function resume() { timer = setInterval(() => scrollTo(curIdx() >= total - 1 ? 0 : curIdx() + 1), 5000); }
+  track.addEventListener('mouseenter', pause);
+  track.addEventListener('touchstart', pause, { passive: true });
+  track.addEventListener('mouseleave', resume);
+  track.addEventListener('touchend', () => { setTimeout(resume, 3000); }, { passive: true });
+})();
+
+/* ── BLOG FILTER ── */
+(function () {
+  const bar = document.getElementById('blogFilterBar');
+  const grid = document.getElementById('blogGrid');
+  if (!bar || !grid) return;
+
+  bar.addEventListener('click', function (e) {
+    const btn = e.target.closest('.blog-filter-btn');
+    if (!btn) return;
+    bar.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cat = btn.dataset.cat;
+    const cards = grid.querySelectorAll('.blog-card');
+
+    cards.forEach(card => {
+      const show = cat === 'todos' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+      /* featured only when all are shown */
+      if (card.classList.contains('blog-card--featured')) {
+        card.style.gridColumn = cat === 'todos' ? '' : 'span 1';
+        card.style.flexDirection = cat === 'todos' ? '' : 'column';
+        const thumb = card.querySelector('.blog-thumb');
+        if (thumb) thumb.style.width = cat === 'todos' ? '' : '100%';
+        if (thumb) thumb.style.height = cat === 'todos' ? '' : '185px';
+      }
+    });
+  });
+})();
+</script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

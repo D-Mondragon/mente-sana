@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi cuenta — Mente Sana</title>
+  <meta name="description" content="Gestiona tus citas, especialistas favoritos y datos personales en Mente Sana.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Account header ── */
+    .acc-header {
+      background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary-dark) 60%, var(--primary) 100%);
+      padding: 48px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .acc-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .acc-header-inner {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 32px;
+    }
+    .acc-avatar-wrap { position: relative; flex-shrink: 0; }
+    .acc-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.18);
+      border: 3px solid rgba(255,255,255,.45);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; font-weight: 700; color: #fff;
+      backdrop-filter: blur(4px);
+    }
+    .acc-online {
+      width: 16px; height: 16px;
+      background: #27ae60;
+      border: 2.5px solid #fff;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 2px; right: 2px;
+    }
+    .acc-info { color: #fff; }
+    .acc-name { font-family: var(--font-display); font-size: 1.55rem; font-weight: 700; margin-bottom: 4px; }
+    .acc-email { font-size: .88rem; color: rgba(255,255,255,.68); margin-bottom: 8px; }
+    .acc-since { font-size: .78rem; color: rgba(255,255,255,.5); display: flex; align-items: center; gap: 5px; }
+    .acc-stats {
+      display: flex;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+      background: rgba(255,255,255,.08);
+      border-radius: var(--radius) var(--radius) 0 0;
+      overflow: hidden;
+    }
+    .acc-stat {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      color: #fff;
+      border-right: 1px solid rgba(255,255,255,.1);
+    }
+    .acc-stat:last-child { border-right: none; }
+    .acc-stat-num { display: block; font-size: 1.4rem; font-weight: 700; line-height: 1; }
+    .acc-stat-label { font-size: .74rem; color: rgba(255,255,255,.6); margin-top: 4px; display: block; }
+
+    /* ── Tab bar ── */
+    .acc-tab-bar {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border-light);
+      margin-bottom: 32px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .acc-tab-bar::-webkit-scrollbar { display: none; }
+    .acc-tab {
+      padding: 14px 24px;
+      border: none; background: none;
+      font-size: .9rem; font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -2px;
+      transition: color .18s, border-color .18s;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .acc-tab:hover { color: var(--primary); }
+    .acc-tab.active { color: var(--primary-dark); border-bottom-color: var(--primary); }
+    .acc-tab-badge {
+      background: var(--primary);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 99px;
+      min-width: 18px;
+      text-align: center;
+    }
+    .acc-panel { display: none; }
+    .acc-panel.active { display: block; }
+
+    /* ── Section header ── */
+    .acc-section-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .acc-section-title { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .acc-section-count { font-size: .8rem; color: var(--text-muted); }
+
+    /* ── Cita card ── */
+    .cita-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: box-shadow var(--transition);
+    }
+    .cita-card:hover { box-shadow: var(--shadow-sm); }
+    .cita-card + .cita-card { margin-top: 12px; }
+    .cita-photo {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--border-light);
+    }
+    .cita-body { flex: 1; min-width: 0; }
+    .cita-specialist { font-weight: 700; font-size: .95rem; color: var(--text); margin-bottom: 2px; }
+    .cita-spec-sub  { font-size: .8rem; color: var(--text-secondary); margin-bottom: 10px; }
+    .cita-meta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      font-size: .82rem; color: var(--text-secondary); margin-bottom: 14px;
+    }
+    .cita-meta-item { display: flex; align-items: center; gap: 5px; }
+    .cita-meta-item svg { flex-shrink: 0; color: var(--primary); opacity: .7; }
+    .cita-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .cita-status {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: 99px;
+      font-size: .74rem; font-weight: 700;
+      align-self: flex-start; margin-top: 2px; flex-shrink: 0;
+    }
+    .cita-status--confirmada { background: rgba(39,174,96,.1); color: #1e8a5e; }
+    .cita-status--cancelada  { background: rgba(224,82,82,.1);  color: #c0392b; }
+    .cita-status--completada { background: rgba(74,127,165,.1); color: var(--primary-dark); }
+
+    /* ── Fav card ── */
+    .fav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .fav-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: box-shadow var(--transition);
+    }
+    .fav-card:hover { box-shadow: var(--shadow-sm); }
+    .fav-card-top { display: flex; gap: 12px; align-items: center; }
+    .fav-photo {
+      width: 52px; height: 52px;
+      border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--border-light); flex-shrink: 0;
+    }
+    .fav-name  { font-weight: 700; font-size: .9rem; color: var(--text); }
+    .fav-spec  { font-size: .78rem; color: var(--text-secondary); margin-top: 2px; }
+    .fav-rating { font-size: .78rem; color: var(--text-muted); margin-top: 4px; }
+    .fav-actions { display: flex; gap: 8px; }
+
+    /* ── Profile form ── */
+    .pf-section {
+      background: var(--bg);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .pf-section-title {
+      font-size: .92rem; font-weight: 700; color: var(--text);
+      margin-bottom: 18px; padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .pf-field { display: flex; flex-direction: column; gap: 5px; }
+    .pf-field.full { grid-column: 1 / -1; }
+    .danger-zone { border-color: rgba(224,82,82,.3); }
+    .danger-zone .pf-section-title { color: #c0392b; border-bottom-color: rgba(224,82,82,.2); }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: 56px 24px;
+      color: var(--text-secondary);
+    }
+    .empty-icon {
+      width: 64px; height: 64px;
+      background: var(--bg-soft);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+      color: var(--text-muted);
+    }
+    .empty-title { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 6px; }
+    .empty-sub   { font-size: .85rem; max-width: 300px; margin: 0 auto 20px; }
+
+    /* ── Login gate ── */
+    #loginGate {
+      display: none;
+      text-align: center;
+      padding: 80px 24px;
+    }
+    #loginGate.visible { display: block; }
+    #accountContent { display: none; }
+    #accountContent.visible { display: block; }
+
+    @media (max-width: 640px) {
+      .acc-header-inner { flex-direction: column; text-align: center; gap: 16px; }
+      .pf-grid { grid-template-columns: 1fr; }
+      .acc-tab { padding: 12px 16px; font-size: .83rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVEGACIÓN ══════════ -->
+<nav class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="nav-logo-img">
+    </a>
+    <div class="nav-links">
+      <a href="index.html"          class="nav-link">Inicio</a>
+      <a href="especialistas.html"  class="nav-link">Especialistas</a>
+      <a href="index.html#proceso"  class="nav-link">Cómo funciona</a>
+      <a href="index.html#blog"     class="nav-link">Blog</a>
+      <a href="index.html#contacto" class="nav-link">Contacto</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+      <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"          class="nav-link">Inicio</a>
+  <a href="especialistas.html"  class="nav-link">Especialistas</a>
+  <a href="index.html#contacto" class="nav-link">Contacto</a>
+  <div class="nav-actions">
+    <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Iniciar sesión</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Registrarse gratis</button>
+  </div>
+</div>
+
+
+<!-- ══════════ LOGIN GATE ══════════ -->
+<div id="loginGate">
+  <div class="empty-icon" style="width:72px;height:72px;margin-bottom:20px;">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  </div>
+  <h2 style="font-family:var(--font-display);margin-bottom:8px;">Accede a tu cuenta</h2>
+  <p style="color:var(--text-secondary);font-size:.9rem;max-width:340px;margin:0 auto 28px;">
+    Inicia sesión para ver tus citas, especialistas favoritos y gestionar tu perfil.
+  </p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <button class="btn btn-primary" onclick="openAuthModal('login')">Iniciar sesión</button>
+    <button class="btn btn-secondary" onclick="openAuthModal('register')">Crear cuenta gratis</button>
+  </div>
+</div>
+
+
+<!-- ══════════ ACCOUNT CONTENT ══════════ -->
+<div id="accountContent">
+
+  <!-- Header -->
+  <div class="acc-header">
+    <div class="container">
+      <div class="acc-header-inner">
+        <div class="acc-avatar-wrap">
+          <div class="acc-avatar" id="accAvatar">?</div>
+          <div class="acc-online"></div>
+        </div>
+        <div class="acc-info">
+          <div class="acc-name" id="accName">—</div>
+          <div class="acc-email" id="accEmail">—</div>
+          <div class="acc-since">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span id="accSince">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="acc-stats">
+        <div class="acc-stat">
+          <span class="acc-stat-num" id="statCitas">0</span>
+          <span class="acc-stat-label">Citas totales</span>
+        </div>
+        <div class="acc-stat">
+          <span class="acc-stat-num" id="statPendientes">0</span>
+          <span class="acc-stat-label">Pendientes</span>
+        </div>
+        <div class="acc-stat">
+          <span class="acc-stat-num" id="statFavs">0</span>
+          <span class="acc-stat-label">Favoritos</span>
+        </div>
+        <div class="acc-stat">
+          <span class="acc-stat-num" id="statReviews">0</span>
+          <span class="acc-stat-label">Reseñas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs + panels -->
+  <div class="container" style="padding-top:32px;padding-bottom:72px;">
+
+    <div class="acc-tab-bar" role="tablist">
+      <button class="acc-tab active" data-tab="citas" onclick="switchAccTab('citas')" role="tab">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Mis citas
+        <span class="acc-tab-badge" id="badgeCitas" style="display:none;"></span>
+      </button>
+      <button class="acc-tab" data-tab="favoritos" onclick="switchAccTab('favoritos')" role="tab">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Favoritos
+        <span class="acc-tab-badge" id="badgeFavs" style="display:none;"></span>
+      </button>
+      <button class="acc-tab" data-tab="perfil" onclick="switchAccTab('perfil')" role="tab">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Mi perfil
+      </button>
+    </div>
+
+    <!-- ── PANEL: Mis citas ── -->
+    <div class="acc-panel active" id="panel-citas" role="tabpanel">
+      <div id="citasContent"></div>
+    </div>
+
+    <!-- ── PANEL: Favoritos ── -->
+    <div class="acc-panel" id="panel-favoritos" role="tabpanel">
+      <div id="favContent"></div>
+    </div>
+
+    <!-- ── PANEL: Mi perfil ── -->
+    <div class="acc-panel" id="panel-perfil" role="tabpanel">
+
+      <!-- Datos personales -->
+      <div class="pf-section">
+        <div class="pf-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Datos personales
+        </div>
+        <form id="profileForm" onsubmit="saveProfile(event)" novalidate>
+          <div class="pf-grid">
+            <div class="pf-field">
+              <label class="form-label" for="pfName">Nombre completo</label>
+              <input type="text" id="pfName" class="form-input" placeholder="Tu nombre">
+              <span class="auth-error" id="pfNameErr"></span>
+            </div>
+            <div class="pf-field">
+              <label class="form-label" for="pfEmail">Correo electrónico</label>
+              <input type="email" id="pfEmail" class="form-input" placeholder="tu@correo.com">
+              <span class="auth-error" id="pfEmailErr"></span>
+            </div>
+            <div class="pf-field">
+              <label class="form-label" for="pfPhone">Teléfono (opcional)</label>
+              <input type="tel" id="pfPhone" class="form-input" placeholder="+51 999 000 000">
+            </div>
+            <div class="pf-field">
+              <label class="form-label" for="pfModality">Modalidad preferida</label>
+              <select id="pfModality" class="form-select">
+                <option value="">Sin preferencia</option>
+                <option value="online">Online (videollamada)</option>
+                <option value="presencial">Presencial</option>
+              </select>
+            </div>
+            <div class="pf-field full">
+              <label class="form-label" for="pfReason">Motivo principal de consulta</label>
+              <select id="pfReason" class="form-select">
+                <option value="">Seleccionar…</option>
+                <option>Ansiedad o pánico</option>
+                <option>Depresión o tristeza persistente</option>
+                <option>Estrés o burnout laboral</option>
+                <option>Terapia de pareja</option>
+                <option>Autoestima y desarrollo personal</option>
+                <option>Duelo o pérdida</option>
+                <option>Otro</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:20px;">Guardar cambios</button>
+        </form>
+      </div>
+
+      <!-- Cambiar contraseña -->
+      <div class="pf-section">
+        <div class="pf-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Cambiar contraseña
+        </div>
+        <form id="passForm" onsubmit="changePassword(event)" novalidate>
+          <div class="pf-grid">
+            <div class="pf-field">
+              <label class="form-label" for="pfPassCurrent">Contraseña actual</label>
+              <input type="password" id="pfPassCurrent" class="form-input" placeholder="••••••••">
+              <span class="auth-error" id="pfPassCurrentErr"></span>
+            </div>
+            <div class="pf-field" style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div class="pf-field">
+                <label class="form-label" for="pfPassNew">Nueva contraseña</label>
+                <input type="password" id="pfPassNew" class="form-input" placeholder="Mínimo 6 caracteres">
+                <span class="auth-error" id="pfPassNewErr"></span>
+              </div>
+              <div class="pf-field">
+                <label class="form-label" for="pfPassConfirm">Confirmar nueva contraseña</label>
+                <input type="password" id="pfPassConfirm" class="form-input" placeholder="Repite la contraseña">
+                <span class="auth-error" id="pfPassConfirmErr"></span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-secondary" style="margin-top:20px;">Actualizar contraseña</button>
+        </form>
+      </div>
+
+      <!-- Zona de peligro -->
+      <div class="pf-section danger-zone">
+        <div class="pf-section-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Zona de peligro
+        </div>
+        <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:16px;">
+          Al eliminar tu cuenta se borrarán todos tus datos, citas y favoritos de forma permanente. Esta acción no se puede deshacer.
+        </p>
+        <button class="btn btn-sm" style="border:1.5px solid #e05252;color:#c0392b;background:none;" onclick="deleteAccount()">
+          Eliminar mi cuenta
+        </button>
+      </div>
+
+    </div><!-- /panel-perfil -->
+  </div>
+</div><!-- /accountContent -->
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="footer-logo-img">
+        </div>
+        <p>Conectamos personas con psicólogos certificados para construir procesos de bienestar mental reales y duraderos.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <div class="footer-links">
+          <a href="especialistas.html" class="footer-link">Buscar especialistas</a>
+          <a href="index.html#modalidades" class="footer-link">Sesiones online</a>
+          <a href="index.html#modalidades" class="footer-link">Sesiones presenciales</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Sobre nosotros</a>
+          <a href="index.html#blog" class="footer-link">Blog</a>
+          <a href="index.html#contacto" class="footer-link">Contacto</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Política de privacidad</a>
+          <a href="#" class="footer-link">Términos de uso</a>
+        </div>
+        <div style="margin-top:16px;font-size:.76rem;color:rgba(255,255,255,.3);line-height:1.6;">
+          Línea de crisis MINSA:<br>
+          <strong style="color:rgba(255,255,255,.55);">113</strong> (gratuita · 24 h)
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mente Sana S.A.C. · Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════ JAVASCRIPT ══════════ -->
+<script>
+/* ── Nav ── */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove('open');
+});
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 8);
+}, { passive: true });
+
+/* ── Specialists DB ── */
+const SPECIALISTS_DB = {
+  'rojas-maria-elena': {
+    name: 'Dra. María Elena Rojas', spec: 'Psicóloga Clínica · TCC', years: 8,
+    rating: 4.9, reviews: 240, price: 90, tags: ['Ansiedad','Estrés','Burnout'],
+    photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&crop=face&q=80',
+    url: 'perfil.html',
+  },
+  'herrera-carlos': {
+    name: 'Ps. Carlos Herrera', spec: 'Psicólogo Clínico · Adultos', years: 5,
+    rating: 4.7, reviews: 180, price: 80, tags: ['Depresión','Relaciones'],
+    photo: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&crop=face&q=80',
+    url: 'perfil.html',
+  },
+  'alarcon-sofia': {
+    name: 'Ps. Sofía Alarcón', spec: 'Psicóloga Infantil · Familias', years: 6,
+    rating: 4.8, reviews: 210, price: 85, tags: ['Infancia','Familia','TDAH'],
+    photo: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&h=200&crop=face&q=80',
+    url: 'perfil.html',
+  },
+  'lima-andres': {
+    name: 'Ps. Andrés Lima', spec: 'Terapeuta TCC · Adultos', years: 6,
+    rating: 4.7, reviews: 158, price: 85, tags: ['Depresión','Fobias'],
+    photo: 'https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=200&h=200&crop=face&q=80',
+    url: 'perfil.html',
+  },
+  'santos-valeria': {
+    name: 'Dra. Valeria Santos', spec: 'Psic. Organizacional', years: 7,
+    rating: 4.8, reviews: 190, price: 95, tags: ['Burnout','Liderazgo'],
+    photo: 'https://images.unsplash.com/photo-1701096374092-bb70915fdc5c?auto=format&fit=crop&w=200&h=200&crop=face&q=80',
+    url: 'perfil.html',
+  },
+  'castro-diego': {
+    name: 'Ps. Diego Castro', spec: 'Psicología Positiva', years: 5,
+    rating: 4.6, reviews: 205, price: 75, tags: ['Autoestima','Mindfulness'],
+    photo: 'https://images.unsplash.com/photo-1645066928295-2506defde470?auto=format&fit=crop&w=200&h=200&crop=face&q=80',
+    url: 'perfil.html',
+  },
+};
+
+/* ── Tab switch ── */
+function switchAccTab(tab) {
+  document.querySelectorAll('.acc-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.acc-panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
+}
+
+/* ── Render citas ── */
+function renderCitas(session) {
+  const all      = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  const mine     = all.filter(b => b.userId === session.id);
+  const upcoming = mine.filter(b => b.status === 'confirmada');
+  const history  = mine.filter(b => b.status !== 'confirmada');
+
+  const badge = document.getElementById('badgeCitas');
+  if (upcoming.length > 0) {
+    badge.textContent = upcoming.length;
+    badge.style.display = '';
+  }
+
+  let html = '';
+
+  /* Próximas */
+  html += `<div class="acc-section-head">
+    <span class="acc-section-title">Próximas citas</span>
+    <span class="acc-section-count">${upcoming.length} confirmada${upcoming.length !== 1 ? 's' : ''}</span>
+  </div>`;
+
+  if (upcoming.length === 0) {
+    html += emptyState(
+      '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      'Sin citas próximas',
+      'Reserva una sesión con alguno de nuestros especialistas y aparecerá aquí.',
+      '<a href="especialistas.html" class="btn btn-primary btn-sm">Buscar especialista</a>'
+    );
+  } else {
+    upcoming.forEach(b => { html += citaCard(b, true); });
+  }
+
+  /* Historial */
+  html += `<div class="acc-section-head" style="margin-top:36px;">
+    <span class="acc-section-title">Historial</span>
+    <span class="acc-section-count">${history.length} cita${history.length !== 1 ? 's' : ''}</span>
+  </div>`;
+
+  if (history.length === 0) {
+    html += `<p style="font-size:.85rem;color:var(--text-muted);padding:16px 0;">Aún no tienes citas en el historial.</p>`;
+  } else {
+    history.forEach(b => { html += citaCard(b, false); });
+  }
+
+  document.getElementById('citasContent').innerHTML = html;
+}
+
+function citaCard(b, isUpcoming) {
+  const spec = SPECIALISTS_DB[toSpecialistId(b.specialist)] || {};
+  const photo = spec.photo || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(b.specialist) + '&background=E8F2FA&color=3A6485&size=100';
+  const subSpec = spec.spec || 'Especialista en salud mental';
+
+  const statusLabel = b.status === 'confirmada' ? 'Confirmada' : b.status === 'cancelada' ? 'Cancelada' : 'Completada';
+  const statusClass = `cita-status--${b.status}`;
+
+  const actions = isUpcoming
+    ? `<button class="btn btn-sm btn-secondary" onclick="cancelCita('${b.id}')">Cancelar sesión</button>
+       <a href="${spec.url || 'perfil.html'}" class="btn btn-sm btn-primary">Ver perfil</a>`
+    : `<a href="${spec.url || 'perfil.html'}" class="btn btn-sm btn-secondary">Repetir reserva</a>`;
+
+  return `
+    <div class="cita-card" id="cita-${b.id}">
+      <img src="${photo}" alt="${b.specialist}" class="cita-photo" loading="lazy">
+      <div class="cita-body">
+        <div class="cita-specialist">${b.specialist}</div>
+        <div class="cita-spec-sub">${subSpec}</div>
+        <div class="cita-meta">
+          <div class="cita-meta-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            ${b.date}
+          </div>
+          <div class="cita-meta-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ${b.time}
+          </div>
+          <div class="cita-meta-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            ${b.modality}
+          </div>
+          <div class="cita-meta-item" style="color:var(--primary-dark);font-weight:600;">${b.price}</div>
+        </div>
+        <div class="cita-actions">${actions}</div>
+      </div>
+      <span class="cita-status ${statusClass}">${statusLabel}</span>
+    </div>`;
+}
+
+function toSpecialistId(name) {
+  const map = {
+    'Dra. María Elena Rojas': 'rojas-maria-elena',
+    'Ps. Carlos Herrera':     'herrera-carlos',
+    'Ps. Sofía Alarcón':      'alarcon-sofia',
+    'Ps. Andrés Lima':        'lima-andres',
+    'Dra. Valeria Santos':    'santos-valeria',
+    'Ps. Diego Castro':       'castro-diego',
+  };
+  return map[name] || '';
+}
+
+function cancelCita(id) {
+  const all = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  const idx = all.findIndex(b => String(b.id) === String(id));
+  if (idx === -1) return;
+
+  if (!confirm('¿Estás seguro de que deseas cancelar esta sesión?')) return;
+
+  all[idx].status = 'cancelada';
+  localStorage.setItem('ms_bookings', JSON.stringify(all));
+  showToast('Sesión cancelada correctamente.', 'info');
+  renderCitas(getSession());
+  updateStats(getSession());
+}
+
+/* ── Render favoritos ── */
+function renderFavoritos() {
+  const ids = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
+  const badge = document.getElementById('badgeFavs');
+  if (ids.length > 0) { badge.textContent = ids.length; badge.style.display = ''; }
+
+  if (ids.length === 0) {
+    document.getElementById('favContent').innerHTML = emptyState(
+      '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+      'Ningún especialista guardado',
+      'Explora perfiles y guarda los que más te interesen con el botón ♡.',
+      '<a href="especialistas.html" class="btn btn-primary btn-sm">Ver especialistas</a>'
+    );
+    return;
+  }
+
+  let html = `<div class="fav-grid">`;
+  ids.forEach(id => {
+    const s = SPECIALISTS_DB[id];
+    if (!s) return;
+    const stars = '★'.repeat(Math.floor(s.rating)) + (s.rating % 1 >= 0.5 ? '½' : '');
+    html += `
+      <div class="fav-card" id="fav-${id}">
+        <div class="fav-card-top">
+          <img src="${s.photo}" alt="${s.name}" class="fav-photo" loading="lazy">
+          <div>
+            <div class="fav-name">${s.name}</div>
+            <div class="fav-spec">${s.spec} · ${s.years} años exp.</div>
+            <div class="fav-rating">⭐ ${s.rating} (${s.reviews} reseñas) · Desde S/. ${s.price}</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          ${s.tags.map(t => `<span class="badge">${t}</span>`).join('')}
+        </div>
+        <div class="fav-actions">
+          <a href="${s.url}" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">Ver perfil</a>
+          <button class="btn btn-sm" style="border:1.5px solid var(--border);" onclick="removeFav('${id}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            Quitar
+          </button>
+        </div>
+      </div>`;
+  });
+  html += `</div>`;
+  document.getElementById('favContent').innerHTML = html;
+}
+
+function removeFav(id) {
+  const favs = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
+  const idx  = favs.indexOf(id);
+  if (idx !== -1) favs.splice(idx, 1);
+  localStorage.setItem('ms_favorites', JSON.stringify(favs));
+  renderFavoritos();
+  updateStats(getSession());
+  showToast('Eliminado de favoritos.', 'info');
+}
+
+/* ── Profile form ── */
+function fillProfileForm(session) {
+  const users = JSON.parse(localStorage.getItem('ms_users') || '[]');
+  const user  = users.find(u => u.id === session.id) || {};
+  document.getElementById('pfName').value     = user.name     || session.name  || '';
+  document.getElementById('pfEmail').value    = user.email    || session.email || '';
+  document.getElementById('pfPhone').value    = user.phone    || '';
+  document.getElementById('pfModality').value = user.modality || '';
+  document.getElementById('pfReason').value   = user.reason   || '';
+}
+
+function saveProfile(e) {
+  e.preventDefault();
+  const name  = document.getElementById('pfName').value.trim();
+  const email = document.getElementById('pfEmail').value.trim();
+  document.getElementById('pfNameErr').textContent  = '';
+  document.getElementById('pfEmailErr').textContent = '';
+  let ok = true;
+  if (name.length < 2) { document.getElementById('pfNameErr').textContent = 'Ingresa tu nombre.'; ok = false; }
+  if (!/\S+@\S+\.\S+/.test(email)) { document.getElementById('pfEmailErr').textContent = 'Correo inválido.'; ok = false; }
+  if (!ok) return;
+
+  const session = getSession();
+  const users   = JSON.parse(localStorage.getItem('ms_users') || '[]');
+  const idx     = users.findIndex(u => u.id === session.id);
+  if (idx !== -1) {
+    users[idx].name     = name;
+    users[idx].email    = email;
+    users[idx].phone    = document.getElementById('pfPhone').value.trim();
+    users[idx].modality = document.getElementById('pfModality').value;
+    users[idx].reason   = document.getElementById('pfReason').value;
+    localStorage.setItem('ms_users', JSON.stringify(users));
+    saveSession(users[idx]);
+    updateNavAuth();
+    loadAccountHeader();
+    showToast('Datos actualizados correctamente.');
+  }
+}
+
+function changePassword(e) {
+  e.preventDefault();
+  const curr    = document.getElementById('pfPassCurrent').value;
+  const newPass = document.getElementById('pfPassNew').value;
+  const confirm = document.getElementById('pfPassConfirm').value;
+  ['pfPassCurrentErr','pfPassNewErr','pfPassConfirmErr'].forEach(id => document.getElementById(id).textContent = '');
+  let ok = true;
+
+  const session = getSession();
+  const users   = JSON.parse(localStorage.getItem('ms_users') || '[]');
+  const user    = users.find(u => u.id === session.id);
+
+  if (!user || user.password !== curr) { document.getElementById('pfPassCurrentErr').textContent = 'Contraseña actual incorrecta.'; ok = false; }
+  if (newPass.length < 6) { document.getElementById('pfPassNewErr').textContent = 'Mínimo 6 caracteres.'; ok = false; }
+  if (newPass !== confirm) { document.getElementById('pfPassConfirmErr').textContent = 'Las contraseñas no coinciden.'; ok = false; }
+  if (!ok) return;
+
+  const idx = users.findIndex(u => u.id === session.id);
+  users[idx].password = newPass;
+  localStorage.setItem('ms_users', JSON.stringify(users));
+  document.getElementById('passForm').reset();
+  showToast('Contraseña actualizada correctamente.');
+}
+
+function deleteAccount() {
+  if (!confirm('¿Eliminar tu cuenta permanentemente? Todos tus datos y citas serán borrados.')) return;
+  const session = getSession();
+  const users   = JSON.parse(localStorage.getItem('ms_users') || '[]');
+  localStorage.setItem('ms_users', JSON.stringify(users.filter(u => u.id !== session.id)));
+  localStorage.removeItem('ms_session');
+  localStorage.removeItem('ms_favorites');
+  showToast('Cuenta eliminada. Hasta pronto.', 'info');
+  setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+}
+
+/* ── Stats ── */
+function updateStats(session) {
+  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]').filter(b => b.userId === session.id);
+  const favs     = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
+  const reviews  = JSON.parse(localStorage.getItem('ms_reviews')   || '[]').filter(r => r.userId === session.id);
+  document.getElementById('statCitas').textContent     = bookings.length;
+  document.getElementById('statPendientes').textContent = bookings.filter(b => b.status === 'confirmada').length;
+  document.getElementById('statFavs').textContent      = favs.length;
+  document.getElementById('statReviews').textContent   = reviews.length;
+}
+
+/* ── Header populate ── */
+function loadAccountHeader() {
+  const session = getSession();
+  if (!session) return;
+  document.getElementById('accAvatar').textContent = session.name.charAt(0).toUpperCase();
+  document.getElementById('accName').textContent   = session.name;
+  document.getElementById('accEmail').textContent  = session.email;
+
+  const users = JSON.parse(localStorage.getItem('ms_users') || '[]');
+  const user  = users.find(u => u.id === session.id);
+  if (user && user.createdAt) {
+    const d = new Date(user.createdAt);
+    document.getElementById('accSince').textContent = 'Miembro desde ' + d.toLocaleDateString('es-PE', { month: 'long', year: 'numeric' });
+  }
+}
+
+/* ── Empty state helper ── */
+function emptyState(iconSvg, title, sub, action = '') {
+  return `<div class="empty-state">
+    <div class="empty-icon">${iconSvg}</div>
+    <div class="empty-title">${title}</div>
+    <p class="empty-sub">${sub}</p>
+    ${action}
+  </div>`;
+}
+
+/* ── Page init (called by main.js after auth ready) ── */
+function initAccountPage() {
+  const session = getSession();
+  if (!session) {
+    document.getElementById('loginGate').classList.add('visible');
+    document.getElementById('accountContent').classList.remove('visible');
+    return;
+  }
+  document.getElementById('loginGate').classList.remove('visible');
+  document.getElementById('accountContent').classList.add('visible');
+  loadAccountHeader();
+  updateStats(session);
+  renderCitas(session);
+  renderFavoritos();
+  fillProfileForm(session);
+}
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>
