@@ -170,6 +170,9 @@ p  { color: var(--text-secondary); line-height: 1.78; }
 .btn-white:hover  { background: var(--primary-lighter); transform: translateY(-2px); }
 .btn-outline-white { border: 2px solid rgba(255,255,255,.55); color: #fff; background: transparent; }
 .btn-outline-white:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
+.btn-wa { background: #25d366; color: #fff; box-shadow: 0 4px 18px rgba(37,211,102,.35); }
+.btn-wa:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 7px 28px rgba(37,211,102,.45); }
+.btn-wa:active { transform: translateY(0); }
 .btn-sm  { padding: 9px 20px; font-size: .85rem; border-radius: var(--radius-sm); }
 .btn-lg  { padding: 16px 38px; font-size: 1.05rem; }
 .btn-full { width: 100%; justify-content: center; }

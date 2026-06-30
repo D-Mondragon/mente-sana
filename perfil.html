@@ -975,14 +975,48 @@ function setRating(v) {
   document.getElementById('starErr').textContent = '';
 }
 
+/* ─── Render a single review card into the DOM ─── */
+function _buildReviewCard(r) {
+  const stars     = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(r.userName || 'Paciente')}&background=B8D9EE&color=2D5270&size=100&bold=true`;
+  const card = document.createElement('div');
+  card.className = 'review-card';
+  card.dataset.reviewId = r.id;
+  card.innerHTML = `
+    <div class="review-header">
+      <div class="review-avatar"><img src="${avatarUrl}" alt="${r.userName}"></div>
+      <div>
+        <div class="review-name">${r.userName} <span style="color:#F5A623;font-size:.82rem;margin-left:4px;">${stars}</span></div>
+        <div class="review-date">${r.date} · Sesión verificada <span class="verified-patient" style="margin-left:6px;">✓ Verificada</span></div>
+      </div>
+    </div>
+    <p class="review-text">"${r.text}"</p>
+  `;
+  return card;
+}
+
 /* ─── Review section init (called by main.js after auth is ready) ─── */
 function initReviewSection() {
+  const allReviews  = JSON.parse(localStorage.getItem('ms_reviews') || '[]');
+  const specReviews = allReviews.filter(r => r.specialist === 'Dra. María Elena Rojas');
+
+  /* Render all saved reviews into the DOM (deduplicate by data-review-id) */
+  const existing = new Set([...document.querySelectorAll('#tab-resenas .review-card[data-review-id]')]
+    .map(c => c.dataset.reviewId));
+  const firstStatic = document.querySelector('#tab-resenas .review-card');
+  specReviews.forEach(r => {
+    if (!existing.has(String(r.id))) {
+      const card = _buildReviewCard(r);
+      if (firstStatic) firstStatic.parentNode.insertBefore(card, firstStatic);
+      else document.querySelector('#tab-resenas').prepend(card);
+    }
+  });
+
   if (!isLoggedIn()) return;
-  const session  = getSession();
-  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
-  const sentIn   = JSON.parse(localStorage.getItem('ms_reviews')  || '[]');
+  const session     = getSession();
+  const bookings    = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
   const hasBooked   = bookings.some(b => b.userId === session.id);
-  const hasReviewed = sentIn.some(r => r.userId === session.id && r.specialist === 'Dra. María Elena Rojas');
+  const hasReviewed = specReviews.some(r => r.userId === session.id);
 
   if (hasBooked && !hasReviewed) {
     const sec = document.getElementById('reviewSection');
@@ -1018,26 +1052,18 @@ function submitReview() {
   localStorage.setItem('ms_reviews', JSON.stringify(reviews));
 
   /* Insertar tarjeta en el DOM */
-  const stars    = '★'.repeat(_rating) + '☆'.repeat(5 - _rating);
-  const initials = userName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=B8D9EE&color=2D5270&size=100&bold=true`;
-  const card = document.createElement('div');
-  card.className = 'review-card';
-  card.innerHTML = `
-    <div class="review-header">
-      <div class="review-avatar"><img src="${avatarUrl}" alt="${userName}"></div>
-      <div>
-        <div class="review-name">${userName} <span style="color:#F5A623;font-size:.82rem;margin-left:4px;">${stars}</span></div>
-        <div class="review-date">${date} · Sesión verificada <span class="verified-patient" style="margin-left:6px;">✓ Verificada</span></div>
-      </div>
-    </div>
-    <p class="review-text">"${text}"</p>
-  `;
+  const newEntry = { id: reviews[reviews.length - 1].id, userName, rating: _rating, text, date };
+  const card     = _buildReviewCard(newEntry);
   const firstCard = document.querySelector('#tab-resenas .review-card');
   if (firstCard) firstCard.parentNode.insertBefore(card, firstCard);
+  else document.querySelector('#tab-resenas').prepend(card);
+
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   document.getElementById('reviewSection').style.display = 'none';
-  document.getElementById('reviewSent').style.display    = '';
+  setTimeout(() => {
+    document.getElementById('reviewSent').style.display = '';
+  }, 800);
   showToast('¡Reseña publicada! Gracias por tu opinión.');
 }
 
