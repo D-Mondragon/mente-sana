@@ -589,8 +589,8 @@
           <textarea id="msgTexto" class="form-textarea" rows="4" placeholder="Hola doctora, quisiera consultar sobre..."></textarea>
           <span class="auth-error" id="msgTextoErr"></span>
         </div>
-        <button type="submit" class="btn btn-wa btn-full">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align:middle;margin-right:6px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.849L.057 23.5a.5.5 0 0 0 .614.614l5.666-1.457A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.524-5.188-1.435l-.37-.22-3.838.987.998-3.78-.24-.386A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        <button type="submit" class="btn btn-wa btn-full" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448zm6.406-3.817c1.677.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648zm11.387-5.464c-.074-.124-.272-.198-.57-.347-1.758-.868-2.031-.967-2.303-.967-.272 0-.471.148-.67.446-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-1.502-.751-2.486-1.342-3.478-2.846-.263-.399.263-.371.753-1.234.083-.16.041-.299-.023-.422-.065-.123-.583-1.405-.799-1.923-.212-.508-.428-.44-.587-.447-.152-.008-.322-.01-.496-.01-.173 0-.454.065-.692.323-.237.258-.906.886-.906 2.161 0 1.274.928 2.508 1.057 2.682 1.268 1.726 2.874 2.994 4.736 3.757 1.862.762 1.862.508 2.198.476.338-.032 1.085-.443 1.239-.871.152-.428.152-.795.106-.871z"/></svg>
           Abrir WhatsApp
         </button>
       </form>
@@ -1004,19 +1004,38 @@ function submitReview() {
     document.getElementById('reviewTextErr').textContent = 'Escribe al menos 15 caracteres.';
     return;
   }
-  const session = getSession();
+  const session  = getSession();
+  const userName = session.nombre || session.name || 'Paciente';
+  const date     = new Date().toLocaleDateString('es-PE', { month: 'long', year: 'numeric' });
+
   const reviews = JSON.parse(localStorage.getItem('ms_reviews') || '[]');
   reviews.push({
-    id:         Date.now(),
-    userId:     session.id,
-    userName:   session.name,
+    id: Date.now(), userId: session.id, userName,
     specialist: 'Dra. María Elena Rojas',
-    rating:     _rating,
-    text,
-    date:       new Date().toLocaleDateString('es-PE', { month: 'long', year: 'numeric' }),
-    createdAt:  new Date().toISOString(),
+    rating: _rating, text, date,
+    createdAt: new Date().toISOString(),
   });
   localStorage.setItem('ms_reviews', JSON.stringify(reviews));
+
+  /* Insertar tarjeta en el DOM */
+  const stars    = '★'.repeat(_rating) + '☆'.repeat(5 - _rating);
+  const initials = userName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=B8D9EE&color=2D5270&size=100&bold=true`;
+  const card = document.createElement('div');
+  card.className = 'review-card';
+  card.innerHTML = `
+    <div class="review-header">
+      <div class="review-avatar"><img src="${avatarUrl}" alt="${userName}"></div>
+      <div>
+        <div class="review-name">${userName} <span style="color:#F5A623;font-size:.82rem;margin-left:4px;">${stars}</span></div>
+        <div class="review-date">${date} · Sesión verificada <span class="verified-patient" style="margin-left:6px;">✓ Verificada</span></div>
+      </div>
+    </div>
+    <p class="review-text">"${text}"</p>
+  `;
+  const firstCard = document.querySelector('#tab-resenas .review-card');
+  if (firstCard) firstCard.parentNode.insertBefore(card, firstCard);
+
   document.getElementById('reviewSection').style.display = 'none';
   document.getElementById('reviewSent').style.display    = '';
   showToast('¡Reseña publicada! Gracias por tu opinión.');
