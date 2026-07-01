@@ -155,6 +155,26 @@
     .cita-status--cancelada  { background: rgba(224,82,82,.1);  color: #c0392b; }
     .cita-status--completada { background: rgba(74,127,165,.1); color: var(--primary-dark); }
 
+    /* ── Payment state badges ── */
+    .pay-state { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:99px; font-size:.73rem; font-weight:700; margin-bottom:10px; }
+    .pay-state--pending   { background:rgba(245,158,11,.12); color:#92400e; }
+    .pay-state--verifying { background:rgba(74,127,165,.12); color:var(--primary-dark); }
+    .pay-state--free      { background:rgba(39,174,96,.12);  color:#1e8a5e; }
+    .pay-info-box { background:var(--bg-secondary); border-radius:var(--radius-sm); padding:9px 12px; font-size:.77rem; margin-bottom:10px; display:flex; flex-direction:column; gap:5px; }
+    .pay-info-row { display:flex; justify-content:space-between; }
+    .pay-info-row span:first-child { color:var(--text-muted); }
+    .pay-info-row span:last-child  { font-weight:600; }
+    .acc-section-head--warn { border-left:3px solid #f59e0b; padding-left:10px; }
+
+    /* ── Mini-payment modal ── */
+    .mpay-overlay { position:fixed; inset:0; background:rgba(0,0,0,.52); z-index:3000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .25s; }
+    .mpay-overlay.active { opacity:1; pointer-events:all; }
+    .mpay-modal { background:var(--bg); border-radius:var(--radius-lg); padding:28px 24px; width:min(400px,92vw); position:relative; box-shadow:0 24px 64px rgba(0,0,0,.22); }
+    .mpay-close { position:absolute; top:12px; right:14px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-muted); line-height:1; }
+    .mpay-tabs { display:flex; gap:6px; background:var(--bg-secondary); border-radius:var(--radius); padding:4px; margin:16px 0; }
+    .mpay-tab { flex:1; padding:8px; border:none; background:transparent; border-radius:calc(var(--radius) - 2px); cursor:pointer; font-size:.84rem; font-weight:600; color:var(--text-secondary); transition:all .2s; }
+    .mpay-tab.active { background:var(--bg); color:var(--primary); box-shadow:0 2px 8px rgba(0,0,0,.1); }
+
     /* ── Fav card ── */
     .fav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
     .fav-card {
@@ -564,63 +584,119 @@ function switchAccTab(tab) {
 
 /* ── Render citas ── */
 function renderCitas(session) {
-  const all      = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
-  const mine     = all.filter(b => b.userId === session.id);
-  const upcoming = mine.filter(b => b.status === 'confirmada');
-  const history  = mine.filter(b => b.status !== 'confirmada');
+  const all   = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  const mine  = all.filter(b => b.userId === session.id);
+
+  const pendingPay = mine.filter(b => b.status === 'confirmada' && !b.paymentStatus);
+  const verifying  = mine.filter(b => b.status === 'confirmada' && b.paymentStatus === 'pendiente_verificacion');
+  const scheduled  = mine.filter(b => b.status === 'confirmada' && b.paymentStatus === 'gratis');
+  const history    = mine.filter(b => b.status !== 'confirmada');
+  const totalUp    = pendingPay.length + verifying.length + scheduled.length;
 
   const badge = document.getElementById('badgeCitas');
-  if (upcoming.length > 0) {
-    badge.textContent = upcoming.length;
-    badge.style.display = '';
-  }
+  badge.textContent   = pendingPay.length || '';
+  badge.style.display = pendingPay.length > 0 ? '' : 'none';
 
   let html = '';
 
-  /* Próximas */
-  html += `<div class="acc-section-head">
-    <span class="acc-section-title">Próximas citas</span>
-    <span class="acc-section-count">${upcoming.length} confirmada${upcoming.length !== 1 ? 's' : ''}</span>
-  </div>`;
+  /* ── Sección: Pago pendiente ── */
+  if (pendingPay.length > 0) {
+    html += `<div class="acc-section-head acc-section-head--warn">
+      <span class="acc-section-title" style="color:#92400e;">⚠️ Pago pendiente</span>
+      <span class="acc-section-count">${pendingPay.length} cita${pendingPay.length !== 1 ? 's' : ''}</span>
+    </div>`;
+    pendingPay.forEach(b => { html += citaCard(b, 'pending'); });
+  }
 
-  if (upcoming.length === 0) {
+  /* ── Sección: Verificando pago ── */
+  if (verifying.length > 0) {
+    html += `<div class="acc-section-head" style="margin-top:${pendingPay.length ? 28 : 0}px;">
+      <span class="acc-section-title">🕐 Verificando pago</span>
+      <span class="acc-section-count">${verifying.length} en proceso</span>
+    </div>`;
+    verifying.forEach(b => { html += citaCard(b, 'verifying'); });
+  }
+
+  /* ── Sección: Sesiones confirmadas ── */
+  if (scheduled.length > 0) {
+    html += `<div class="acc-section-head" style="margin-top:${(pendingPay.length || verifying.length) ? 28 : 0}px;">
+      <span class="acc-section-title">✓ Próximas sesiones</span>
+      <span class="acc-section-count">${scheduled.length} confirmada${scheduled.length !== 1 ? 's' : ''}</span>
+    </div>`;
+    scheduled.forEach(b => { html += citaCard(b, 'confirmed'); });
+  }
+
+  /* ── Sin citas próximas ── */
+  if (totalUp === 0) {
+    html += `<div class="acc-section-head"><span class="acc-section-title">Próximas citas</span></div>`;
     html += emptyState(
       '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
       'Sin citas próximas',
       'Reserva una sesión con alguno de nuestros especialistas y aparecerá aquí.',
       '<a href="especialistas.html" class="btn btn-primary btn-sm">Buscar especialista</a>'
     );
-  } else {
-    upcoming.forEach(b => { html += citaCard(b, true); });
   }
 
-  /* Historial */
+  /* ── Historial ── */
   html += `<div class="acc-section-head" style="margin-top:36px;">
     <span class="acc-section-title">Historial</span>
     <span class="acc-section-count">${history.length} cita${history.length !== 1 ? 's' : ''}</span>
   </div>`;
-
   if (history.length === 0) {
     html += `<p style="font-size:.85rem;color:var(--text-muted);padding:16px 0;">Aún no tienes citas en el historial.</p>`;
   } else {
-    history.forEach(b => { html += citaCard(b, false); });
+    history.forEach(b => { html += citaCard(b, 'history'); });
   }
 
   document.getElementById('citasContent').innerHTML = html;
 }
 
-function citaCard(b, isUpcoming) {
-  const spec = SPECIALISTS_DB[toSpecialistId(b.specialist)] || {};
-  const photo = spec.photo || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(b.specialist) + '&background=E8F2FA&color=3A6485&size=100';
+const ICONO_CAL  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+const ICONO_HORA = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+const ICONO_MOD  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`;
+
+function citaCard(b, type) {
+  const spec    = SPECIALISTS_DB[toSpecialistId(b.specialist)] || {};
+  const photo   = spec.photo || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(b.specialist) + '&background=E8F2FA&color=3A6485&size=100';
   const subSpec = spec.spec || 'Especialista en salud mental';
 
-  const statusLabel = b.status === 'confirmada' ? 'Confirmada' : b.status === 'cancelada' ? 'Cancelada' : 'Completada';
-  const statusClass = `cita-status--${b.status}`;
+  /* Badge de estado de pago */
+  let payBadge = '';
+  if      (type === 'pending')   payBadge = `<span class="pay-state pay-state--pending">⚠️ Pago pendiente</span>`;
+  else if (type === 'verifying') payBadge = `<span class="pay-state pay-state--verifying">🕐 Verificando pago</span>`;
+  else if (type === 'confirmed') payBadge = `<span class="pay-state pay-state--free">✓ Gratuita</span>`;
 
-  const actions = isUpcoming
-    ? `<button class="btn btn-sm btn-secondary" onclick="cancelCita('${b.id}')">Cancelar sesión</button>
-       <a href="${spec.url || 'perfil.html'}" class="btn btn-sm btn-primary">Ver perfil</a>`
-    : `<a href="${spec.url || 'perfil.html'}" class="btn btn-sm btn-secondary">Repetir reserva</a>`;
+  /* Info de pago para "verifying" */
+  let payInfo = '';
+  if (type === 'verifying' && b.payMethod && b.opNumber) {
+    const method = b.payMethod === 'yape' ? '📱 Yape' : '🏦 Transferencia';
+    payInfo = `<div class="pay-info-box">
+      <div class="pay-info-row"><span>Método</span><span>${method}</span></div>
+      <div class="pay-info-row"><span>N° operación</span><span>${b.opNumber}</span></div>
+      <div class="pay-info-row"><span>Precio</span><span>${b.price}</span></div>
+    </div>`;
+  }
+
+  /* Badge de estado de cita (historial) */
+  const statusLabel = b.status === 'cancelada' ? 'Cancelada' : 'Completada';
+  const statusClass = `cita-status--${b.status}`;
+  const statusBadge = type === 'history'
+    ? `<span class="cita-status ${statusClass}">${statusLabel}</span>` : '';
+
+  /* Acciones según estado */
+  let actions = '';
+  if (type === 'pending') {
+    actions = `<button class="btn btn-sm btn-primary" onclick="registrarPago('${b.id}')">Registrar pago</button>
+               <button class="btn btn-sm btn-secondary" onclick="cancelCita('${b.id}')">Cancelar</button>`;
+  } else if (type === 'verifying') {
+    actions = `<button class="btn btn-sm btn-secondary" onclick="registrarPago('${b.id}')">Actualizar N° op.</button>
+               <button class="btn btn-sm" style="border:1.5px solid var(--border);color:var(--text-secondary);" onclick="cancelCita('${b.id}')">Cancelar</button>`;
+  } else if (type === 'confirmed') {
+    actions = `<button class="btn btn-sm btn-secondary" onclick="cancelCita('${b.id}')">Cancelar sesión</button>
+               <a href="${spec.url || 'perfil.html'}" class="btn btn-sm btn-primary">Ver perfil</a>`;
+  } else {
+    actions = `<a href="${spec.url || 'perfil.html'}" class="btn btn-sm btn-secondary">Repetir reserva</a>`;
+  }
 
   return `
     <div class="cita-card" id="cita-${b.id}">
@@ -628,24 +704,17 @@ function citaCard(b, isUpcoming) {
       <div class="cita-body">
         <div class="cita-specialist">${b.specialist}</div>
         <div class="cita-spec-sub">${subSpec}</div>
+        ${payBadge}
+        ${payInfo}
         <div class="cita-meta">
-          <div class="cita-meta-item">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            ${b.date}
-          </div>
-          <div class="cita-meta-item">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            ${b.time}
-          </div>
-          <div class="cita-meta-item">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            ${b.modality}
-          </div>
-          <div class="cita-meta-item" style="color:var(--primary-dark);font-weight:600;">${b.price}</div>
+          <div class="cita-meta-item">${ICONO_CAL} ${b.date}</div>
+          <div class="cita-meta-item">${ICONO_HORA} ${b.time}</div>
+          <div class="cita-meta-item">${ICONO_MOD} ${b.modality}</div>
+          ${type !== 'verifying' ? `<div class="cita-meta-item" style="color:var(--primary-dark);font-weight:600;">${b.price}</div>` : ''}
         </div>
         <div class="cita-actions">${actions}</div>
       </div>
-      <span class="cita-status ${statusClass}">${statusLabel}</span>
+      ${statusBadge}
     </div>`;
 }
 
@@ -673,6 +742,56 @@ function cancelCita(id) {
   showToast('Sesión cancelada correctamente.', 'info');
   renderCitas(getSession());
   updateStats(getSession());
+}
+
+/* ── Mini-modal registro de pago ── */
+let _mpayId     = null;
+let _mpayMethod = 'yape';
+
+function registrarPago(id) {
+  _mpayId     = id;
+  _mpayMethod = 'yape';
+  document.getElementById('mpayOpNum').value    = '';
+  document.getElementById('mpayErr').textContent = '';
+  document.getElementById('mTabYape').classList.add('active');
+  document.getElementById('mTabTransfer').classList.remove('active');
+  document.getElementById('mpayOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMpay() {
+  document.getElementById('mpayOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function switchMpayTab(tab) {
+  _mpayMethod = tab;
+  document.getElementById('mTabYape').classList.toggle('active', tab === 'yape');
+  document.getElementById('mTabTransfer').classList.toggle('active', tab === 'transfer');
+}
+
+function saveMpay() {
+  const opNum = document.getElementById('mpayOpNum').value.trim();
+  const errEl = document.getElementById('mpayErr');
+  errEl.textContent = '';
+  if (!opNum) {
+    errEl.textContent = 'El número de operación es obligatorio.';
+    document.getElementById('mpayOpNum').focus();
+    return;
+  }
+  const all = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  const idx = all.findIndex(b => String(b.id) === String(_mpayId));
+  if (idx !== -1) {
+    all[idx].paymentStatus = 'pendiente_verificacion';
+    all[idx].payMethod     = _mpayMethod;
+    all[idx].opNumber      = opNum;
+    localStorage.setItem('ms_bookings', JSON.stringify(all));
+  }
+  closeMpay();
+  showToast('Pago registrado. En breve lo verificaremos.', 'success');
+  const session = getSession();
+  renderCitas(session);
+  updateStats(session);
 }
 
 /* ── Render favoritos ── */
@@ -812,7 +931,7 @@ function updateStats(session) {
   const favs     = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
   const reviews  = JSON.parse(localStorage.getItem('ms_reviews')   || '[]').filter(r => r.userId === session.id);
   document.getElementById('statCitas').textContent     = bookings.length;
-  document.getElementById('statPendientes').textContent = bookings.filter(b => b.status === 'confirmada').length;
+  document.getElementById('statPendientes').textContent = bookings.filter(b => b.status === 'confirmada' && !b.paymentStatus).length;
   document.getElementById('statFavs').textContent      = favs.length;
   document.getElementById('statReviews').textContent   = reviews.length;
 }
@@ -861,5 +980,25 @@ function initAccountPage() {
 }
 </script>
 <script src="js/main.js"></script>
+
+<!-- Mini-modal: registrar pago -->
+<div class="mpay-overlay" id="mpayOverlay" onclick="if(event.target===this)closeMpay()">
+  <div class="mpay-modal">
+    <button class="mpay-close" onclick="closeMpay()">×</button>
+    <h3 style="margin:0 0 4px;font-size:1.05rem;">Registrar pago</h3>
+    <p style="font-size:.84rem;color:var(--text-secondary);margin:0 0 4px;">Selecciona el método con el que realizaste el pago e ingresa el número de operación para que el especialista pueda verificarlo.</p>
+    <div class="mpay-tabs">
+      <button class="mpay-tab active" id="mTabYape"     onclick="switchMpayTab('yape')">📱 Yape</button>
+      <button class="mpay-tab"        id="mTabTransfer" onclick="switchMpayTab('transfer')">🏦 Transferencia</button>
+    </div>
+    <div style="margin-bottom:18px;">
+      <label class="form-label" style="font-size:.84rem;font-weight:600;">N° de operación <span style="color:var(--error);">*obligatorio</span></label>
+      <input type="text" id="mpayOpNum" class="form-input" placeholder="Ej: 1234567890" style="margin-top:6px;">
+      <span class="auth-error" id="mpayErr" style="display:block;margin-top:4px;"></span>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="saveMpay()">Confirmar pago</button>
+    <button class="btn btn-ghost btn-full" onclick="closeMpay()" style="margin-top:8px;border:1.5px solid var(--border);">Cancelar</button>
+  </div>
+</div>
 </body>
 </html>
