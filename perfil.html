@@ -552,8 +552,70 @@
         <div class="bk-row"><span>Estado</span><span style="color:var(--success);font-weight:700;">✓ Confirmada</span></div>
       </div>
 
-      <button class="btn btn-primary btn-full" onclick="closeBkModal()">Entendido</button>
+      <p style="font-size:.76rem;color:var(--text-muted);margin-top:14px;text-align:center;">Para confirmar tu sesión, completa el pago al especialista.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+        <button class="btn btn-wa btn-full" style="display:flex;align-items:center;justify-content:center;gap:8px;" onclick="onPayNow()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Ir a pagar ahora
+        </button>
+        <button class="btn btn-ghost btn-full" style="border:1.5px solid var(--border);" onclick="closeBkModal()">Pagaré después</button>
+      </div>
     </div>
+  </div>
+</div>
+
+
+<!-- ══════════ PAYMENT MODAL ══════════ -->
+<div class="pay-overlay" id="payOverlay">
+  <div class="pay-modal" role="dialog" aria-modal="true" aria-label="Pago de sesión">
+    <button class="pay-close" id="payClose" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div class="pay-header">
+      <div class="pay-badge" id="payAmountDisplay">S/. 90.00</div>
+      <h3 class="pay-title">Completa tu pago</h3>
+      <p class="pay-sub" id="payHolder">Dra. María Elena Rojas Díaz</p>
+    </div>
+
+    <div class="pay-tabs" id="payTabsRow">
+      <button class="pay-tab active" id="tabYape" onclick="switchPayTab('yape')">📱 Yape</button>
+      <button class="pay-tab" id="tabTransfer" onclick="switchPayTab('transfer')">🏦 Transferencia</button>
+    </div>
+
+    <!-- Panel Yape -->
+    <div class="pay-panel" id="panelYape">
+      <div class="yape-qr-wrap">
+        <img id="yapeQRImg" src="" alt="QR Yape" class="yape-qr-img" width="160" height="160">
+        <div class="yape-logo-tag">YAPE</div>
+      </div>
+      <div class="yape-phone-row">
+        <span id="yapePhoneDisplay" style="font-size:1.2rem;font-weight:700;letter-spacing:.04em;">981 234 560</span>
+        <button class="copy-btn" onclick="copyField('yapePhoneDisplay')">Copiar</button>
+      </div>
+      <div style="text-align:center;font-size:.78rem;color:var(--text-muted);margin-bottom:10px;" id="yapeNameDisplay">Dra. María Elena Rojas Díaz</div>
+      <div class="pay-note">Monto exacto: <strong id="payNoteYape">S/. 90.00</strong></div>
+    </div>
+
+    <!-- Panel Transferencia -->
+    <div class="pay-panel" id="panelTransfer" style="display:none;">
+      <div class="transfer-box">
+        <div class="tr-row"><span>Banco</span><strong id="trBank">BCP</strong></div>
+        <div class="tr-row"><span>Titular</span><strong id="trHolder">María Elena Rojas Díaz</strong></div>
+        <div class="tr-row"><span>Cta. Soles</span><strong id="trAccount">191-12345670-0-01</strong></div>
+        <div class="tr-row"><span>CCI</span><strong id="trCCI">00219100123456700012</strong></div>
+      </div>
+      <button class="copy-btn" style="width:100%;margin-top:8px;" onclick="copyTransferData()">Copiar todos los datos</button>
+      <div class="pay-note" style="margin-top:10px;">Monto exacto: <strong id="payNoteTransfer">S/. 90.00</strong></div>
+    </div>
+
+    <div style="margin:16px 0 12px;">
+      <label class="form-label" for="opNumber">N° de operación <span style="color:var(--text-muted);font-weight:400;">(opcional)</span></label>
+      <input type="text" id="opNumber" class="form-input" placeholder="Ej: 1234567890">
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="confirmPayment()" style="margin-bottom:8px;">Confirmar pago</button>
+    <button class="btn btn-ghost btn-full" style="border:1.5px solid var(--border);" onclick="closePayModal()">Pagaré después</button>
   </div>
 </div>
 
@@ -1067,19 +1129,109 @@ function submitReview() {
   showToast('¡Reseña publicada! Gracias por tu opinión.');
 }
 
+/* ─── Payment modal ─── */
+const PAYMENT_DEFAULT = {
+  yape: '981234560', holder: 'María Elena Rojas Díaz',
+  bank: 'BCP', account: '191-12345670-0-01', cci: '00219100123456700012',
+};
+let _payData  = { ...PAYMENT_DEFAULT };
+let _payPrice = 90;
+
+function onPayNow() {
+  const price = _isFreeConsult ? 0 : 90;
+  closeBkModal();
+  setTimeout(() => openPayModal(price), 320);
+}
+
+function openPayModal(price) {
+  const stored = sessionStorage.getItem('ms_pay_data');
+  _payData  = stored ? { ...PAYMENT_DEFAULT, ...JSON.parse(stored) } : { ...PAYMENT_DEFAULT };
+  _payPrice = price;
+
+  const priceStr = price === 0 ? 'Gratis' : 'S/. ' + price + '.00';
+  document.getElementById('payAmountDisplay').textContent = priceStr;
+  document.getElementById('payHolder').textContent        = _payData.holder;
+  document.getElementById('payNoteYape').textContent      = priceStr;
+  document.getElementById('payNoteTransfer').textContent  = priceStr;
+
+  const phone = _payData.yape.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+  document.getElementById('yapePhoneDisplay').textContent = phone;
+  document.getElementById('yapeNameDisplay').textContent  = _payData.holder;
+  document.getElementById('yapeQRImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(_payData.yape)}&margin=8&qzone=1`;
+
+  document.getElementById('trBank').textContent    = _payData.bank;
+  document.getElementById('trHolder').textContent  = _payData.holder;
+  document.getElementById('trAccount').textContent = _payData.account;
+  document.getElementById('trCCI').textContent     = _payData.cci;
+  document.getElementById('opNumber').value        = '';
+
+  const tabsRow = document.getElementById('payTabsRow');
+  if (price === 0) {
+    tabsRow.style.display = 'none';
+    document.getElementById('panelYape').innerHTML = '<div style="text-align:center;padding:20px 10px;"><div style="font-size:2.5rem;margin-bottom:12px;">🎁</div><p style="font-size:.9rem;">Esta es tu <strong>consulta gratuita</strong>. No requiere pago previo.</p><p style="font-size:.8rem;color:var(--text-muted);margin-top:6px;">Solo preséntate a la hora acordada.</p></div>';
+    document.getElementById('panelTransfer').style.display = 'none';
+  } else {
+    tabsRow.style.display = '';
+    switchPayTab('yape');
+  }
+
+  document.getElementById('payOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePayModal() {
+  document.getElementById('payOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function switchPayTab(tab) {
+  document.getElementById('panelYape').style.display     = tab === 'yape'     ? '' : 'none';
+  document.getElementById('panelTransfer').style.display = tab === 'transfer' ? '' : 'none';
+  document.getElementById('tabYape').classList.toggle('active',     tab === 'yape');
+  document.getElementById('tabTransfer').classList.toggle('active', tab === 'transfer');
+}
+
+function copyField(id) {
+  const text = document.getElementById(id).textContent.replace(/\s/g, '');
+  navigator.clipboard.writeText(text).then(() => showToast('Número copiado.', 'info'));
+}
+
+function copyTransferData() {
+  const text = `Banco: ${_payData.bank}\nTitular: ${_payData.holder}\nCuenta: ${_payData.account}\nCCI: ${_payData.cci}`;
+  navigator.clipboard.writeText(text).then(() => showToast('Datos bancarios copiados.', 'info'));
+}
+
+function confirmPayment() {
+  const opNum = document.getElementById('opNumber').value.trim();
+  const method = document.getElementById('tabYape').classList.contains('active') ? 'yape' : 'transferencia';
+  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  if (bookings.length > 0) {
+    const last = bookings[bookings.length - 1];
+    last.paymentStatus = 'pendiente_verificacion';
+    last.payMethod     = _payPrice === 0 ? 'gratis' : method;
+    last.opNumber      = opNum;
+    localStorage.setItem('ms_bookings', JSON.stringify(bookings));
+  }
+  closePayModal();
+  showToast('¡Pago registrado! Te confirmaremos la sesión pronto.', 'success');
+}
+
 /* Close modals on backdrop click / Escape */
 document.getElementById('bkOverlay').addEventListener('click', e => {
   if (e.target === document.getElementById('bkOverlay')) closeBkModal();
 });
 document.getElementById('bkClose').addEventListener('click', closeBkModal);
+document.getElementById('payOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('payOverlay')) closePayModal();
+});
+document.getElementById('payClose').addEventListener('click', closePayModal);
 document.getElementById('msgOverlay').addEventListener('click', e => {
   if (e.target === document.getElementById('msgOverlay')) closeMsgModal();
 });
 document.getElementById('msgClose').addEventListener('click', closeMsgModal);
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  closeBkModal();
-  closeMsgModal();
+  closeBkModal(); closePayModal(); closeMsgModal();
 });
 </script>
 <script src="js/main.js"></script>

@@ -1272,6 +1272,33 @@ p  { color: var(--text-secondary); line-height: 1.78; }
 .bk-actions .btn { flex: 1; }
 
 /* ════════════════════════════════════════
+   PAYMENT MODAL
+════════════════════════════════════════ */
+.pay-overlay { position:fixed; inset:0; background:rgba(0,0,0,.52); z-index:2100; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .25s; }
+.pay-overlay.active { opacity:1; pointer-events:all; }
+.pay-modal { background:var(--bg); border-radius:var(--radius-lg); padding:28px 24px 24px; width:min(420px,94vw); max-height:90vh; overflow-y:auto; position:relative; box-shadow:0 24px 64px rgba(0,0,0,.22); }
+.pay-close { position:absolute; top:12px; right:12px; background:none; border:none; cursor:pointer; color:var(--text-muted); display:flex; align-items:center; padding:4px; border-radius:50%; transition:background .15s; }
+.pay-close:hover { background:var(--bg-secondary); }
+.pay-header { text-align:center; margin-bottom:18px; }
+.pay-badge { display:inline-block; background:var(--primary-light); color:var(--primary-dark); font-size:1.5rem; font-weight:800; padding:8px 24px; border-radius:30px; margin-bottom:10px; font-family:var(--font-heading); }
+.pay-title { font-size:1.05rem; font-weight:700; margin-bottom:3px; }
+.pay-sub { font-size:.8rem; color:var(--text-muted); }
+.pay-tabs { display:flex; gap:6px; background:var(--bg-secondary); border-radius:var(--radius); padding:4px; margin-bottom:18px; }
+.pay-tab { flex:1; padding:9px 6px; border:none; background:transparent; border-radius:calc(var(--radius) - 2px); cursor:pointer; font-size:.85rem; font-weight:600; color:var(--text-secondary); transition:all .2s; }
+.pay-tab.active { background:var(--bg); color:var(--primary); box-shadow:0 2px 8px rgba(0,0,0,.1); }
+.yape-qr-wrap { display:flex; flex-direction:column; align-items:center; margin-bottom:12px; }
+.yape-qr-img { width:160px; height:160px; border-radius:12px; border:3px solid #6b2fa0; display:block; }
+.yape-logo-tag { color:#6b2fa0; font-weight:800; font-size:1rem; margin-top:6px; letter-spacing:.08em; }
+.yape-phone-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:4px; }
+.copy-btn { background:var(--primary-light); color:var(--primary); border:none; border-radius:var(--radius-sm); padding:5px 12px; font-size:.76rem; font-weight:600; cursor:pointer; transition:all .15s; white-space:nowrap; }
+.copy-btn:hover { background:var(--primary); color:#fff; }
+.transfer-box { background:var(--bg-secondary); border-radius:var(--radius); padding:14px 16px; display:flex; flex-direction:column; gap:10px; }
+.tr-row { display:flex; justify-content:space-between; align-items:center; font-size:.82rem; gap:8px; }
+.tr-row span { color:var(--text-muted); flex-shrink:0; }
+.tr-row strong { font-weight:600; text-align:right; word-break:break-all; }
+.pay-note { text-align:center; font-size:.78rem; color:var(--text-muted); }
+
+/* ════════════════════════════════════════
    MESSAGE MODAL
 ════════════════════════════════════════ */
 .msg-overlay {

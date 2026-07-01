@@ -172,7 +172,7 @@
       <div class="specialists-grid" id="specialistsGrid">
 
         <!-- Card 1 — Destacada -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. maría elena rojas" data-tags="ansiedad,estrés,burnout,clínica"
           data-especialidades="ansiedad,burnout" data-price="90" data-rating="4.9"
           data-modalidad="ambas" data-disponible="hoy" data-free="true" data-location="">
@@ -193,12 +193,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Ansiedad</span><span class="badge">Estrés</span><span class="badge">Burnout</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 90</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 2 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. carlos herrera" data-tags="pareja,familia,comunicación,terapia"
           data-especialidades="pareja,familia" data-price="100" data-rating="4.8"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -217,12 +217,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Pareja</span><span class="badge">Familia</span><span class="badge">Comunicación</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 100</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. sofía alarcón" data-tags="infancia,adolescencia,tdah,infantil"
           data-especialidades="infantil,tdah" data-price="80" data-rating="4.9"
           data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
@@ -241,12 +241,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Infancia</span><span class="badge">Adolescencia</span><span class="badge">TDAH</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 80</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 4 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. andrés lima" data-tags="depresión,fobias,toc,tcc"
           data-especialidades="depresion,fobias,toc" data-price="85" data-rating="4.7"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -265,12 +265,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Depresión</span><span class="badge">Fobias</span><span class="badge">TOC</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 5 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. patricia vega" data-tags="evaluación,neuropsicología,presencial"
           data-especialidades="neuropsicologia" data-price="110" data-rating="4.8"
           data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
@@ -289,12 +289,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Evaluación</span><span class="badge">Neuropsicología</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 110</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 6 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. diego castro" data-tags="autoestima,mindfulness,bienestar,positiva"
           data-especialidades="autoestima,bienestar" data-price="75" data-rating="4.6"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -313,12 +313,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Autoestima</span><span class="badge">Mindfulness</span><span class="badge">Bienestar</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 75</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 7 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. lucía moreno" data-tags="maternidad,duelo,ansiedad,perinatal"
           data-especialidades="duelo,ansiedad" data-price="95" data-rating="4.9"
           data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
@@ -337,12 +337,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Maternidad</span><span class="badge">Duelo</span><span class="badge">Ansiedad</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 8 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. fernando ríos" data-tags="trauma,emdr,adicciones,trastorno"
           data-especialidades="trauma,adicciones" data-price="120" data-rating="4.7"
           data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
@@ -361,12 +361,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Trauma</span><span class="badge">EMDR</span><span class="badge">Adicciones</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 120</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 9 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. valeria santos" data-tags="burnout,liderazgo,estrés,organizacional"
           data-especialidades="burnout,estres" data-price="95" data-rating="4.8"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -385,14 +385,14 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Liderazgo</span><span class="badge">Estrés</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- ══ PÁGINA 2 ══ -->
 
         <!-- Card 10 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. andrea flores" data-tags="aprendizaje,bullying,adaptación,educativa"
           data-especialidades="infantil,aprendizaje" data-price="70" data-rating="4.7"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -411,12 +411,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Aprendizaje</span><span class="badge">Bullying</span><span class="badge">Adaptación</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 70</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 11 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. isabel mendoza" data-tags="vejez,duelo,familia,gerontología"
           data-especialidades="duelo,familia" data-price="80" data-rating="4.8"
           data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
@@ -435,12 +435,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Vejez</span><span class="badge">Duelo</span><span class="badge">Familia</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 80</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 12 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. rodrigo saavedra" data-tags="rendimiento,ansiedad,motivación,deporte"
           data-especialidades="ansiedad,bienestar" data-price="85" data-rating="4.6"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -459,12 +459,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Rendimiento</span><span class="badge">Ansiedad</span><span class="badge">Motivación</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 13 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. carmen paredes" data-tags="ansiedad,depresión,toc,tcc,adultos"
           data-especialidades="ansiedad,depresion,toc" data-price="90" data-rating="4.9"
           data-modalidad="ambas" data-disponible="hoy" data-free="true" data-location="">
@@ -483,12 +483,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Ansiedad</span><span class="badge">Depresión</span><span class="badge">TOC</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 90</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 14 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. gabriel ruiz" data-tags="tdah,infantil,escolar,aprendizaje"
           data-especialidades="infantil,tdah" data-price="75" data-rating="4.5"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -507,12 +507,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">TDAH</span><span class="badge">Infantil</span><span class="badge">Escolar</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 75</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 15 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. mariana lagos" data-tags="trauma,violencia,peritaje,forense"
           data-especialidades="trauma,duelo" data-price="130" data-rating="4.7"
           data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
@@ -531,12 +531,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Trauma</span><span class="badge">Violencia</span><span class="badge">Peritaje</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 130</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 16 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. cristina huanca" data-tags="estrés,bienestar,mindfulness,mbsr"
           data-especialidades="bienestar,estres" data-price="65" data-rating="4.8"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -555,12 +555,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Estrés</span><span class="badge">Mindfulness</span><span class="badge">Bienestar</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 65</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 17 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dr. alejandro mora" data-tags="burnout,valores,aceptación,act"
           data-especialidades="burnout,bienestar" data-price="100" data-rating="4.7"
           data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
@@ -579,12 +579,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Valores</span><span class="badge">Aceptación</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 100</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 18 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. nicole herrera" data-tags="maternidad,postparto,duelo,perinatal"
           data-especialidades="duelo,ansiedad" data-price="70" data-rating="4.6"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -603,14 +603,14 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Maternidad</span><span class="badge">Postparto</span><span class="badge">Duelo</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 70</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- ══ PÁGINA 3 ══ -->
 
         <!-- Card 19 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dr. samuel torres" data-tags="fobias,ansiedad,hábitos,hipnoterapia"
           data-especialidades="ansiedad,fobias" data-price="140" data-rating="4.8"
           data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
@@ -629,12 +629,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Fobias</span><span class="badge">Ansiedad</span><span class="badge">Hábitos</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 140</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 20 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. verónica pinto" data-tags="pareja,familia,comunicación,sistémica"
           data-especialidades="pareja,familia" data-price="95" data-rating="4.7"
           data-modalidad="ambas" data-disponible="semana" data-free="false" data-location="">
@@ -653,12 +653,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Pareja</span><span class="badge">Familia</span><span class="badge">Comunicación</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 21 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. kevin alvarado" data-tags="adolescentes,vocación,identidad,orientación"
           data-especialidades="infantil,autoestima" data-price="60" data-rating="4.5"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -677,12 +677,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Adolescentes</span><span class="badge">Vocación</span><span class="badge">Identidad</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 60</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 22 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dra. beatriz salamanca" data-tags="cáncer,duelo,autoestima,psicooncología"
           data-especialidades="duelo,autoestima" data-price="90" data-rating="4.9"
           data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
@@ -701,12 +701,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Duelo</span><span class="badge">Autoestima</span><span class="badge">Apoyo oncológico</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 90</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 23 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. luis espinoza" data-tags="tdah,autismo,evaluación,infantil"
           data-especialidades="infantil,tdah" data-price="100" data-rating="4.8"
           data-modalidad="ambas" data-disponible="hoy" data-free="false" data-location="nueva cajamarca">
@@ -725,12 +725,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">TDAH</span><span class="badge">Autismo</span><span class="badge">Evaluación</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 100</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 24 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. fiorella castro" data-tags="familia,pareja,adolescencia,sistémica"
           data-especialidades="familia,pareja" data-price="80" data-rating="4.7"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -749,12 +749,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Familia</span><span class="badge">Pareja</span><span class="badge">Adolescencia</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 80</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 25 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="dr. hernán vásquez" data-tags="depresión,bipolar,trastornos,psiquiatría"
           data-especialidades="depresion,toc" data-price="160" data-rating="4.9"
           data-modalidad="presencial" data-disponible="" data-free="false" data-location="nueva cajamarca">
@@ -773,12 +773,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Depresión</span><span class="badge">Bipolar</span><span class="badge">Trastornos</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 160</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 26 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. camila rodríguez" data-tags="burnout,estrés,liderazgo,corporativo"
           data-especialidades="burnout,estres" data-price="85" data-rating="4.6"
           data-modalidad="online" data-disponible="hoy" data-free="false" data-location="">
@@ -797,12 +797,12 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Estrés</span><span class="badge">Liderazgo</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
         <!-- Card 27 -->
-        <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;"
+        <div class="specialist-card" onclick="goToProfile(event, this.dataset.specId)" style="cursor:pointer;"
           data-name="ps. marco antonio díaz" data-tags="inconsciente,conflicto,personalidad,psicoanálisis"
           data-especialidades="depresion,autoestima" data-price="120" data-rating="4.8"
           data-modalidad="online" data-disponible="semana" data-free="false" data-location="">
@@ -821,7 +821,7 @@
           <div class="card-body"><div class="card-tags"><span class="badge">Conflicto interno</span><span class="badge">Autoestima</span><span class="badge">Personalidad</span></div></div>
           <div class="card-footer">
             <span class="card-price">Desde <strong>S/. 120</strong>/sesión</span>
-            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+            <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfile(event, this.closest('.specialist-card').dataset.specId)">Ver perfil ›</a>
           </div>
         </div>
 
@@ -889,6 +889,44 @@ document.addEventListener('click', e => {
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 8);
 }, { passive: true });
+
+/* ── Specialist payment data ── */
+const PAYMENT_DATA = {
+  'c01':{ yape:'981234560', bank:'BCP',         account:'191-12345670-0-01',  cci:'00219100123456700012', holder:'María Elena Rojas Díaz'    },
+  'c02':{ yape:'912456783', bank:'Interbank',    account:'200-13456712-1-08',  cci:'00320010134567121080', holder:'Alejandra Vásquez Pérez'    },
+  'c03':{ yape:'945781234', bank:'BBVA',         account:'0011-0311-012456789',cci:'01103110124567890001', holder:'Jorge Paredes Sánchez'      },
+  'c04':{ yape:'976892340', bank:'Scotiabank',   account:'000-102345678-1',    cci:'00900001023456781001', holder:'Lucía Torres Mendoza'       },
+  'c05':{ yape:'993201564', bank:'BCP',          account:'191-23456780-0-03',  cci:'00219100234567800030', holder:'Rodrigo Campos Vargas'      },
+  'c06':{ yape:'965432178', bank:'Interbank',    account:'200-34567891-1-02',  cci:'00320030034567891020', holder:'Sofía Quispe Mamani'        },
+  'c07':{ yape:'988765401', bank:'BBVA',         account:'0011-0111-013456789',cci:'01111101345678900001', holder:'Arturo Díaz Flores'         },
+  'c08':{ yape:'917654302', bank:'BCP',          account:'191-45678901-0-05',  cci:'00219100456789010050', holder:'Claudia Núñez Herrera'      },
+  'c09':{ yape:'934567891', bank:'Scotiabank',   account:'000-203456789-2',    cci:'00900002034567892001', holder:'Roberto Alvarado Cruz'      },
+  'c10':{ yape:'978901245', bank:'Interbank',    account:'200-56789012-1-07',  cci:'00320050056789012070', holder:'Andrea Flores Cárdenas'     },
+  'c11':{ yape:'956789024', bank:'BCP',          account:'191-67890123-0-02',  cci:'00219100678901230020', holder:'Isabel Mendoza García'      },
+  'c12':{ yape:'921345679', bank:'BBVA',         account:'0011-0211-014567891',cci:'01102110145678910001', holder:'Rodrigo Saavedra Lima'      },
+  'c13':{ yape:'967234512', bank:'BCP',          account:'191-78901234-0-08',  cci:'00219100789012340080', holder:'Carmen Paredes Robles'      },
+  'c14':{ yape:'989012346', bank:'Interbank',    account:'200-89012345-1-04',  cci:'00320080089012345040', holder:'Gabriel Ruiz Pinto'         },
+  'c15':{ yape:'934512679', bank:'Scotiabank',   account:'000-304567891-3',    cci:'00900003045678913001', holder:'Mariana Lagos Vera'         },
+  'c16':{ yape:'972345891', bank:'BCP',          account:'191-90123456-0-06',  cci:'00219100901234560060', holder:'Cristina Huanca Mamani'     },
+  'c17':{ yape:'948901238', bank:'Interbank',    account:'200-01234567-1-09',  cci:'00320000012345670090', holder:'Alejandro Mora Espinoza'    },
+  'c18':{ yape:'961234579', bank:'BBVA',         account:'0011-0311-015678912',cci:'01103110156789120001', holder:'Nicole Herrera Castro'      },
+  'c19':{ yape:'907654322', bank:'BCP',          account:'191-12345671-0-09',  cci:'00219100123456710090', holder:'Samuel Torres Aguirre'      },
+  'c20':{ yape:'985432110', bank:'Interbank',    account:'200-23456782-1-06',  cci:'00320020234567820060', holder:'Verónica Pinto Salcedo'     },
+  'c21':{ yape:'943210988', bank:'Scotiabank',   account:'000-404567892-4',    cci:'00900004045678924001', holder:'Kevin Alvarado Ríos'        },
+  'c22':{ yape:'971890235', bank:'BCP',          account:'191-34567892-0-04',  cci:'00219100345678920040', holder:'Beatriz Salamanca Mejía'    },
+  'c23':{ yape:'957891204', bank:'Interbank',    account:'200-45678903-1-03',  cci:'00320040456789030030', holder:'Luis Espinoza Tapia'        },
+  'c24':{ yape:'986012346', bank:'BBVA',         account:'0011-0111-016789123',cci:'01111101678912300001', holder:'Fiorella Castro Morales'    },
+  'c25':{ yape:'929876544', bank:'BCP',          account:'191-56789014-0-07',  cci:'00219100567890140070', holder:'Hernán Vásquez Delgado'     },
+  'c26':{ yape:'968345211', bank:'Interbank',    account:'200-67890125-1-05',  cci:'00320060678901250050', holder:'Camila Rodríguez Fuentes'   },
+  'c27':{ yape:'941234088', bank:'Scotiabank',   account:'000-504567893-5',    cci:'00900005045678935001', holder:'Marco Antonio Díaz Valenzuela'},
+};
+
+function goToProfile(e, specId) {
+  e.preventDefault();
+  const data = PAYMENT_DATA[specId];
+  if (data) sessionStorage.setItem('ms_pay_data', JSON.stringify(data));
+  window.location.href = 'perfil.html';
+}
 
 /* ── Price range ── */
 function updatePrice(val) {
@@ -1061,6 +1099,11 @@ document.getElementById('locationFilter').addEventListener('change', applyFilter
 document.querySelector('.sort-select').addEventListener('change', applyFilters);
 document.querySelectorAll('.filter-group input').forEach(input => {
   input.addEventListener('change', applyFilters);
+});
+
+/* ── Assign spec IDs by DOM order ── */
+document.querySelectorAll('#specialistsGrid .specialist-card').forEach((card, i) => {
+  card.dataset.specId = 'c' + String(i + 1).padStart(2, '0');
 });
 
 /* ── Init ── */
