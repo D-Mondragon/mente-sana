@@ -974,6 +974,7 @@ p  { color: var(--text-secondary); line-height: 1.78; }
 .slot-item { padding: 7px 4px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: .76rem; text-align: center; cursor: pointer; transition: all var(--transition); background: var(--bg); color: var(--text-secondary); }
 .slot-item:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
 .slot-item.selected { background: var(--primary); border-color: var(--primary); color: #fff; font-weight: 600; }
+.slot-item.disabled { background: rgba(39,174,96,.08); border-color: rgba(39,174,96,.3); color: var(--success); cursor: not-allowed; font-size: .7rem; }
 .booking-summary { background: var(--bg-soft); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 14px; font-size: .8rem; border: 1px solid var(--border-light); }
 .booking-summary div { display: flex; justify-content: space-between; padding: 2px 0; color: var(--text-secondary); }
 .booking-summary strong { color: var(--text); }

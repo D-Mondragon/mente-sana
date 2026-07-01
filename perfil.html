@@ -390,19 +390,21 @@
           <span class="booking-label">Horarios disponibles</span>
           <div class="slot-grid" id="slotGrid"></div>
 
+          <div style="margin-bottom:14px;margin-top:14px;">
+            <span class="booking-label">Modalidad</span>
+            <select class="form-select" id="modalitySelect" style="width:100%;margin-top:6px;" onchange="updateSumModality()">
+              <option value="">— Selecciona una modalidad —</option>
+              <option value="Online (videollamada)">💻 Online (videollamada)</option>
+              <option value="Presencial — Nueva Cajamarca">🏥 Presencial — Nueva Cajamarca</option>
+            </select>
+            <span class="auth-error" id="modalityErr" style="margin-top:4px;display:block;"></span>
+          </div>
+
           <div class="booking-summary" id="bookingSummary" style="display:none;">
             <div><span>Especialista:</span><strong>Dra. M. E. Rojas</strong></div>
             <div><span>Fecha:</span><strong id="sumDate">—</strong></div>
             <div><span>Hora:</span><strong id="sumTime">—</strong></div>
-            <div><span>Modalidad:</span><strong>Online</strong></div>
-          </div>
-
-          <div style="margin-bottom:14px;">
-            <span class="booking-label">Modalidad</span>
-            <select class="form-select" style="width:100%;margin-top:6px;">
-              <option>💻 Online (videollamada)</option>
-              <option>🏥 Presencial — Nueva Cajamarca</option>
-            </select>
+            <div><span>Modalidad:</span><strong id="sumModality">—</strong></div>
           </div>
 
           <button class="btn btn-full btn-sm btn-free" onclick="bookFreeConsult()" style="margin-bottom:10px;">
@@ -609,9 +611,10 @@
       <div class="pay-note" style="margin-top:10px;">Monto exacto: <strong id="payNoteTransfer">S/. 90.00</strong></div>
     </div>
 
-    <div style="margin:16px 0 12px;">
-      <label class="form-label" for="opNumber">N° de operación <span style="color:var(--text-muted);font-weight:400;">(opcional)</span></label>
+    <div style="margin:16px 0 12px;" id="opNumberWrap">
+      <label class="form-label" for="opNumber">N° de operación <span id="opNumLabel" style="color:var(--error);font-size:.75rem;font-weight:600;">*obligatorio</span></label>
       <input type="text" id="opNumber" class="form-input" placeholder="Ej: 1234567890">
+      <span class="auth-error" id="opNumErr" style="margin-top:4px;display:block;"></span>
     </div>
 
     <button class="btn btn-primary btn-full" onclick="confirmPayment()" style="margin-bottom:8px;">Confirmar pago</button>
@@ -766,11 +769,9 @@ function renderCalendar() {
     el.textContent = d;
     if (isAv) {
       el.addEventListener('click', () => {
-        selectedDay = d;
-        document.getElementById('sumDate').textContent = d + ' de ' + months[currentDate.getMonth()];
-        document.getElementById('bookingSummary').style.display = 'flex';
-        document.getElementById('bookingSummary').style.flexDirection = 'column';
-        renderCalendar(); renderSlots();
+        selectedDay  = d;
+        selectedSlot = null;
+        renderCalendar(); renderSlots(); updateSummary();
       });
     }
     grid.appendChild(el);
@@ -779,24 +780,51 @@ function renderCalendar() {
 
 /* Slots */
 const slots = ['09:00','10:00','11:00','12:00','16:00','17:00','18:00'];
-let selectedSlot = null;
+let selectedSlot  = null;
+const bookedSlots = []; /* { date: '2 de Junio', time: '09:00' } */
+
+function currentDateLabel() {
+  return selectedDay ? selectedDay + ' de ' + months[currentDate.getMonth()] : null;
+}
 
 function renderSlots() {
-  const grid = document.getElementById('slotGrid');
+  const grid    = document.getElementById('slotGrid');
+  const dateKey = currentDateLabel();
   grid.innerHTML = '';
   slots.forEach(t => {
+    const isBooked = dateKey && bookedSlots.some(b => b.date === dateKey && b.time === t);
     const el = document.createElement('div');
-    el.className = 'slot-item' + (t === selectedSlot ? ' selected' : '');
-    el.textContent = t;
-    el.addEventListener('click', () => {
-      selectedSlot = t;
-      document.getElementById('sumTime').textContent = t;
-      document.getElementById('bookingSummary').style.display = 'flex';
-      document.getElementById('bookingSummary').style.flexDirection = 'column';
-      renderSlots();
-    });
+    el.className = 'slot-item' +
+      (isBooked         ? ' disabled'  : '') +
+      (t === selectedSlot && !isBooked ? ' selected'  : '');
+    el.textContent = isBooked ? t + ' ✓' : t;
+    if (!isBooked) {
+      el.addEventListener('click', () => {
+        selectedSlot = t;
+        updateSummary();
+        renderSlots();
+      });
+    }
     grid.appendChild(el);
   });
+}
+
+function updateSumModality() {
+  const sel = document.getElementById('modalitySelect').value;
+  document.getElementById('sumModality').textContent = sel || '—';
+  document.getElementById('modalityErr').textContent = '';
+  updateSummary();
+}
+
+function updateSummary() {
+  const date     = currentDateLabel();
+  const modality = document.getElementById('modalitySelect').value;
+  if (!date && !selectedSlot) return;
+  if (date)        document.getElementById('sumDate').textContent     = date;
+  if (selectedSlot) document.getElementById('sumTime').textContent   = selectedSlot;
+  if (modality)    document.getElementById('sumModality').textContent = modality;
+  const sum = document.getElementById('bookingSummary');
+  if (date && selectedSlot) { sum.style.display = 'flex'; sum.style.flexDirection = 'column'; }
 }
 
 document.getElementById('calPrev').addEventListener('click', () => {
@@ -813,8 +841,31 @@ renderSlots();
 
 /* Booking confirm — opens modal, auth-gated */
 function confirmBooking() {
-  if (!selectedDay || !selectedSlot) {
-    showToast('Selecciona una fecha y un horario primero.', 'error');
+  /* ── Validaciones ── */
+  let valid = true;
+
+  if (!selectedDay) {
+    showToast('Selecciona una fecha disponible.', 'error'); valid = false;
+  }
+  if (!selectedSlot) {
+    showToast('Selecciona un horario.', 'error'); valid = false;
+  }
+
+  const modalityEl  = document.getElementById('modalitySelect');
+  const modalityErr = document.getElementById('modalityErr');
+  if (!modalityEl.value) {
+    modalityErr.textContent = 'Selecciona una modalidad.'; valid = false;
+  } else {
+    modalityErr.textContent = '';
+  }
+
+  if (!valid) return;
+
+  const dateStr = currentDateLabel();
+
+  /* Verificar si ese horario ya fue reservado */
+  if (bookedSlots.some(b => b.date === dateStr && b.time === selectedSlot)) {
+    showToast('Ya tienes una cita en ese horario. Elige otro.', 'error');
     return;
   }
 
@@ -829,26 +880,22 @@ function confirmBooking() {
   const priceEl = document.getElementById('bkPriceVal');
   if (priceEl) { priceEl.textContent = 'S/. 90'; priceEl.style.color = ''; }
 
-  const modalityEl = document.querySelector('.booking-body .form-select');
-  const modality   = modalityEl ? modalityEl.value.replace(/^[^\s]+\s/, '') : 'Online (videollamada)';
-  const dateStr    = selectedDay + ' de ' + months[currentDate.getMonth()];
-
+  const modality = modalityEl.value;
   document.getElementById('bkDate').textContent     = dateStr;
   document.getElementById('bkTime').textContent     = selectedSlot;
   document.getElementById('bkModality').textContent = modality;
 
-  const overlay = document.getElementById('bkOverlay');
-  overlay.classList.add('active');
+  document.getElementById('bkOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
 function closeBkModal() {
-  const overlay = document.getElementById('bkOverlay');
-  overlay.classList.remove('active');
+  document.getElementById('bkOverlay').classList.remove('active');
   document.body.style.overflow = '';
   setTimeout(() => {
     document.getElementById('bkStep1').style.display = '';
     document.getElementById('bkStep2').style.display = 'none';
+    document.getElementById('modalityErr').textContent = '';
   }, 300);
 }
 
@@ -873,18 +920,17 @@ function finishBooking() {
   });
   localStorage.setItem('ms_bookings', JSON.stringify(bookings));
 
+  /* Marcar slot como reservado y resetear selección */
+  bookedSlots.push({ date, time });
+  selectedSlot = null;
+  renderSlots();
+
   /* Show success step */
   document.getElementById('bkDate2').textContent     = date;
   document.getElementById('bkTime2').textContent     = time;
   document.getElementById('bkModality2').textContent = modality;
   document.getElementById('bkStep1').style.display = 'none';
   document.getElementById('bkStep2').style.display = '';
-
-  /* Update book button */
-  const btn = document.getElementById('bookBtn');
-  btn.textContent = '✓ Sesión reservada';
-  btn.disabled = true;
-  btn.style.background = 'var(--success)';
 }
 
 /* Message modal */
@@ -1163,14 +1209,21 @@ function openPayModal(price) {
   document.getElementById('trHolder').textContent  = _payData.holder;
   document.getElementById('trAccount').textContent = _payData.account;
   document.getElementById('trCCI').textContent     = _payData.cci;
-  document.getElementById('opNumber').value        = '';
+  document.getElementById('opNumber').value   = '';
+  document.getElementById('opNumErr').textContent = '';
 
-  const tabsRow = document.getElementById('payTabsRow');
+  const opWrap   = document.getElementById('opNumberWrap');
+  const opLabel  = document.getElementById('opNumLabel');
+  const tabsRow  = document.getElementById('payTabsRow');
+
   if (price === 0) {
+    opWrap.style.display  = 'none';
     tabsRow.style.display = 'none';
     document.getElementById('panelYape').innerHTML = '<div style="text-align:center;padding:20px 10px;"><div style="font-size:2.5rem;margin-bottom:12px;">🎁</div><p style="font-size:.9rem;">Esta es tu <strong>consulta gratuita</strong>. No requiere pago previo.</p><p style="font-size:.8rem;color:var(--text-muted);margin-top:6px;">Solo preséntate a la hora acordada.</p></div>';
     document.getElementById('panelTransfer').style.display = 'none';
   } else {
+    opWrap.style.display  = '';
+    opLabel.style.display = '';
     tabsRow.style.display = '';
     switchPayTab('yape');
   }
@@ -1202,8 +1255,18 @@ function copyTransferData() {
 }
 
 function confirmPayment() {
-  const opNum = document.getElementById('opNumber').value.trim();
-  const method = document.getElementById('tabYape').classList.contains('active') ? 'yape' : 'transferencia';
+  const opNum   = document.getElementById('opNumber').value.trim();
+  const errEl   = document.getElementById('opNumErr');
+  const method  = document.getElementById('tabYape').classList.contains('active') ? 'yape' : 'transferencia';
+
+  errEl.textContent = '';
+
+  if (_payPrice > 0 && !opNum) {
+    errEl.textContent = 'Ingresa el número de operación para confirmar el pago.';
+    document.getElementById('opNumber').focus();
+    return;
+  }
+
   const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
   if (bookings.length > 0) {
     const last = bookings[bookings.length - 1];
