@@ -923,8 +923,25 @@ const PAYMENT_DATA = {
 
 function goToProfile(e, specId) {
   e.preventDefault();
-  const data = PAYMENT_DATA[specId];
-  if (data) sessionStorage.setItem('ms_pay_data', JSON.stringify(data));
+  const card = e.target.closest('.specialist-card') ||
+               document.querySelector(`#specialistsGrid .specialist-card[data-spec-id="${specId}"]`);
+  if (card) {
+    const specData = {
+      specId,
+      name:       card.querySelector('.card-name')?.textContent.trim()  || '',
+      photo:      card.querySelector('.card-avatar img')?.src            || '',
+      spec:       card.querySelector('.card-spec')?.textContent.trim()   || '',
+      tags:       [...card.querySelectorAll('.card-tags .badge')].map(b => b.textContent.trim()),
+      price:      parseInt(card.dataset.price)  || 90,
+      rating:     parseFloat(card.dataset.rating) || 0,
+      modalidad:  card.dataset.modalidad  || 'ambas',
+      disponible: card.dataset.disponible || '',
+      isFree:     card.dataset.free === 'true',
+    };
+    sessionStorage.setItem('ms_spec_data', JSON.stringify(specData));
+  }
+  const payData = PAYMENT_DATA[specId];
+  if (payData) sessionStorage.setItem('ms_pay_data', JSON.stringify(payData));
   window.location.href = 'perfil.html';
 }
 

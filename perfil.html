@@ -407,7 +407,7 @@
             <div><span>Modalidad:</span><strong id="sumModality">—</strong></div>
           </div>
 
-          <button class="btn btn-full btn-sm btn-free" onclick="bookFreeConsult()" style="margin-bottom:10px;">
+          <button id="freeConsultBtn" class="btn btn-full btn-sm btn-free" onclick="bookFreeConsult()" style="margin-bottom:10px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
             Primera consulta gratis · 20 min
           </button>
@@ -524,7 +524,7 @@
       <p class="bk-sub">Revisa los detalles de tu sesión antes de confirmar.</p>
 
       <div class="bk-details">
-        <div class="bk-row"><span>Especialista</span><span>Dra. M. E. Rojas</span></div>
+        <div class="bk-row"><span>Especialista</span><span id="bkSpecName">Dra. M. E. Rojas</span></div>
         <div class="bk-row"><span>Fecha</span><span id="bkDate">—</span></div>
         <div class="bk-row"><span>Hora</span><span id="bkTime">—</span></div>
         <div class="bk-row"><span>Modalidad</span><span id="bkModality">Online (videollamada)</span></div>
@@ -538,31 +538,8 @@
       </div>
     </div>
 
-    <!-- Step 2: success -->
-    <div id="bkStep2" style="display:none;">
-      <div class="bk-icon" style="background:rgba(39,174,96,.14);">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <div class="bk-title">¡Sesión reservada!</div>
-      <p class="bk-sub">Tu reserva ha sido registrada. Recibirás un recordatorio antes de la sesión.</p>
-
-      <div class="bk-details">
-        <div class="bk-row"><span>Especialista</span><span>Dra. M. E. Rojas</span></div>
-        <div class="bk-row"><span>Fecha</span><span id="bkDate2">—</span></div>
-        <div class="bk-row"><span>Hora</span><span id="bkTime2">—</span></div>
-        <div class="bk-row"><span>Modalidad</span><span id="bkModality2">Online</span></div>
-        <div class="bk-row"><span>Estado</span><span style="color:var(--success);font-weight:700;">✓ Confirmada</span></div>
-      </div>
-
-      <p style="font-size:.76rem;color:var(--text-muted);margin-top:14px;text-align:center;">Para confirmar tu sesión, completa el pago al especialista.</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
-        <button class="btn btn-wa btn-full" style="display:flex;align-items:center;justify-content:center;gap:8px;" onclick="onPayNow()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          Ir a pagar ahora
-        </button>
-        <button class="btn btn-ghost btn-full" style="border:1.5px solid var(--border);" onclick="closeBkModal()">Pagaré después</button>
-      </div>
-    </div>
+    <!-- Step 2: success (content filled by JS) -->
+    <div id="bkStep2" style="display:none;"></div>
   </div>
 </div>
 
@@ -836,8 +813,10 @@ document.getElementById('calNext').addEventListener('click', () => {
   renderCalendar();
 });
 
+applySpecData();
 renderCalendar();
 renderSlots();
+updateFreeConsultVisibility();
 
 /* Booking confirm — opens modal, auth-gated */
 function confirmBooking() {
@@ -905,32 +884,70 @@ function finishBooking() {
   const modality = document.getElementById('bkModality').textContent;
   const session  = getSession();
 
-  /* Save booking to localStorage */
-  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
-  bookings.push({
-    id:         Date.now(),
-    userId:     session ? session.id : null,
-    specialist: 'Dra. María Elena Rojas',
-    date,
-    time,
-    modality,
-    price:      _isFreeConsult ? 'S/. 0 — Gratis' : 'S/. 90',
-    status:     'confirmada',
-    createdAt:  new Date().toISOString(),
-  });
-  localStorage.setItem('ms_bookings', JSON.stringify(bookings));
-
-  /* Marcar slot como reservado y resetear selección */
+  /* Mark slot as taken */
   bookedSlots.push({ date, time });
   selectedSlot = null;
   renderSlots();
 
-  /* Show success step */
-  document.getElementById('bkDate2').textContent     = date;
-  document.getElementById('bkTime2').textContent     = time;
-  document.getElementById('bkModality2').textContent = modality;
+  if (_isFreeConsult) {
+    /* ── Free: save immediately ── */
+    const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+    bookings.push({
+      id: Date.now(), userId: session?.id,
+      specialist: window._specName, date, time, modality,
+      price: 'Gratis', status: 'confirmada',
+      paymentStatus: 'gratis', createdAt: new Date().toISOString(),
+    });
+    localStorage.setItem('ms_bookings', JSON.stringify(bookings));
+    updateFreeConsultVisibility();
+
+    /* Show free success */
+    _showBkStep2({
+      icon: '🎁', title: '¡Consulta gratuita reservada!',
+      sub: 'Tu primera consulta de 20 minutos está confirmada. No requiere pago.',
+      date, time, modality, price: 'Gratis',
+      estado: '<span style="color:var(--success);font-weight:700;">✓ Confirmada</span>',
+    });
+  } else {
+    /* ── Paid: store pending, go to payment ── */
+    _pendingBooking = {
+      id: Date.now(), userId: session?.id,
+      specialist: window._specName, date, time, modality,
+      price: 'S/. ' + window._specPrice,
+      status: 'confirmada', createdAt: new Date().toISOString(),
+    };
+    _pendingDate     = date;
+    _pendingTime     = time;
+    _pendingModality = modality;
+    /* Close booking modal, open pay modal */
+    _origCloseBkModal();
+    setTimeout(() => openPayModal(window._specPrice), 320);
+  }
+}
+
+function _showBkStep2({ icon, title, sub, date, time, modality, price, estado, payMethod, opNum }) {
+  const step2 = document.getElementById('bkStep2');
+  step2.innerHTML = `
+    <div class="bk-icon" style="background:rgba(39,174,96,.14);font-size:1.8rem;display:flex;align-items:center;justify-content:center;">${icon}</div>
+    <div class="bk-title">${title}</div>
+    <p class="bk-sub">${sub}</p>
+    <div class="bk-details">
+      <div class="bk-row"><span>Especialista</span><span>${window._specName}</span></div>
+      <div class="bk-row"><span>Fecha</span><span>${date}</span></div>
+      <div class="bk-row"><span>Hora</span><span>${time}</span></div>
+      <div class="bk-row"><span>Modalidad</span><span>${modality}</span></div>
+      <div class="bk-row"><span>Precio</span><span>${price}</span></div>
+      ${payMethod ? `<div class="bk-row"><span>Método</span><span>${payMethod}</span></div>` : ''}
+      ${opNum     ? `<div class="bk-row"><span>N° operación</span><span>${opNum}</span></div>` : ''}
+      <div class="bk-row"><span>Estado</span>${estado}</div>
+    </div>
+    <a href="mi-cuenta.html" class="btn btn-primary btn-full" style="margin-top:10px;text-align:center;display:block;">Ir a Mis citas</a>
+    <button class="btn btn-ghost btn-full" style="margin-top:8px;border:1.5px solid var(--border);" onclick="closeBkModal()">Cerrar</button>
+  `;
   document.getElementById('bkStep1').style.display = 'none';
   document.getElementById('bkStep2').style.display = '';
+  document.getElementById('bkOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 /* Message modal */
@@ -1033,8 +1050,94 @@ function shareProfile() {
   }
 }
 
+/* ─── Specialist data from sessionStorage ─── */
+window._specName  = 'Dra. María Elena Rojas';
+window._specPrice = 90;
+window._specFree  = true;
+
+function applySpecData() {
+  const raw = sessionStorage.getItem('ms_spec_data');
+  if (!raw) return;
+  const s = JSON.parse(raw);
+
+  window._specName  = s.name  || window._specName;
+  window._specPrice = s.price || window._specPrice;
+  window._specFree  = s.isFree !== undefined ? s.isFree : window._specFree;
+
+  // Page title & breadcrumb
+  document.title = window._specName + ' — Mente Sana';
+  const bc = document.querySelector('.breadcrumb span:last-child');
+  if (bc) bc.textContent = window._specName;
+
+  // Header name & specialty
+  const h1 = document.querySelector('.profile-name');
+  if (h1) h1.textContent = window._specName;
+  if (s.spec) {
+    const specEl = document.querySelector('.profile-spec');
+    if (specEl) specEl.textContent = s.spec;
+  }
+
+  // Photo
+  if (s.photo) {
+    const img = document.querySelector('.profile-avatar img');
+    if (img) { img.src = s.photo.replace('w=200&h=200', 'w=300&h=300'); img.alt = window._specName; }
+  }
+
+  // Tags
+  if (s.tags && s.tags.length) {
+    const wrap = document.querySelector('.profile-tags');
+    if (wrap) wrap.innerHTML = s.tags.map(t => `<span class="badge">${t}</span>`).join('');
+  }
+
+  // Rating
+  if (s.rating) {
+    const rEl = document.querySelector('.profile-meta-item strong');
+    if (rEl) rEl.textContent = s.rating;
+  }
+
+  // Price in booking summary
+  const priceEl = document.getElementById('bkPriceVal');
+  if (priceEl) priceEl.textContent = 'S/. ' + window._specPrice;
+
+  // Modality options: remove unavailable
+  const sel = document.getElementById('modalitySelect');
+  if (sel && s.modalidad !== 'ambas') {
+    [...sel.options].forEach(opt => {
+      if (!opt.value) return;
+      if (s.modalidad === 'online'      && opt.value.toLowerCase().includes('presencial')) opt.remove();
+      if (s.modalidad === 'presencial'  && opt.value.toLowerCase().includes('online'))     opt.remove();
+    });
+  }
+
+  // Booking summary specialist name
+  const sumSpec = document.querySelector('#bookingSummary div:first-child strong');
+  if (sumSpec) sumSpec.textContent = window._specName;
+  // Booking modal step1 specialist name
+  const bkSpec = document.getElementById('bkSpecName');
+  if (bkSpec) bkSpec.textContent = window._specName;
+
+  // Free consult button: hide if specialist doesn't offer it
+  if (!window._specFree) {
+    const btn = document.getElementById('freeConsultBtn');
+    if (btn) btn.style.display = 'none';
+  }
+}
+
+/* ─── Hide free button if user already has any booking ─── */
+function updateFreeConsultVisibility() {
+  const btn = document.getElementById('freeConsultBtn');
+  if (!btn) return;
+  if (!window._specFree) { btn.style.display = 'none'; return; }
+  if (!isLoggedIn()) return; // keep visible until login
+  const session  = getSession();
+  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  const hasAny   = bookings.some(b => b.userId === session.id);
+  btn.style.display = hasAny ? 'none' : '';
+}
+
 /* ─── Free consult ─── */
-let _isFreeConsult = false;
+let _isFreeConsult  = false;
+let _pendingBooking = null;
 
 function bookFreeConsult() {
   if (!isLoggedIn()) {
@@ -1071,7 +1174,7 @@ closeBkModal = function() {
   _origCloseBkModal();
   _isFreeConsult = false;
   const priceEl = document.getElementById('bkPriceVal');
-  if (priceEl) { priceEl.textContent = 'S/. 90'; priceEl.style.color = ''; }
+  if (priceEl) { priceEl.textContent = 'S/. ' + window._specPrice; priceEl.style.color = ''; }
 };
 
 /* ─── Star rating ─── */
@@ -1106,7 +1209,7 @@ function _buildReviewCard(r) {
 /* ─── Review section init (called by main.js after auth is ready) ─── */
 function initReviewSection() {
   const allReviews  = JSON.parse(localStorage.getItem('ms_reviews') || '[]');
-  const specReviews = allReviews.filter(r => r.specialist === 'Dra. María Elena Rojas');
+  const specReviews = allReviews.filter(r => r.specialist === window._specName);
 
   /* Render all saved reviews into the DOM (deduplicate by data-review-id) */
   const existing = new Set([...document.querySelectorAll('#tab-resenas .review-card[data-review-id]')]
@@ -1153,7 +1256,7 @@ function submitReview() {
   const reviews = JSON.parse(localStorage.getItem('ms_reviews') || '[]');
   reviews.push({
     id: Date.now(), userId: session.id, userName,
-    specialist: 'Dra. María Elena Rojas',
+    specialist: window._specName,
     rating: _rating, text, date,
     createdAt: new Date().toISOString(),
   });
@@ -1182,12 +1285,6 @@ const PAYMENT_DEFAULT = {
 };
 let _payData  = { ...PAYMENT_DEFAULT };
 let _payPrice = 90;
-
-function onPayNow() {
-  const price = _isFreeConsult ? 0 : 90;
-  closeBkModal();
-  setTimeout(() => openPayModal(price), 320);
-}
 
 function openPayModal(price) {
   const stored = sessionStorage.getItem('ms_pay_data');
@@ -1235,6 +1332,16 @@ function openPayModal(price) {
 function closePayModal() {
   document.getElementById('payOverlay').classList.remove('active');
   document.body.style.overflow = '';
+  /* If user closes without paying, undo the pending slot reservation */
+  if (_pendingBooking) {
+    const idx = bookedSlots.findIndex(b => b.date === _pendingBooking.date && b.time === _pendingBooking.time);
+    if (idx !== -1) bookedSlots.splice(idx, 1);
+    _pendingBooking  = null;
+    _pendingDate     = '';
+    _pendingTime     = '';
+    _pendingModality = '';
+    renderSlots();
+  }
 }
 
 function switchPayTab(tab) {
@@ -1255,10 +1362,9 @@ function copyTransferData() {
 }
 
 function confirmPayment() {
-  const opNum   = document.getElementById('opNumber').value.trim();
-  const errEl   = document.getElementById('opNumErr');
-  const method  = document.getElementById('tabYape').classList.contains('active') ? 'yape' : 'transferencia';
-
+  const opNum  = document.getElementById('opNumber').value.trim();
+  const errEl  = document.getElementById('opNumErr');
+  const method = document.getElementById('tabYape').classList.contains('active') ? 'yape' : 'transferencia';
   errEl.textContent = '';
 
   if (_payPrice > 0 && !opNum) {
@@ -1267,17 +1373,39 @@ function confirmPayment() {
     return;
   }
 
-  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
-  if (bookings.length > 0) {
-    const last = bookings[bookings.length - 1];
-    last.paymentStatus = 'pendiente_verificacion';
-    last.payMethod     = _payPrice === 0 ? 'gratis' : method;
-    last.opNumber      = opNum;
+  const date     = _pendingDate     || '—';
+  const time     = _pendingTime     || '—';
+  const modality = _pendingModality || '—';
+
+  /* Save the pending booking with payment info */
+  if (_pendingBooking) {
+    _pendingBooking.paymentStatus = 'pendiente_verificacion';
+    _pendingBooking.payMethod     = method;
+    _pendingBooking.opNumber      = opNum;
+    const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+    bookings.push(_pendingBooking);
     localStorage.setItem('ms_bookings', JSON.stringify(bookings));
+    _pendingBooking = null;
   }
+
+  const methodLabel = method === 'yape' ? '📱 Yape' : '🏦 Transferencia';
   closePayModal();
-  showToast('¡Pago registrado! Te confirmaremos la sesión pronto.', 'success');
+
+  /* Show booking success */
+  _showBkStep2({
+    icon: '✅', title: '¡Reserva y pago registrados!',
+    sub: 'Verificaremos tu número de operación y confirmaremos la sesión pronto.',
+    date, time, modality,
+    price: 'S/. ' + _payPrice,
+    payMethod: methodLabel, opNum,
+    estado: '<span style="color:#92400e;font-weight:700;">🕐 Verificando pago</span>',
+  });
 }
+
+/* Helpers to carry date/time/modality into confirmPayment success screen */
+let _pendingDate     = '';
+let _pendingTime     = '';
+let _pendingModality = '';
 
 /* Close modals on backdrop click / Escape */
 document.getElementById('bkOverlay').addEventListener('click', e => {

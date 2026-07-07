@@ -689,8 +689,8 @@ function citaCard(b, type) {
     actions = `<button class="btn btn-sm btn-primary" onclick="registrarPago('${b.id}')">Registrar pago</button>
                <button class="btn btn-sm btn-secondary" onclick="cancelCita('${b.id}')">Cancelar</button>`;
   } else if (type === 'verifying') {
-    actions = `<button class="btn btn-sm btn-secondary" onclick="registrarPago('${b.id}')">Actualizar N° op.</button>
-               <button class="btn btn-sm" style="border:1.5px solid var(--border);color:var(--text-secondary);" onclick="cancelCita('${b.id}')">Cancelar</button>`;
+    actions = (b.opNumber ? '' : `<button class="btn btn-sm btn-secondary" onclick="registrarPago('${b.id}')">Registrar N° op.</button>`) +
+              `<button class="btn btn-sm" style="border:1.5px solid var(--border);color:var(--text-secondary);" onclick="cancelCita('${b.id}')">Cancelar</button>`;
   } else if (type === 'confirmed') {
     actions = `<button class="btn btn-sm btn-secondary" onclick="cancelCita('${b.id}')">Cancelar sesión</button>
                <a href="${spec.url || 'perfil.html'}" class="btn btn-sm btn-primary">Ver perfil</a>`;

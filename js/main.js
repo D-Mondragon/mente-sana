@@ -268,9 +268,10 @@ document.addEventListener('keydown', e => {
 ───────────────────────────────────────────── */
 function _globalInit() {
   updateNavAuth();
-  if (typeof initFavoriteState  === 'function') initFavoriteState();
-  if (typeof initReviewSection  === 'function') initReviewSection();
-  if (typeof initAccountPage    === 'function') initAccountPage();
+  if (typeof initFavoriteState          === 'function') initFavoriteState();
+  if (typeof initReviewSection          === 'function') initReviewSection();
+  if (typeof initAccountPage            === 'function') initAccountPage();
+  if (typeof updateFreeConsultVisibility === 'function') updateFreeConsultVisibility();
 }
 
 if (document.readyState === 'loading') {
