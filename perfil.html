@@ -594,8 +594,7 @@
       <span class="auth-error" id="opNumErr" style="margin-top:4px;display:block;"></span>
     </div>
 
-    <button class="btn btn-primary btn-full" onclick="confirmPayment()" style="margin-bottom:8px;">Confirmar pago</button>
-    <button class="btn btn-ghost btn-full" style="border:1.5px solid var(--border);" onclick="closePayModal()">Pagaré después</button>
+    <button class="btn btn-primary btn-full" onclick="confirmPayment()">Confirmar pago</button>
   </div>
 </div>
 
@@ -1128,10 +1127,11 @@ function updateFreeConsultVisibility() {
   const btn = document.getElementById('freeConsultBtn');
   if (!btn) return;
   if (!window._specFree) { btn.style.display = 'none'; return; }
-  if (!isLoggedIn()) return; // keep visible until login
+  if (typeof isLoggedIn !== 'function' || !isLoggedIn()) return;
   const session  = getSession();
+  if (!session) return;
   const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
-  const hasAny   = bookings.some(b => b.userId === session.id);
+  const hasAny   = bookings.some(b => String(b.userId) === String(session.id));
   btn.style.display = hasAny ? 'none' : '';
 }
 
@@ -1379,7 +1379,7 @@ function confirmPayment() {
 
   /* Save the pending booking with payment info */
   if (_pendingBooking) {
-    _pendingBooking.paymentStatus = 'pendiente_verificacion';
+    _pendingBooking.paymentStatus = 'pagado';
     _pendingBooking.payMethod     = method;
     _pendingBooking.opNumber      = opNum;
     const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');

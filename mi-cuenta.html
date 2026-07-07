@@ -585,11 +585,12 @@ function switchAccTab(tab) {
 /* ── Render citas ── */
 function renderCitas(session) {
   const all   = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
-  const mine  = all.filter(b => b.userId === session.id);
+  const mine  = all.filter(b => String(b.userId) === String(session.id));
 
+  /* pagado = paid+opNumber entered; gratis = free consult */
   const pendingPay = mine.filter(b => b.status === 'confirmada' && !b.paymentStatus);
   const verifying  = mine.filter(b => b.status === 'confirmada' && b.paymentStatus === 'pendiente_verificacion');
-  const scheduled  = mine.filter(b => b.status === 'confirmada' && b.paymentStatus === 'gratis');
+  const scheduled  = mine.filter(b => b.status === 'confirmada' && (b.paymentStatus === 'gratis' || b.paymentStatus === 'pagado'));
   const history    = mine.filter(b => b.status !== 'confirmada');
   const totalUp    = pendingPay.length + verifying.length + scheduled.length;
 
@@ -599,7 +600,7 @@ function renderCitas(session) {
 
   let html = '';
 
-  /* ── Sección: Pago pendiente ── */
+  /* ── Sección: Pago pendiente (sin opNumber) ── */
   if (pendingPay.length > 0) {
     html += `<div class="acc-section-head acc-section-head--warn">
       <span class="acc-section-title" style="color:#92400e;">⚠️ Pago pendiente</span>
@@ -608,7 +609,7 @@ function renderCitas(session) {
     pendingPay.forEach(b => { html += citaCard(b, 'pending'); });
   }
 
-  /* ── Sección: Verificando pago ── */
+  /* ── Sección: Verificando pago (estado legacy) ── */
   if (verifying.length > 0) {
     html += `<div class="acc-section-head" style="margin-top:${pendingPay.length ? 28 : 0}px;">
       <span class="acc-section-title">🕐 Verificando pago</span>
@@ -617,11 +618,11 @@ function renderCitas(session) {
     verifying.forEach(b => { html += citaCard(b, 'verifying'); });
   }
 
-  /* ── Sección: Sesiones confirmadas ── */
+  /* ── Sección: Próximas sesiones (gratis o pago registrado) ── */
   if (scheduled.length > 0) {
     html += `<div class="acc-section-head" style="margin-top:${(pendingPay.length || verifying.length) ? 28 : 0}px;">
       <span class="acc-section-title">✓ Próximas sesiones</span>
-      <span class="acc-section-count">${scheduled.length} confirmada${scheduled.length !== 1 ? 's' : ''}</span>
+      <span class="acc-section-count">${scheduled.length} sesión${scheduled.length !== 1 ? 'es' : ''}</span>
     </div>`;
     scheduled.forEach(b => { html += citaCard(b, 'confirmed'); });
   }
@@ -664,7 +665,9 @@ function citaCard(b, type) {
   let payBadge = '';
   if      (type === 'pending')   payBadge = `<span class="pay-state pay-state--pending">⚠️ Pago pendiente</span>`;
   else if (type === 'verifying') payBadge = `<span class="pay-state pay-state--verifying">🕐 Verificando pago</span>`;
-  else if (type === 'confirmed') payBadge = `<span class="pay-state pay-state--free">✓ Gratuita</span>`;
+  else if (type === 'confirmed') payBadge = b.paymentStatus === 'gratis'
+    ? `<span class="pay-state pay-state--free">🎁 Primera consulta gratuita</span>`
+    : `<span class="pay-state pay-state--free">✓ Pago registrado</span>`;
 
   /* Info de pago para "verifying" */
   let payInfo = '';
@@ -927,7 +930,7 @@ function deleteAccount() {
 
 /* ── Stats ── */
 function updateStats(session) {
-  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]').filter(b => b.userId === session.id);
+  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]').filter(b => String(b.userId) === String(session.id));
   const favs     = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
   const reviews  = JSON.parse(localStorage.getItem('ms_reviews')   || '[]').filter(r => r.userId === session.id);
   document.getElementById('statCitas').textContent     = bookings.length;

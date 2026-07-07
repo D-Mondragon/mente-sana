@@ -216,7 +216,8 @@ function handleLogin(e) {
   closeAuthModal();
   updateNavAuth();
   showToast(`¡Bienvenido/a de vuelta, ${user.name.split(' ')[0]}!`);
-  if (typeof initAccountPage === 'function') initAccountPage();
+  if (typeof initAccountPage            === 'function') initAccountPage();
+  if (typeof updateFreeConsultVisibility === 'function') updateFreeConsultVisibility();
 }
 
 function handleRegister(e) {
@@ -242,7 +243,8 @@ function handleRegister(e) {
   closeAuthModal();
   updateNavAuth();
   showToast(`Cuenta creada. ¡Bienvenido/a, ${name.split(' ')[0]}!`);
-  if (typeof initAccountPage === 'function') initAccountPage();
+  if (typeof initAccountPage            === 'function') initAccountPage();
+  if (typeof updateFreeConsultVisibility === 'function') updateFreeConsultVisibility();
 }
 
 function logout() {
