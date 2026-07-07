@@ -98,7 +98,10 @@ function buildAuthModal() {
       </button>
 
       <div class="auth-brand">
-        <img src="img/logo2.png" alt="Mente Sana" class="auth-logo-img">
+        <div class="auth-logo-wrap">
+          <img src="img/logooo.png" alt="Mente Sana" class="auth-logo-img">
+          <span class="auth-logo-brand">Mente Sana</span>
+        </div>
       </div>
 
       <div class="auth-tabs" role="tablist">
@@ -254,6 +257,37 @@ function logout() {
   if (window.location.pathname.endsWith('mi-cuenta.html')) {
     setTimeout(() => { window.location.href = 'index.html'; }, 1100);
   }
+}
+
+/* ─────────────────────────────────────────────
+   NAVEGACIÓN A PERFIL DESDE TARJETA
+   Extrae los datos del especialista de cualquier
+   .specialist-card y los guarda en sessionStorage
+   para que perfil.html muestre al especialista correcto.
+───────────────────────────────────────────── */
+function goToProfileFromCard(e, el) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  const card = el.closest('.specialist-card');
+  if (card) {
+    const priceTxt  = card.querySelector('.card-price strong')?.textContent || '';
+    const ratingTxt = card.querySelector('.card-rating')?.textContent || '';
+    const specData = {
+      specId:     card.dataset.specId || '',
+      name:       card.querySelector('.card-name')?.textContent.trim() || '',
+      photo:      card.querySelector('.card-avatar img')?.src || '',
+      spec:       card.querySelector('.card-spec')?.textContent.trim() || '',
+      tags:       [...card.querySelectorAll('.card-tags .badge')].map(b => b.textContent.trim()),
+      price:      parseInt(card.dataset.price) || parseInt(priceTxt.replace(/\D/g, '')) || 90,
+      rating:     parseFloat(card.dataset.rating) || parseFloat(ratingTxt.match(/\d\.\d/)?.[0]) || 0,
+      modalidad:  card.dataset.modalidad || 'ambas',
+      disponible: card.dataset.disponible || '',
+      isFree:     card.dataset.free !== undefined ? card.dataset.free === 'true' : true,
+    };
+    sessionStorage.setItem('ms_spec_data', JSON.stringify(specData));
+    /* Sin datos de pago propios: limpiar los del especialista anterior */
+    sessionStorage.removeItem('ms_pay_data');
+  }
+  window.location.href = 'perfil.html';
 }
 
 /* ─────────────────────────────────────────────

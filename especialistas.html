@@ -13,7 +13,8 @@
 <nav class="nav" id="navbar">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="nav-logo-img">
+      <img src="img/logooo.png" alt="Mente Sana" class="nav-logo-img">
+      <span class="nav-logo-brand">Mente Sana</span>
     </a>
     <div class="nav-links">
       <a href="index.html"         class="nav-link">Inicio</a>
@@ -839,7 +840,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo-wrap">
-          <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="footer-logo-img">
+          <img src="img/logooo.png" alt="Mente Sana" class="footer-logo-img">
+          <span class="footer-logo-brand">Mente Sana</span>
         </div>
         <p>Conectamos personas con psicólogos certificados para construir procesos de bienestar mental reales y duraderos.</p>
         <div class="footer-social">
@@ -921,10 +923,16 @@ const PAYMENT_DATA = {
   'c27':{ yape:'941234088', bank:'Scotiabank',   account:'000-504567893-5',    cci:'00900005045678935001', holder:'Marco Antonio Díaz Valenzuela'},
 };
 
+/* Asignar IDs (c01…c27) a las tarjetas según su orden, para enlazar con PAYMENT_DATA */
+document.querySelectorAll('#specialistsGrid .specialist-card').forEach((card, i) => {
+  card.dataset.specId = 'c' + String(i + 1).padStart(2, '0');
+});
+
 function goToProfile(e, specId) {
   e.preventDefault();
   const card = e.target.closest('.specialist-card') ||
                document.querySelector(`#specialistsGrid .specialist-card[data-spec-id="${specId}"]`);
+  if (card && !specId) specId = card.dataset.specId;
   if (card) {
     const specData = {
       specId,
@@ -941,7 +949,14 @@ function goToProfile(e, specId) {
     sessionStorage.setItem('ms_spec_data', JSON.stringify(specData));
   }
   const payData = PAYMENT_DATA[specId];
-  if (payData) sessionStorage.setItem('ms_pay_data', JSON.stringify(payData));
+  if (payData) {
+    /* El titular de la cuenta debe coincidir con el especialista elegido */
+    const cardName = card?.querySelector('.card-name')?.textContent.trim() || '';
+    const holder   = cardName.replace(/^(dra?\.|dr\.|ps\.|lic\.)\s*/i, '');
+    sessionStorage.setItem('ms_pay_data', JSON.stringify({ ...payData, holder: holder || payData.holder }));
+  } else {
+    sessionStorage.removeItem('ms_pay_data');
+  }
   window.location.href = 'perfil.html';
 }
 

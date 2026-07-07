@@ -13,7 +13,8 @@
 <nav class="nav" id="navbar">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="nav-logo-img">
+      <img src="img/logooo.png" alt="Mente Sana" class="nav-logo-img">
+      <span class="nav-logo-brand">Mente Sana</span>
     </a>
     <div class="nav-links">
       <a href="index.html"         class="nav-link">Inicio</a>
@@ -447,7 +448,7 @@
   <div class="container">
     <h3 style="margin-bottom:24px;">También te puede interesar</h3>
     <div class="grid-3">
-      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+      <div class="specialist-card" onclick="goToProfileFromCard(event, this)" style="cursor:pointer;">
         <div class="card-top">
           <div class="card-avatar-wrap">
             <div class="card-avatar"><img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Andrés Lima"></div>
@@ -462,11 +463,11 @@
         <div class="card-body"><div class="card-tags"><span class="badge">Depresión</span><span class="badge">Fobias</span></div></div>
         <div class="card-footer">
           <span class="card-price">Desde <strong>S/. 85</strong>/sesión</span>
-          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfileFromCard(event, this)">Ver perfil ›</a>
         </div>
       </div>
 
-      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+      <div class="specialist-card" onclick="goToProfileFromCard(event, this)" style="cursor:pointer;">
         <div class="card-top">
           <div class="card-avatar-wrap">
             <div class="card-avatar"><img src="https://images.unsplash.com/photo-1701096374092-bb70915fdc5c?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Dra. Valeria Santos"></div>
@@ -481,11 +482,11 @@
         <div class="card-body"><div class="card-tags"><span class="badge">Burnout</span><span class="badge">Liderazgo</span></div></div>
         <div class="card-footer">
           <span class="card-price">Desde <strong>S/. 95</strong>/sesión</span>
-          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfileFromCard(event, this)">Ver perfil ›</a>
         </div>
       </div>
 
-      <div class="specialist-card" onclick="window.location='perfil.html'" style="cursor:pointer;">
+      <div class="specialist-card" onclick="goToProfileFromCard(event, this)" style="cursor:pointer;">
         <div class="card-top">
           <div class="card-avatar-wrap">
             <div class="card-avatar"><img src="https://images.unsplash.com/photo-1645066928295-2506defde470?auto=format&fit=crop&w=200&h=200&crop=face&q=80" alt="Ps. Diego Castro"></div>
@@ -500,7 +501,7 @@
         <div class="card-body"><div class="card-tags"><span class="badge">Autoestima</span><span class="badge">Mindfulness</span></div></div>
         <div class="card-footer">
           <span class="card-price">Desde <strong>S/. 75</strong>/sesión</span>
-          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="event.stopPropagation()">Ver perfil ›</a>
+          <a href="perfil.html" class="btn btn-primary btn-sm" onclick="goToProfileFromCard(event, this)">Ver perfil ›</a>
         </div>
       </div>
     </div>
@@ -613,7 +614,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.849L.057 23.5a.5.5 0 0 0 .614.614l5.666-1.457A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.524-5.188-1.435l-.37-.22-3.838.987.998-3.78-.24-.386A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
         </div>
         <div>
-          <div class="msg-title" style="margin-bottom:0;">Contactar a Dra. Rojas</div>
+          <div class="msg-title" id="msgModalTitle" style="margin-bottom:0;">Contactar a Dra. Rojas</div>
           <p style="font-size:.72rem;color:#25d366;margin:0;font-weight:600;">Responde en menos de 2 horas vía WhatsApp</p>
         </div>
       </div>
@@ -642,7 +643,7 @@
         <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.849L.057 23.5a.5.5 0 0 0 .614.614l5.666-1.457A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.524-5.188-1.435l-.37-.22-3.838.987.998-3.78-.24-.386A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
       </div>
       <div style="font-weight:700;font-size:1.05rem;margin-bottom:6px;">¡WhatsApp abierto!</div>
-      <p style="font-size:.84rem;color:var(--text-secondary);margin-bottom:20px;">Tu mensaje está listo en WhatsApp. Solo presiona enviar y la Dra. Rojas te responderá pronto.</p>
+      <p style="font-size:.84rem;color:var(--text-secondary);margin-bottom:20px;" id="msgSentText">Tu mensaje está listo en WhatsApp. Solo presiona enviar y la Dra. Rojas te responderá pronto.</p>
       <button class="btn btn-secondary" onclick="closeMsgModal()">Cerrar</button>
     </div>
   </div>
@@ -655,7 +656,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo-wrap">
-          <img src="img/logo2.png" alt="Mente Sana — Consultorio Psicológico" class="footer-logo-img">
+          <img src="img/logooo.png" alt="Mente Sana" class="footer-logo-img">
+          <span class="footer-logo-brand">Mente Sana</span>
         </div>
         <p>Conectamos personas con psicólogos certificados para construir procesos de bienestar mental reales y duraderos.</p>
         <div class="footer-social">
@@ -812,10 +814,19 @@ document.getElementById('calNext').addEventListener('click', () => {
   renderCalendar();
 });
 
-applySpecData();
+/* ─── Valores por defecto del especialista (Dra. María Elena Rojas) ───
+   Deben definirse ANTES de llamar a applySpecData(), que los usa como fallback. */
+window._specName  = 'Dra. María Elena Rojas';
+window._specPrice = 90;
+window._specFree  = true;
+window._specPhoto = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200&crop=face&q=80';
+window._specSub   = 'Psicóloga Clínica · TCC';
+
+/* applySpecData() lee sessionStorage ms_spec_data y sobreescribe los defaults
+   con los datos del especialista que el usuario seleccionó. */
 renderCalendar();
 renderSlots();
-updateFreeConsultVisibility();
+applySpecData();
 
 /* Booking confirm — opens modal, auth-gated */
 function confirmBooking() {
@@ -893,11 +904,13 @@ function finishBooking() {
     const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
     bookings.push({
       id: Date.now(), userId: session?.id,
-      specialist: window._specName, date, time, modality,
+      specialist: window._specName, photo: window._specPhoto, specSub: window._specSub,
+      date, time, modality,
       price: 'Gratis', status: 'confirmada',
       paymentStatus: 'gratis', createdAt: new Date().toISOString(),
     });
     localStorage.setItem('ms_bookings', JSON.stringify(bookings));
+    markFreeConsultUsed(session?.id);
     updateFreeConsultVisibility();
 
     /* Show free success */
@@ -911,7 +924,8 @@ function finishBooking() {
     /* ── Paid: store pending, go to payment ── */
     _pendingBooking = {
       id: Date.now(), userId: session?.id,
-      specialist: window._specName, date, time, modality,
+      specialist: window._specName, photo: window._specPhoto, specSub: window._specSub,
+      date, time, modality,
       price: 'S/. ' + window._specPrice,
       status: 'confirmada', createdAt: new Date().toISOString(),
     };
@@ -999,7 +1013,16 @@ function sendMessage(e) {
 }
 
 /* ─── Favourite ─── */
-const SPECIALIST_ID = 'rojas-maria-elena';
+/* Id derivado del nombre del especialista actual (Rojas por defecto = rojas-maria-elena) */
+function currentFavId() {
+  if (window._specName === 'Dra. María Elena Rojas') return 'rojas-maria-elena';
+  return (window._specName || 'especialista').toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/^(dra?\.|dr\.|ps\.|lic\.)\s*/i, '')
+    .trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+function _favIdOf(f) { return typeof f === 'object' && f !== null ? f.id : f; }
 
 function toggleFavorite() {
   if (!isLoggedIn()) {
@@ -1007,27 +1030,34 @@ function toggleFavorite() {
     showToast('Inicia sesión para guardar especialistas.', 'info');
     return;
   }
+  const id   = currentFavId();
   const favs = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
-  const idx  = favs.indexOf(SPECIALIST_ID);
+  const idx  = favs.findIndex(f => _favIdOf(f) === id);
   const btn  = document.getElementById('favBtn');
   const lbl  = document.getElementById('favBtnLabel');
   if (idx === -1) {
-    favs.push(SPECIALIST_ID);
+    const raw  = sessionStorage.getItem('ms_spec_data');
+    const data = raw ? JSON.parse(raw) : {};
+    favs.push({
+      id, name: window._specName, photo: window._specPhoto, spec: window._specSub,
+      price: window._specPrice, rating: data.rating || 4.9, tags: data.tags || [],
+    });
     btn.classList.add('fav-active');
     lbl.textContent = 'Guardado';
-    showToast('Especialista guardada en tus favoritos.');
+    showToast('Especialista guardado en tus favoritos.');
   } else {
     favs.splice(idx, 1);
     btn.classList.remove('fav-active');
     lbl.textContent = 'Guardar';
-    showToast('Eliminada de tus favoritos.', 'info');
+    showToast('Eliminado de tus favoritos.', 'info');
   }
   localStorage.setItem('ms_favorites', JSON.stringify(favs));
 }
 
 function initFavoriteState() {
+  const id   = currentFavId();
   const favs = JSON.parse(localStorage.getItem('ms_favorites') || '[]');
-  if (favs.includes(SPECIALIST_ID)) {
+  if (favs.some(f => _favIdOf(f) === id)) {
     document.getElementById('favBtn').classList.add('fav-active');
     document.getElementById('favBtnLabel').textContent = 'Guardado';
   }
@@ -1036,7 +1066,7 @@ function initFavoriteState() {
 /* ─── Share ─── */
 function shareProfile() {
   const shareData = {
-    title: 'Dra. María Elena Rojas — Mente Sana',
+    title: window._specName + ' — Mente Sana',
     text:  'Psicóloga Clínica especializada en ansiedad, estrés y burnout. Primera consulta gratuita.',
     url:   window.location.href,
   };
@@ -1049,10 +1079,6 @@ function shareProfile() {
   }
 }
 
-/* ─── Specialist data from sessionStorage ─── */
-window._specName  = 'Dra. María Elena Rojas';
-window._specPrice = 90;
-window._specFree  = true;
 
 function applySpecData() {
   const raw = sessionStorage.getItem('ms_spec_data');
@@ -1078,9 +1104,11 @@ function applySpecData() {
 
   // Photo
   if (s.photo) {
+    window._specPhoto = s.photo;
     const img = document.querySelector('.profile-avatar img');
     if (img) { img.src = s.photo.replace('w=200&h=200', 'w=300&h=300'); img.alt = window._specName; }
   }
+  if (s.spec) window._specSub = s.spec;
 
   // Tags
   if (s.tags && s.tags.length) {
@@ -1120,9 +1148,46 @@ function applySpecData() {
     const btn = document.getElementById('freeConsultBtn');
     if (btn) btn.style.display = 'none';
   }
+
+  // Textos y modales que mencionan a la especialista por defecto
+  const msgTitle = document.getElementById('msgModalTitle');
+  if (msgTitle) msgTitle.textContent = 'Contactar a ' + window._specName;
+  const msgSentTxt = document.getElementById('msgSentText');
+  if (msgSentTxt) msgSentTxt.textContent = `Tu mensaje está listo en WhatsApp. Solo presiona enviar y ${window._specName} te responderá pronto.`;
+  const reviewPh = document.getElementById('reviewText');
+  if (reviewPh) reviewPh.placeholder = `Comparte tu experiencia con ${window._specName}...`;
+
+  // Reseñas estáticas de ejemplo: adaptar la mención al especialista actual
+  if (window._specName !== 'Dra. María Elena Rojas') {
+    document.querySelectorAll('#tab-resenas .review-text').forEach(p => {
+      p.textContent = p.textContent
+        .replace(/la Dra\. Rojas/g, window._specName)
+        .replace(/Dra\. Rojas/g, window._specName);
+    });
+  }
 }
 
-/* ─── Hide free button if user already has any booking ─── */
+/* ─── Free-consult usage tracking (única por usuario, para siempre) ─── */
+function markFreeConsultUsed(userId) {
+  if (userId === undefined || userId === null) return;
+  const used = JSON.parse(localStorage.getItem('ms_free_used') || '[]');
+  if (!used.some(id => String(id) === String(userId))) {
+    used.push(userId);
+    localStorage.setItem('ms_free_used', JSON.stringify(used));
+  }
+}
+
+function hasUsedFreeConsult(userId) {
+  const used = JSON.parse(localStorage.getItem('ms_free_used') || '[]');
+  if (used.some(id => String(id) === String(userId))) return true;
+  /* Compatibilidad: reservas gratis previas guardadas antes de ms_free_used */
+  const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
+  return bookings.some(b =>
+    String(b.userId) === String(userId) &&
+    (b.paymentStatus === 'gratis' || b.price === 'Gratis'));
+}
+
+/* ─── Hide free button if user already used it or has any booking ─── */
 function updateFreeConsultVisibility() {
   const btn = document.getElementById('freeConsultBtn');
   if (!btn) return;
@@ -1132,8 +1197,13 @@ function updateFreeConsultVisibility() {
   if (!session) return;
   const bookings = JSON.parse(localStorage.getItem('ms_bookings') || '[]');
   const hasAny   = bookings.some(b => String(b.userId) === String(session.id));
-  btn.style.display = hasAny ? 'none' : '';
+  btn.style.display = (hasAny || hasUsedFreeConsult(session.id)) ? 'none' : '';
 }
+
+/* Re-verificar al volver a la página desde el historial (bfcache) */
+window.addEventListener('pageshow', () => {
+  if (typeof isLoggedIn === 'function') updateFreeConsultVisibility();
+});
 
 /* ─── Free consult ─── */
 let _isFreeConsult  = false;
@@ -1143,6 +1213,12 @@ function bookFreeConsult() {
   if (!isLoggedIn()) {
     openAuthModal('register');
     showToast('Crea tu cuenta para reservar tu consulta gratuita.', 'info', 4000);
+    return;
+  }
+  const session = getSession();
+  if (hasUsedFreeConsult(session.id)) {
+    showToast('Ya utilizaste tu consulta gratuita de bienvenida.', 'info', 4000);
+    updateFreeConsultVisibility();
     return;
   }
   _isFreeConsult = true;
@@ -1288,7 +1364,9 @@ let _payPrice = 90;
 
 function openPayModal(price) {
   const stored = sessionStorage.getItem('ms_pay_data');
-  _payData  = stored ? { ...PAYMENT_DEFAULT, ...JSON.parse(stored) } : { ...PAYMENT_DEFAULT };
+  /* Sin datos propios: usar los números por defecto pero con el titular del especialista actual */
+  const fallbackHolder = (window._specName || '').replace(/^(dra?\.|dr\.|ps\.|lic\.)\s*/i, '') || PAYMENT_DEFAULT.holder;
+  _payData  = stored ? { ...PAYMENT_DEFAULT, ...JSON.parse(stored) } : { ...PAYMENT_DEFAULT, holder: fallbackHolder };
   _payPrice = price;
 
   const priceStr = price === 0 ? 'Gratis' : 'S/. ' + price + '.00';
